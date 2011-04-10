@@ -7,10 +7,10 @@ body
 }
 
 #container{
-	width: 80%;
+	width: 900px;
     margin-left:auto;
     margin-right:auto;
-    
+    min-width:800px;
 	border: 1px solid black;
 	border-radius: 0.4em;
 
@@ -23,7 +23,7 @@ body
 }
 #headerkolonne
 {
-	width: 20%;
+	width:250px;
 	float: right;
 	padding-top: 25px;
 	margin-right: 25px;
@@ -39,7 +39,7 @@ body
 #sok
 {
 	background-color: gold;
-	width: 20%;
+	width: 250px;
 	float: right;
 	margin-top: 25px;
 	margin-right: 25px;
@@ -47,7 +47,7 @@ body
 }
 
 #meny {
-
+	text-align: center;
 	height: 50px;
 	background-color: orange;
 	border-left: solid 1px;
@@ -79,7 +79,7 @@ body
 {
 	background-color: white;
 	margin-top: 20px;
-	width: 20%;
+	width: 250px;
 	height: 379px;
 	overflow: hidden;
 	border-left: solid grey 1px;
@@ -90,7 +90,7 @@ body
 {
 	background-color: white;
 	min-height: 400px;
-	width: 80%;
+	width: 600px;
 	float: left;
 }
 #footer
