@@ -7,23 +7,24 @@ body
 }
 
 #container{
-	width: 900px;
+	width: 1002px;
     margin-left:auto;
     margin-right:auto;
     min-width:800px;
 	border: 1px solid black;
 	border-radius: 0.4em;
+	padding:0.5% 0.5% 0.5% 0.5%;
 
 }
-
 #header {
 	background-color: orange;
+	width: 1000px;
 	height: 200px;
 	border-radius: 0.4em;
 }
 #headerkolonne
 {
-	width:250px;
+	width: 250px;
 	float: right;
 	padding-top: 25px;
 	margin-right: 25px;
@@ -47,13 +48,15 @@ body
 }
 
 #meny {
-	text-align: center;
+	width: 1000px;
 	height: 50px;
 	background-color: orange;
 	border-left: solid 1px;
 	border-right: solid 1px;
 	text-decoration: none;
+	text-align:center;
 	border-radius: 0.4em;
+	
 }
 #menylinker
 {
@@ -79,7 +82,7 @@ body
 {
 	background-color: white;
 	margin-top: 20px;
-	width: 250px;
+	width: 199px;
 	height: 379px;
 	overflow: hidden;
 	border-left: solid grey 1px;
@@ -89,18 +92,18 @@ body
 #main
 {
 	background-color: white;
-	min-height: 400px;
-	width: 600px;
+	height: 400px;
+	width: 800px;
 	float: left;
 }
 #footer
 {
-	clear: both;
 	background-color: white;
-
+	width: 1000px;
 	height: 70px;
 	margin-top: 40px;
 	border-top: 1px solid grey;
+	text-align: center;
 }
 #handlevogn
 {
