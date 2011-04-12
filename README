@@ -14,5 +14,38 @@ Hovedoppgave i WebProgrammering ved HiO
  - Design
  		- HTML og CSS layout
  - PHP
- 
+	- Se nettsidekart
  - Implementasjon
+ 	- Test av nettside
+ 	- Utrullingstest
+ 	
+ ################  Nettsidekart  #################
+ 
+ index
+ 	- admin
+ 		- index
+ 		- Brukere
+ 			- Gi admin tilgang
+ 			- Liste alle brukere
+ 		- Kategorier
+ 			- Legge til
+ 			- Endre
+ 			- Slette
+		- Artikler
+			- Legge til produktartikkel
+				- Kategori
+				- Navn
+				- Bilde
+				- Tekst
+				- Pris
+			- Endre og Slette
+	
+	- Brukere
+		- Egen brukerprofil med innlogging
+		- Endre data (Adresse, epost)
+	
+	- Artikkler
+
+	- Kategorier
+		- Liste opp artikler
+		
