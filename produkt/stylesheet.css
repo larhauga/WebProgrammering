@@ -47,7 +47,7 @@ body
 #logginn
 {
 	/*border: 1px solid black; */
-	background-color: #e9e9e9;
+	background-color: #00BFFF;
 	padding: 5px;
 	border-radius: 0.4em;
 	margin-bottom:3px;
@@ -58,7 +58,7 @@ body
 #sok
 {
 	/* border: 1px solid black; */
-	background-color: #e9e9e9; /* gold */
+	background-color: #00BFFF; /* gold */
 	padding: 5px;
 	border-radius: 0.4em;
         opacity:0.8;
@@ -157,6 +157,7 @@ body
 }
 #handlevogn
 {
+    
 	border:solid 1px;
 	padding-top: 2px;
 	padding-left: 2px;
