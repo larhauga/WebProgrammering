@@ -163,11 +163,11 @@ body
 	padding-left: 2	px;
 
 	border-radius: 5px;
-	background: gray70;
-	background:-moz-linear-gradient(bottom,#ffffff,gray70);
-	background:-webkit-gradient(linear,left bottom,left top,from(#ffffff),to(gray70));
-	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff', endColorstr='gray70');
-	background: -o-linear-gradient(bottom, #ffffff, gray70);
+	background: #b8b8b8;
+	background:-moz-linear-gradient(bottom,#ffffff,#b8b8b8);
+	background:-webkit-gradient(linear,left bottom,left top,from(#ffffff),to(#b8b8b8));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff', endColorstr='#b8b8b8');
+	background: -o-linear-gradient(bottom, #ffffff, #b8b8b8);
 	
 }
 #rightbar h1{
