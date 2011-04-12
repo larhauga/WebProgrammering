@@ -2,7 +2,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-DROP SCHEMA IF EXISTS `xzindor_db1` ;
 CREATE SCHEMA IF NOT EXISTS `xzindor_db1` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `xzindor_db1` ;
 
@@ -30,7 +29,7 @@ CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`bruker` (
   `fornavn` VARCHAR(45) NOT NULL ,
   `etternavn` VARCHAR(45) NOT NULL ,
   `adresse` VARCHAR(45) NOT NULL ,
-  `postnr` INT(4) NOT NULL ,
+  `postnr` INT NULL ,
   `epost` VARCHAR(45) NOT NULL ,
   `registrert` DATETIME NOT NULL ,
   `rettigheter` INT(2) NOT NULL ,
