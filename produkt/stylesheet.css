@@ -69,11 +69,12 @@ body
 	width: 100%;
 	height: 40px; /* Høyden på hele menyen */
 	text-align:center;
-	border-radius: 0.4em;
+	/*border-radius: 0.4em;*/
 	
 }
 #meny ul{
 	list-style-type:none;
+	padding-left:0px;
 }
 #meny li{
 	position:relative;
@@ -85,7 +86,7 @@ body
 	width: 110px;
 	border-radius: 5px;
 	
-    background: #067bc4;
+    background: ##d7d7d7,#e4e4e4;
 	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
 	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
 	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
