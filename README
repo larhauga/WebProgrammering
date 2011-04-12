@@ -39,6 +39,13 @@ Hovedoppgave i WebProgrammering ved HiO
 				- Tekst
 				- Pris
 			- Endre og Slette
+		- Varebeholdning
+			- Vise antall varer
+			- Endre antall varer
+		- Sikkerhet
+			- Sjekke hvor mange som har logget seg inn
+			- Antall brukere
+			- Ip logging
 	
 	- Brukere
 		- Egen brukerprofil med innlogging
