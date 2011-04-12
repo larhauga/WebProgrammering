@@ -61,11 +61,10 @@
 		</div>
 		
 		<div id="main">
-		<div id="path">
-                    <a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
-		</div> 
-                   
-                    <object type="application/x-shockwave-flash" data="http://www.bg-sc.com/games/index/kenya.swf" width="550" height="400" id="video" style="margin:0;padding:0"></object>
+			<div id="path">
+				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
+			</div>
+
 		</div>
 		<div id="rightbar">
 		  <div id="handlevogn">
