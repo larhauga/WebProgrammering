@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +10,15 @@
 </head>
 <body>
 <?php
-if(false) //Not logged inn
+if(isset($_GET['login']))
+{
+	//validerer input
+	//Sette opp sessions
+	$_SESSION['login'] = true;
+	
+}
+
+if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
 {
 	echo '
 		<div id="containerLogin">
@@ -23,7 +34,7 @@ if(false) //Not logged inn
 			<div id="loginboks">
 				<h1>Login</h1>
 				<p>Uavtorisert tilgang vil bli logget!</p>
-				<form id="adminlogin">
+				<form id="adminlogin" action="?login=true" method="post">
 				<p>Brukernavn: <input type="text" id="user" name="bruker" /></p>
 				<p>Passord: <input type="password" id="psw" name="passord" /></p>
 				<p class="forgetmenot">
