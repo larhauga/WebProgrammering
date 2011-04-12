@@ -155,7 +155,7 @@ body
 	/*#d7d7d7,#e4e4e4 */
 	background-color: white;
 	margin-top: 20px;
-	
+	color:white;
 	width: 199px;
 	height: 379px;
 	overflow: hidden;
@@ -163,11 +163,11 @@ body
 	padding-left: 2	px;
 
 	border-radius: 5px;
-	background: #d7d7d7;
-	background:-moz-linear-gradient(bottom,#ffffff,#d7d7d7);
-	background:-webkit-gradient(linear,left bottom,left top,from(#ffffff),to(#d7d7d7));
-	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff', endColorstr='#d7d7d7');
-	background: -o-linear-gradient(bottom, #ffffff, #d7d7d7);
+	background: #1C86EE;
+	background:-moz-linear-gradient(bottom,#ffffff,#1C86EE);
+	background:-webkit-gradient(linear,left bottom,left top,from(#ffffff),to(#1C86EE));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff', endColorstr='#1C86EE');
+	background: -o-linear-gradient(bottom, #ffffff, #1C86EE);
 	
 }
 #handlevogn
@@ -186,7 +186,7 @@ body
 	margin-top: 0px;
 	padding: 0px;
 	text-align: left;
-	border-bottom: 1px grey dotted;
+	border-bottom: 1px white dotted;
 }
 /* Slutt høyre bar */
 
