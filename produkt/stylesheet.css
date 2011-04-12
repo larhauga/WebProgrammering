@@ -31,22 +31,21 @@ body
 	margin-right: 25px;
 	text-align: left;
 }
-#header #headerkolonne #form1
+#header #headerkolonne #logginn
 {
 	border: 1px solid black;
 	background-color: gold;
 	padding: 5px;
 	border-radius: 0.4em;
 }
-#sok
+#header #headerkolonne #sok
 {
+	border: 1px solid black;
 	background-color: gold;
-	width: 250px;
-	float: right;
-	margin-top: 25px;
-	margin-right: 25px;
+	padding: 5px;
 	border-radius: 0.4em;
 }
+
 
 #meny {
 	width: 1000px;
