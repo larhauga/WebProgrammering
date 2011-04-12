@@ -115,22 +115,13 @@ body
 
 /* Meny slutt */
 
-#rightbar
-{
-	background-color: white;
-	margin-top: 20px;
-	width: 199px;
-	height: 379px;
-	overflow: hidden;
-	border-left: solid grey 1px;
-	padding-left: 2	px;
-}
+
 
 #main
 {
 	background-color: white;
-	height: 400px;
 	width: 800px;
+	min-height: 400px;
 	float: left;
 }
 #path
@@ -138,11 +129,56 @@ body
 	color: grey;
 	font-size:12px;
 	padding-top: 3px;
+	padding-left: 10px;
 }
 #path a
 {
 	color: grey;
 	text-decoration: none;
+}
+
+#rightbar{
+	/*#d7d7d7,#e4e4e4 */
+	background-color: white;
+	margin-top: 20px;
+	
+	width: 199px;
+	height: 379px;
+	overflow: hidden;
+	/*border-left: solid grey 1px; */
+	padding-left: 2	px;
+
+	border-radius: 5px;
+	background: #d7d7d7;
+	background:-moz-linear-gradient(bottom,#ffffff,#d7d7d7);
+	background:-webkit-gradient(linear,left bottom,left top,from(#ffffff),to(#d7d7d7));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff', endColorstr='#d7d7d7');
+	background: -o-linear-gradient(bottom, #ffffff, #d7d7d7);
+	
+}
+#handlevogn
+{
+    
+	/*border:solid 1px;*/
+	padding-top: 2px;
+	padding-left: 2px;
+	margin-left: 4px;
+	margin-right: 2px;
+	border-radius: 3px;
+	
+	/*
+	background: #067bc4;
+	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
+	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
+	background: -o-linear-gradient(bottom, #067bc4, #059af8);*/
+}
+#rightbar #handlevogn p
+{
+	margin-top: 0px;
+	padding: 0px;
+	text-align: left;
+	border-bottom: 1px grey dotted;
 }
 
 #footer
@@ -153,25 +189,6 @@ body
 	margin-top: 40px;
 	border-top: 1px solid grey;
 	text-align: center;
-}
-#handlevogn
-{
-    
-	border:solid 1px;
-	padding-top: 2px;
-	padding-left: 2px;
-	margin-left: 4px;
-	margin-right: 2px;
-	border-top-left-radius: 5px 5px;
-	border-top-right-radius: 5px 5px;
-	background: gold;
-}
-#rightbar #handlevogn p
-{
-	margin-top: 0px;
-	padding: 0px;
-	text-align: left;
-	border-bottom: 1px grey dotted;
 }
 
 
