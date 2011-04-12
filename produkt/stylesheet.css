@@ -4,6 +4,8 @@
 body
 {
 	background-color: grey;
+    font-family:Helvetica,Arial,Verdana,sans-serif;
+    font-size:12px;
 }
 
 #container{
@@ -54,17 +56,28 @@ body
 	background-color: orange;
 	text-align:center;
 	border-radius: 0.4em;
-                
-	
+
+}
+#meny ul{
+	list-style-type:none;
+}
+#meny li{
+	margin: 2.1em 5px;
+	padding: 0 0 8px;
+	float: left;
+	display:block;
+
 }
 
 #meny a
 {
 	text-decoration: none;
+	display:block;
 	color: black;
 }
-#menylinker
+.menylinker
 {
+	
 	margin-left: 18px;
         
 	border: 1px solid black;
