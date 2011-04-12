@@ -76,7 +76,7 @@ body
 	list-style-type:none;
 }
 #meny li{
-	position:relative;
+	position: relative;
 	padding: 8px;
 	float: left;
 	display:block;
@@ -94,14 +94,14 @@ body
 }
 #meny li:hover{
 	background: #005f9b;
-	color:white;
+
 }
 
 #meny a
 {
 	text-decoration: none;
 	display:block;
-	color: black;
+	color: white;
 }
 
 
@@ -109,7 +109,6 @@ body
 {
 	display:block;
 	background:#005f9b;
-	color:white;
 }
 
 /* Meny slutt */
