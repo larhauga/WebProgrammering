@@ -33,7 +33,13 @@ body
 	height: 200px;
 	border-radius: 0.4em;
 }
+<<<<<<< HEAD
 
+=======
+#heeader h1{
+	color:#ffffff;
+}
+>>>>>>> 3f7a8db398020620d61e79e6ee65497179f2a1cd
 #headerkolonne
 {
 
