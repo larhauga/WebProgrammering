@@ -22,11 +22,13 @@ body
 }
 #header {
 	/* background-color: orange; */
+
 	background: #067bc4;
 	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
 	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
-	background: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
 	background: -o-linear-gradient(bottom, #067bc4, #059af8);
+
 	width: 1000px;
 	height: 200px;
 	border-radius: 0.4em;
