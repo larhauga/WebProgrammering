@@ -66,22 +66,40 @@ body
 
 /* Menyen */
 #meny {
-	width: 1000px;
-	height: 50px;
-	background-color: orange;
+	width: 100%;
+	height: 40px; /* Høyden på hele menyen */
 	text-align:center;
 	border-radius: 0.4em;
-
+	/*
+    background: #067bc4;
+	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
+	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
+	background: -o-linear-gradient(bottom, #067bc4, #059af8);*/
 }
 #meny ul{
 	list-style-type:none;
 }
 #meny li{
-	margin: 2.1em 5px;
-	padding: 0 0 8px;
+	position:relative;
+	padding: 8px;
 	float: left;
 	display:block;
+	margin-left: 10px;
+	
+	width: 110px;
+	border-radius: 5px;
+	
+    background: #067bc4;
+	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
+	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
+	background: -o-linear-gradient(bottom, #067bc4, #059af8);
 
+}
+#meny li:hover{
+	background: #005f9b;
+	color:white;
 }
 
 #meny a
@@ -90,28 +108,13 @@ body
 	display:block;
 	color: black;
 }
-.menylinker
-{
-	display:block;
-	margin-left: 18px;
-    
-	/*border: 1px solid black;*/
-	padding-top: 4px;
 
-	width: 120px;
-	border-top-left-radius: 5px 5px;
-	border-top-right-radius: 5px 5px;
-	float: left;
-	
-	background: #067bc4;
-	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
-	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
-	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#067bc4', endColorstr='#059af8');
-	background: -o-linear-gradient(bottom, #067bc4, #059af8);
-}
+
 #meny a:hover
 {
-		
+	display:block;
+	background:#005f9b;
+	color:white;
 }
 
 /* Meny slutt */
