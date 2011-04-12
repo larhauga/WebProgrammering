@@ -1,4 +1,5 @@
 <?php
-	<h1>Brukeradministrasjon</h1>
-	echo '<img src="images/user-icon.png" alt="Brukere" width="100" height="100" />';
+	echo '
+			<h1><img src="images/user-icon.png" alt="Brukere" width="30" height="30" />Brukeradministrasjon</h1>
+';
 ?>

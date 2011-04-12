@@ -41,6 +41,7 @@ else if(isset($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
+			<p>Velkommen <b>Lars</b></p>
 		</div>
 		<div id="menyRight">
 			<p><a href="#"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
@@ -49,7 +50,7 @@ else if(isset($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
 	</div>
 	<div id="container">
 		<div id="head">
-			<h1>Admin - Hjem</h1>
+			<h1>Admin</h1>
 		</div>
 		<div id="meny">
 			<ul>
@@ -63,19 +64,26 @@ else if(isset($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
 			</ul>
 		</div>
 		<div id="content">';
+		
 			/* Her hentes ekstern fil som inkluderes */
-			if(id == 2)
-				include('brukere.php');
-			if(id == 3)
-				include('kat.php');
-			if(id == 4)
-				include('prod.php');
-			if(id == 5)
-				include('beholdning.php');
-			if(id == 6)
-				include('sec.php');
-			if(id == 7)
-				include('conf.php');
+			if($id == 2){
+				include('pages/brukere.php');
+			}
+			if($id == 3){
+				include('pages/kat.php');
+			}
+			if($id == 4){
+				include('pages/prod.php');
+			}
+			if($id == 5){
+				include('pages/beholdning.php');
+			}
+			if($id == 6){
+				include('pages/sec.php');
+			}
+			if($id == 7){
+				include('pages/conf.php');
+			}
 		echo '
 		</div>
 		<div id="footer">
@@ -89,6 +97,7 @@ else
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
+			<p>Velkommen <b>Lars</b></p>
 		</div>
 		<div id="menyRight">
 			<p><a href="#"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
