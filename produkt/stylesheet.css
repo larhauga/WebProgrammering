@@ -65,8 +65,10 @@ body
 	padding: 5px;
 	border-radius: 0.4em;
 	margin-bottom:3px;
-
-        
+	opacity:0.9;
+}
+#logginn:hover{
+	opacity:1;
 }
 
 #sok
@@ -76,6 +78,9 @@ body
 	padding: 5px;
 	border-radius: 0.4em;
         opacity:0.9;
+}
+#sok:hover{
+	opacity:1;
 }
 
 /* Menyen */
