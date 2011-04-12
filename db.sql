@@ -11,7 +11,7 @@ USE `xzindor_db1` ;
 DROP TABLE IF EXISTS `xzindor_db1`.`postnr` ;
 
 CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`postnr` (
-  `postnr` INT NOT NULL ,
+  `postnr` INT(4) NOT NULL ,
   `Sted` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`postnr`) )
 ENGINE = MyISAM;
