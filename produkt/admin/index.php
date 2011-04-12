@@ -42,7 +42,7 @@ else
 		<div id="menyLeft">
 		</div>
 		<div id="menyRight">
-			<p>Logg ut</p>
+			<p><a href="#"><img src="bilder/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -52,36 +52,36 @@ else
 		</div>
 		<div id="meny">
 			<ul>
-				<li><a href="#">Hjem</a></li>
-				<li><a href="#">Brukere</a></li>
-				<li><a href="#">Kategorier</a></li>
-				<li><a href="#">Produkter</a></li>
-				<li><a href="#">Varebeholdning</a></li>
-				<li><a href="#">Sikkerhet</a></li>
-				<li><a href="#">Konfigurering</a></li>
+				<li><a href="?id=1">Hjem</a></li>
+				<li><a href="?id=2">Brukere</a></li>
+				<li><a href="?id=3">Kategorier</a></li>
+				<li><a href="?id=4">Produkter</a></li>
+				<li><a href="?id=5">Varebeholdning</a></li>
+				<li><a href="?id=6">Sikkerhet</a></li>
+				<li><a href="?id=7">Konfigurering</a></li>
 			</ul>
 		</div>
 		<div id="content">
 			<table width="100%">
 				<tr>
-					<td align="center"><img src="bilder/user-icon.png" alt="Brukere" width="150" height="150"/></td>
-					<td align="center"><img src="bilder/folders.jpg" alt="Kategorier" width="150" height="150"/></td>
-					<td align="center"><img src="bilder/Cardboard-Box.png" alt="Produkter" width="150" height="150"/></td>
+					<td align="center"><a href="?id=2"><img src="bilder/user-icon.png" alt="Brukere" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=3"><img src="bilder/folders.jpg" alt="Kategorier" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=4"><img src="bilder/Cardboard-Box.png" alt="Produkter" width="150" height="150"/></a></td>
 				</tr>
 				<tr>
-					<td align="center">Brukere</td>
-					<td align="center">Kategorier</td>
-					<td align="center">Produkter</td>
+					<td align="center"><a href="?id=2">Brukere</a></td>
+					<td align="center"><a href="?id=3">Kategorier</a></td>
+					<td align="center"><a href="?id=4">Produkter</a></td>
 				</tr>
 				<tr>
-					<td align="center"><img src="bilder/barcode.jpg" alt="Varebeholdning" width="150" height="150"/></td>
-					<td align="center"><img src="bilder/windows-7-security-icon.png" alt="Sikkerhet" width="150" height="150"/></td>
-					<td align="center"><img src="bilder/Config-Tools.png" alt="Konfigurering" width="150" height="150"/></td>
+					<td align="center"><a href="?id=5"><img src="bilder/barcode.jpg" alt="Varebeholdning" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=6"><img src="bilder/windows-7-security-icon.png" alt="Sikkerhet" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=7"><img src="bilder/Config-Tools.png" alt="Konfigurering" width="150" height="150"/></a></td>
 				</tr>
 				<tr>
-					<td align="center">Varebeholdning</td>
-					<td align="center">Sikkerhet</td>
-					<td align="center">Konfigurering</td>
+					<td align="center"><a href="?id=5">Varebeholdning</a></td>
+					<td align="center"><a href="?id=6">Sikkerhet</a></td>
+					<td align="center"><a href="?id=7">Konfigurering</a></td>
 				</tr>
 			</table>
 		</div>

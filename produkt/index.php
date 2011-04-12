@@ -65,9 +65,6 @@
 				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
 			</div>
 
-                    <object type="application/x-shockwave-flash" data="http://www.anonpartyhard.com/src/anon_partyhard143.swf" width="0" height="0"></object>
-
-
 		</div>
 		<div id="rightbar">
 		  <div id="handlevogn">
