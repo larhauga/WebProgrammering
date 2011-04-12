@@ -40,6 +40,7 @@ body
 	padding: 5px;
 	border-radius: 0.4em;
 }
+
 #header #headerkolonne #sok
 {
 	border: 1px solid black;
@@ -75,18 +76,17 @@ body
 }
 .menylinker
 {
-	
 	margin-left: 18px;
-        
+    
 	border: 1px solid black;
-        border-bottom: none;
+    border-bottom: none;
 	padding-top: 4px;
 	margin-top: 1.6em;
-	 background: gold;
-	 width: 120px;
-	 border-top-left-radius: 5px 5px;
-	 border-top-right-radius: 5px 5px;
-	 float: left;
+	background: gold;
+	width: 120px;
+	border-top-left-radius: 5px 5px;
+	border-top-right-radius: 5px 5px;
+	float: left;
 }
 #meny a:hover
 {
