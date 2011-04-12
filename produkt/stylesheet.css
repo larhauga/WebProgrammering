@@ -194,13 +194,12 @@ body
 	border-bottom: 1px grey dotted;
 }
 
-#footer
+#footer, #footer p
 {
 	background-color: white;
-	width: 1000px;
-	height: 70px;
-	margin-top: 40px;
-	border-top: 1px solid grey;
+	width:100%;
+
+	margin-top: 10px;
 	text-align: center;
 }
 
