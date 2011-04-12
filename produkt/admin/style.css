@@ -52,6 +52,16 @@ a:active {
 	top-padding: 0px;
 	top-margin: 0px;
 }
+#menyLeft{
+	float:left;
+	width:50%;
+	text-align:left;
+}
+#menyRight{
+	float:right;
+	width:50%;
+	text-align:right;
+}
 
 #loginboks{
 	font:11px "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;

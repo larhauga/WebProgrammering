@@ -12,7 +12,13 @@ if(true)
 	echo '
 		<div id="containerLogin">
 			<div id="menyline">
-				<p><a href="../index.php">Tilbake</a></p>
+				<div id="menyLeft">
+					<p><a href="../index.php">Tilbake</a></p>
+				</div>
+				<div id="menyRight">
+					<p>Logg ut</p>
+				</div>
+				<div style="clear:both;"></div>
 			</div>
 			<div id="loginboks">
 				<h1>Login</h1>
@@ -32,6 +38,13 @@ if(true)
 else
 {
 	echo '
+	<div id="menyline">
+		<div id="menyLeft">
+		</div>
+		<div id="menyRight">
+		</div>
+		<div style="clear:both;"></div>
+	</div>
 	<div id="container">
 		<div id="head">
 			
