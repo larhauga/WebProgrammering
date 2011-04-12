@@ -10,32 +10,36 @@
 	<div id="container">
 		<div id="header">
 		  <div id="headerkolonne">
-		    <form id="logginn" name="login" method="post" action="login.php">
-					<table>
-					  <tr>
-						<td>Epost: </td>
-						<td><input type="text" name="epost" id="epost" /></td>
-				      </tr>
-				      <tr>
-				        <td>Passord: </td>
-				        <td><input type="password" name="passord" id="passord" /></td>
-			    	  </tr>
-			          <tr>
-				         <td></td>
-					 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
-				           Registrer <a href="#">her</a></td>
-				      </tr>
-			    	</table>
-				</form>
+		  	<div id="logginn">
+			    <form name="login" method="post" action="login.php">
+						<table>
+						  <tr>
+							<td>Epost: </td>
+							<td><input type="text" name="epost" id="epost" /></td>
+					      </tr>
+					      <tr>
+					        <td>Passord: </td>
+					        <td><input type="password" name="passord" id="passord" /></td>
+				    	  </tr>
+				          <tr>
+					         <td></td>
+						 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
+					           Registrer <a href="#">her</a></td>
+					      </tr>
+				    	</table>
+					</form>
+				</div>
 				
-		   <form id="sok">
-				   <table>
-					 <tr>
-					   	<td><input type="text" name="soktekst" id="soktekst" /></td>
-					    <td><input name="sok" type="submit" value="SØK" /></td>
-					 </tr>
-					</table>
+			<div id="sok">
+				<form id="sok">
+						<table>
+							<tr>
+								<td><input type="text" name="soktekst" id="soktekst" /></td>
+								<td><input name="sok" type="submit" value="SØK" /></td>
+							</tr>
+						</table>
 				</form>
+			</div>
 		 </div>
 		</div>
 
