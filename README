@@ -27,6 +27,7 @@ Hovedoppgave i WebProgrammering ved HiO
  		- index
  		- Brukere
  			- Gi admin tilgang
+ 				- Kun enkelte admins med høyere status (Superbruker)
  			- Liste alle brukere
  		- Kategorier
  			- Legge til
