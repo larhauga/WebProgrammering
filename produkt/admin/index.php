@@ -35,6 +35,55 @@ if(false) //Not logged inn
 		</div>
 		';
 }
+else if(isset($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
+{
+	$id = $_GET['id'];
+	echo '
+	<div id="menyline">
+		<div id="menyLeft">
+		</div>
+		<div id="menyRight">
+			<p><a href="#"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<div id="container">
+		<div id="head">
+			<h1>Admin - Hjem</h1>
+		</div>
+		<div id="meny">
+			<ul>
+				<li><a href="?id=1">Hjem</a></li>
+				<li><a href="?id=2">Brukere</a></li>
+				<li><a href="?id=3">Kategorier</a></li>
+				<li><a href="?id=4">Produkter</a></li>
+				<li><a href="?id=5">Varebeholdning</a></li>
+				<li><a href="?id=6">Sikkerhet</a></li>
+				<li><a href="?id=7">Konfigurering</a></li>
+			</ul>
+		</div>
+		<div id="content">';
+			/* Her hentes ekstern fil som inkluderes */
+			if(id == 2)
+				include('brukere.php');
+			if(id == 3)
+				include('kat.php');
+			if(id == 4)
+				include('prod.php');
+			if(id == 5)
+				include('beholdning.php');
+			if(id == 6)
+				include('sec.php');
+			if(id == 7)
+				include('conf.php');
+		echo '
+		</div>
+		<div id="footer">
+			
+		</div>
+	</div>
+	';
+}
 else
 {
 	echo '
@@ -42,7 +91,7 @@ else
 		<div id="menyLeft">
 		</div>
 		<div id="menyRight">
-			<p><a href="#"><img src="bilder/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
+			<p><a href="#"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -64,9 +113,9 @@ else
 		<div id="content">
 			<table width="100%">
 				<tr>
-					<td align="center"><a href="?id=2"><img src="bilder/user-icon.png" alt="Brukere" width="150" height="150"/></a></td>
-					<td align="center"><a href="?id=3"><img src="bilder/folders.jpg" alt="Kategorier" width="150" height="150"/></a></td>
-					<td align="center"><a href="?id=4"><img src="bilder/Cardboard-Box.png" alt="Produkter" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=2"><img src="images/user-icon.png" alt="Brukere" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=3"><img src="images/folders.jpg" alt="Kategorier" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=4"><img src="images/Cardboard-Box.png" alt="Produkter" width="150" height="150"/></a></td>
 				</tr>
 				<tr>
 					<td align="center"><a href="?id=2">Brukere</a></td>
@@ -74,9 +123,9 @@ else
 					<td align="center"><a href="?id=4">Produkter</a></td>
 				</tr>
 				<tr>
-					<td align="center"><a href="?id=5"><img src="bilder/barcode.jpg" alt="Varebeholdning" width="150" height="150"/></a></td>
-					<td align="center"><a href="?id=6"><img src="bilder/windows-7-security-icon.png" alt="Sikkerhet" width="150" height="150"/></a></td>
-					<td align="center"><a href="?id=7"><img src="bilder/Config-Tools.png" alt="Konfigurering" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=5"><img src="images/barcode.jpg" alt="Varebeholdning" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=6"><img src="images/windows-7-security-icon.png" alt="Sikkerhet" width="150" height="150"/></a></td>
+					<td align="center"><a href="?id=7"><img src="images/Config-Tools.png" alt="Konfigurering" width="150" height="150"/></a></td>
 				</tr>
 				<tr>
 					<td align="center"><a href="?id=5">Varebeholdning</a></td>
