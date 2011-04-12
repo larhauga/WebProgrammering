@@ -22,8 +22,10 @@ body
 }
 #header {
 	/* background-color: orange; */
+        background:-o-linear-gradient(top, #067bc4, #059af8);
 	background:-moz-linear-gradient(bottom,#067bc4,#059af8);
 	background:-webkit-gradient(linear,left bottom,left top,from(#067bc4),to(#059af8));
+        
 	width: 1000px;
 	height: 200px;
 	border-radius: 0.4em;
