@@ -47,7 +47,7 @@ body
 #logginn
 {
 	/*border: 1px solid black; */
-	background-color: #00BFFF;
+	background-color: white;
 	padding: 5px;
 	border-radius: 0.4em;
 	margin-bottom:3px;
@@ -58,7 +58,7 @@ body
 #sok
 {
 	/* border: 1px solid black; */
-	background-color: #00BFFF; /* gold */
+	background-color: white; /* gold */
 	padding: 5px;
 	border-radius: 0.4em;
         opacity:0.8;
