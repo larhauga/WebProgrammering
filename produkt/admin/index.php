@@ -16,7 +16,7 @@ if(true)
 					<p><a href="../index.php">Tilbake</a></p>
 				</div>
 				<div id="menyRight">
-					<p>Logg ut</p>
+
 				</div>
 				<div style="clear:both;"></div>
 			</div>
@@ -42,6 +42,7 @@ else
 		<div id="menyLeft">
 		</div>
 		<div id="menyRight">
+			<p>Logg ut</p>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
