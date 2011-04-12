@@ -2,11 +2,12 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+DROP SCHEMA IF EXISTS `xzindor_db1` ;
 CREATE SCHEMA IF NOT EXISTS `xzindor_db1` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `xzindor_db1` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`postnr`
+-- Table `xzindor_db1`.`postnr`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`postnr` ;
 
@@ -18,7 +19,7 @@ ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`bruker`
+-- Table `xzindor_db1`.`bruker`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`bruker` ;
 
@@ -38,14 +39,14 @@ CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`bruker` (
   INDEX `postnr` () ,
   CONSTRAINT `postnr`
     FOREIGN KEY ()
-    REFERENCES `mydb`.`postnr` ()
+    REFERENCES `xzindor_db1`.`postnr` ()
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`kategori`
+-- Table `xzindor_db1`.`kategori`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`kategori` ;
 
@@ -58,7 +59,7 @@ ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`vare`
+-- Table `xzindor_db1`.`vare`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`vare` ;
 
@@ -76,19 +77,19 @@ CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`vare` (
   INDEX `idkategori` () ,
   CONSTRAINT `bruker`
     FOREIGN KEY ()
-    REFERENCES `mydb`.`bruker` ()
+    REFERENCES `xzindor_db1`.`bruker` ()
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `idkategori`
     FOREIGN KEY ()
-    REFERENCES `mydb`.`kategori` ()
+    REFERENCES `xzindor_db1`.`kategori` ()
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Loginlog`
+-- Table `xzindor_db1`.`Loginlog`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`Loginlog` ;
 
@@ -102,7 +103,7 @@ ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ordre`
+-- Table `xzindor_db1`.`ordre`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`ordre` ;
 
@@ -116,14 +117,14 @@ CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`ordre` (
   INDEX `idbruker` () ,
   CONSTRAINT `idbruker`
     FOREIGN KEY ()
-    REFERENCES `mydb`.`bruker` ()
+    REFERENCES `xzindor_db1`.`bruker` ()
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ordrelinje`
+-- Table `xzindor_db1`.`ordrelinje`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `xzindor_db1`.`ordrelinje` ;
 
@@ -138,15 +139,35 @@ CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`ordrelinje` (
   INDEX `idvare` () ,
   CONSTRAINT `idordre`
     FOREIGN KEY ()
-    REFERENCES `mydb`.`ordre` ()
+    REFERENCES `xzindor_db1`.`ordre` ()
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `idvare`
     FOREIGN KEY ()
-    REFERENCES `mydb`.`vare` ()
+    REFERENCES `xzindor_db1`.`vare` ()
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `xzindor_db1`.`vareregister`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `xzindor_db1`.`vareregister` ;
+
+CREATE  TABLE IF NOT EXISTS `xzindor_db1`.`vareregister` (
+  `idvareregister` INT NOT NULL AUTO_INCREMENT ,
+  `idvare` INT NOT NULL ,
+  `sistoppdatert` DATETIME NOT NULL ,
+  `antall` INT NOT NULL ,
+  PRIMARY KEY (`idvareregister`) ,
+  INDEX `idvare` () ,
+  CONSTRAINT `idvare`
+    FOREIGN KEY ()
+    REFERENCES `xzindor_db1`.`vare` ()
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = MyISAM;
 
 
 
