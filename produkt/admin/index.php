@@ -174,6 +174,8 @@ else
 				</table>
 				<h1>Info</h1>
 				<p>Muligheter for implementasjon av google analythics vil bli implementert ved en senere versjon</p>
+				<h1>Feilvisning</h1>
+				<p>Prøve å utvikle et overvåkingsverktøy som sjekker phplogg-filene for å se om det er noe feil med nettsiden.</p>
 
 			</div>
 			<div style="clear:both;"></div>
