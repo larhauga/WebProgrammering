@@ -15,6 +15,7 @@ if(isset($_GET['login']))
 	//validerer input
 	//Sette opp sessions
 	$_SESSION['login'] = true;
+	//IP $_SESSION['ip'] = $_SERVER['REMOTE_ADDR']; 
 	
 }
 
