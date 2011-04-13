@@ -48,7 +48,7 @@ Hovedoppgave i WebProgrammering ved HiO
 			- Sjekke hvor mange som har logget seg inn
 			- Antall brukere
 			- Ip logging
-	
+		- Config
 	- Brukere
 		- Egen brukerprofil med innlogging
 		- Endre data (Adresse, epost)
