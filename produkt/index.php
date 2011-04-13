@@ -29,7 +29,7 @@
 						 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
 					           Registrer <a href="#">her</a></td>
 					      </tr>
-				    	</table>
+						</table>
 					</form>
 				</div>
 				

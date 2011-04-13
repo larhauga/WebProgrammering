@@ -66,6 +66,37 @@ a:active {
 #content{
 	min-height:200px;
 }
+#maincontent{
+	float:left;
+	width:80%;
+}
+#maincontentright{
+	float:right;
+	width:20%;
+}
+#maincontentright h1{
+	padding:3px 3px 3px 6px;
+	background: #067bc4;
+	background:-moz-linear-gradient(bottom,#d7d7d7,#e4e4e4);
+	background:-webkit-gradient(linear,left bottom,left top,from(#d7d7d7),to(#e4e4e4));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d7d7d7', endColorstr='#e4e4e4');
+	background: -o-linear-gradient(bottom, #d7d7d7, #e4e4e4);
+	border-radius: 3px;
+	font-size:15px;
+}
+.colorTall, .colorTall1, .colorTall2{
+	font-size: 18px;
+}
+.colorTall{
+	color:#067bc4;
+}
+.colorTall1{
+	color:orange;
+}
+.colorTall2{
+	color:green;
+}
+
 #footer{
 	
 }

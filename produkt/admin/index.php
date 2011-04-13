@@ -132,6 +132,7 @@ else
 			</ul>
 		</div>
 		<div id="content">
+			<div id="maincontent">
 			<table width="100%">
 				<tr>
 					<td align="center"><a href="?id=2"><img src="images/user-icon.png" alt="Brukere" width="150" height="150"/></a></td>
@@ -154,6 +155,28 @@ else
 					<td align="center"><a href="?id=7">Konfigurering</a></td>
 				</tr>
 			</table>
+			</div>
+			<div id="maincontentright">
+				<h1>Innhold</h1>
+				<table width="100%">
+					<tr>
+						<td align="right" class="colorTall">147</td>
+						<td>Varer</td>
+					</tr>
+					<tr>
+						<td align="right" class="colorTall1">5</td>
+						<td>Kategorier</td>
+					</tr>
+					<tr>
+						<td align="right" class="colorTall2">146</td>
+						<td>Brukere</td>
+					</tr>
+				</table>
+				<h1>Info</h1>
+				<p>Muligheter for implementasjon av google analythics vil bli implementert ved en senere versjon</p>
+
+			</div>
+			<div style="clear:both;"></div>
 		</div>
 		<div id="footer">
 			
