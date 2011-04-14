@@ -23,38 +23,72 @@ Hovedoppgave i WebProgrammering ved HiO
  ################  Nettsidekart  #################
  
  index
- 	- admin
- 		- index
- 		- Brukere
- 			- Gi admin tilgang
- 				- Kun enkelte admins med høyere status (Superbruker)
- 			- Liste alle brukere
- 		- Kategorier
- 			- Legge til
- 			- Endre
- 			- Slette
-		- Artikler
-			- Legge til produktartikkel
-				- Kategori
-				- Navn
-				- Bilde
-				- Tekst
-				- Pris
-			- Endre og Slette
-		- Varebeholdning
-			- Vise antall varer
-			- Endre antall varer
-		- Sikkerhet
-			- Sjekke hvor mange som har logget seg inn
-			- Antall brukere
-			- Ip logging
-		- Config
-	- Brukere
-		- Egen brukerprofil med innlogging
-		- Endre data (Adresse, epost)
+ 	- Innloggingsfunksjon (gjennomføres på hele nettstedet)
+ 	- Søkfunksjon
+ 	- Handlevognfunksjon (evt. vises kun når det er varer i handlekurven)
+ 	- Hente kategorier automatisk
+ 	
+	<---
+		- Kategorier
+			- Liste opp varer
+			- Sti, hovedvisning, med utdrag?
+	-->
 	
-	- Artikkler
+	<---
+		- Varer
+			- Egen side for hver enkelt vare.
+			- Info, bilde og mulighet for å bestille
+			- Tilbakeknapp og visning av hvor man er
+	-->
+	
+	<---	
+		- Brukere
+			- Egen brukerprofil med innlogging
+			- Endre data (Adresse, epost)
+			- Vise ordre
+				- Avbestille / endre?
+			- Lagre ordre
+	--->
 
-	- Kategorier
-		- Liste opp artikler
-		
+	<---
+	 	- admin -> Sikker innlogging! 
+	 	
+	 		- index
+	 			- Innhold
+	 				- Stats (Antall varer, kategorier og brukere)
+	 			- Feilvisning
+	 				- Vise hvis det er noen feil som er blitt logget på siden.
+	 					- Vise feilene og antall feil og når det skjedde.
+	 					
+	 		- Brukere
+	 			- Gi admin tilgang
+	 				- Kun enkelte admins med høyere status (Superbruker)
+	 			- Liste alle brukere
+	 		- Kategorier
+	 			- Legge til
+	 			- Endre
+	 			- Slette
+			- Artikler
+				- Legge til produktartikkel
+					- Kategori
+					- Navn
+					- Bilde (link eller opplastning)
+					- Tekst
+					- Pris
+				- Endre og Slette
+			- Varebeholdning
+				- Vise antall varer
+				- Endre antall varer
+				- Vis aktive transaksjoner
+			- Sikkerhet
+				- Sjekke hvor mange som har logget seg inn
+				- Antall brukere
+				- Ip logging
+			- Config
+				- Mulighet til å endre på info som er på siden
+				- Tittel, slagord, url, epost, datoformat, tidsformat
+				- Media: Miniatyrbilde, størelser (medium, stor)
+					- Velge path for filopplastning
+					- Administrere opplastede filer
+				
+	--->	
