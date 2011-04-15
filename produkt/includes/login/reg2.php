@@ -16,7 +16,8 @@ if($innepost == $innepost2)
 	{
 	if($innpassord == $innpassord2)
 		{
-			$bruker = new person($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
+			$bruker = new bruker($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
+			$bruker->updateDB();
 		}
 		else 
 		{ echo "Du har ikke skrevet inn 2 like passord"; }
