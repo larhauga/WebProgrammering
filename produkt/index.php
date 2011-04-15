@@ -1,5 +1,5 @@
 <?php 
-include "/includes/head.php";
+include "includes/head.php";
 ?>
 
 <body>
@@ -70,7 +70,7 @@ include "/includes/head.php";
 	  	  </div>
 		</div><!--end of rightbar -->
         <?php
-		include "/includes/footer.php";
+		include "includes/footer.php";
 		?>
 	</div>
 </body>

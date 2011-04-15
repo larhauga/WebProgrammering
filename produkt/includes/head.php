@@ -7,5 +7,4 @@
 </head>
 <?php
 include "klasser.php";
-include "dbconnect.php";
 ?>

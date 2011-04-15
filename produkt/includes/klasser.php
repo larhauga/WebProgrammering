@@ -1,5 +1,33 @@
 <?php
-include "dbconnect.php";
+
+class db
+{
+	public $ip;
+	public $brukernavn;
+	public $passord;
+	public $dbnavn;
+	function __construct()
+	{
+		$this->ip = "localhost";
+		$this->brukernavn = "xzindor_db1";
+		$this->passord = "lol123";
+		$this->dbnavn = "xzindor_db1";
+	}
+	
+function connectDB()
+{
+	$db = new MySQLi("localhostddddddd","xzindor_db1","lol123","xzindor_db1");
+	if($db->connect_error)
+	{
+	die("Kunne ikke koble til databasen".$db->connect_error);
+	}
+}//end of donnectDB
+
+}//end of db class
+
+
+
+
 class bruker
 {
 	public $epost;
@@ -23,41 +51,42 @@ class bruker
 		$this->postnr = $innpostnr;
 		$this->posted = $innpoststed;
 		$this->tlf = $inntlf;
-		$this->registert = $regdato;
+		$this->registert = 10;
 		$this->rettigheter = 0;
 	}
 	
 	function updateDB()
 	{
-		if( $this->epost != null && $this->passord != null && $this->fornavn != null && $this->etternavn != null && $this->adresse != null && $this->postnr != null && $this->tlf != null)
-		{
-			
-		$sql = "Insert into bruker(epost,passord,fornavn,etternavn,adresse,postnr,registert,rettigheter,tlf) VALUES('$this->epost','$this->passord','$this->fornavn','$this->etternavn','$this->adresse','$this->postnr','$this->registert','$this->rettigheter','$this->tlf');";
-		$resultat = $db->query($sql);
+		$dbc = new db();
+		$sql = "Insert into bruker(epost,passord,passord,etternavn,adresse,postnr,registrert,rettigheter,tlf) 
+		Values(
+		'$this->epost',
+		'$this->passord',
+		'$this->fornavn',
+		'$this->etternavn',
+		'$this->adresse',
+		'$this->postnr',
+		'$this->registert',
+		'$this->rettigheter',
+		'$this->tlf'
+		)";
+		$resultat = $this->dbc->query($sql);
 			if(!$resultat)
 			{
-			echo "Error".$db->error;
+			echo "Error".$dbc->error;
 			die();
 			}
 			else 
 			{
-				$antrader = $db->affected_rows;
+				$antrader = $dbc->affected_rows;
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
 					die();
 				}
 			}
-			}
-			
-			else
-			{
-			echo "noe feilet med innsettingen, feilen ligger i variabelen";
-			die();
-			}
-			
 		echo "Du er nå registert";
-		}//slutt på fuksjonen
+	}
 			
 }
 	?>
