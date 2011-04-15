@@ -1,0 +1,1 @@
+<div id="footer"><p>2011 &copy; Nettbutikken</p></div>

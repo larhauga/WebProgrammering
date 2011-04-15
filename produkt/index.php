@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Nettbutikken</title>
-<link href="stylesheet.css" rel="stylesheet" type="text/css" />
-</head>
+<?php 
+include "/includes/head.php";
+?>
 
 <body>
 	<div id="container">
@@ -73,7 +69,9 @@
 		  	<p>Vare 2</p>
 	  	  </div>
 		</div><!--end of rightbar -->
-		<div id="footer"><p>2011 &copy; Nettbutikken</p></div>
+        <?php
+		include "/includes/footer.php";
+		?>
 	</div>
 </body>
 </html>

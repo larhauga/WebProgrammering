@@ -12,8 +12,16 @@ $innpostnr = $_GET['postnr'];
 $innpoststed = $_GET['poststed'];
 $inntlf = $_GET['tlf'];
 
-
-//klasser her
-
+if($innepost == $innepost2)
+	{
+	if($innpassord == $innpassord2)
+		{
+			$bruker = new person($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
+		}
+		else 
+		{ echo "Du har ikke skrevet inn 2 like passord"; }
+	}
+ else
+ { echo "du har ikke skrevet inn 2 like eposter"; }
 
 ?>
