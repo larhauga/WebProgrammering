@@ -1,6 +1,21 @@
 <?php
 /* Kategorier */
-
+	if(isset($_POST['registrer']))
+	{
+		$tittel = mysqli_real_escape_string($db, $_POST['tittel']);
+		$aktiv = $_POST['aktiv'];
+		if($tittel != null)
+		{
+			admin::nyKat($tittel, $aktiv);
+			unset($_POST['tittel']);
+			unset($_POST['aktiv']);
+			unset($_POST['registrer']);
+		}
+		else
+		{
+			//Alle feltene var ikke skrevet inn. Skriv en feilmelding til dette	
+		}
+	}
 	echo '
 			<h1><img src="images/folders.jpg" alt="Brukere" width="30" height="30" />Kategorier</h1>
  			
