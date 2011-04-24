@@ -52,7 +52,7 @@ class bruker
 		$this->posted = $innpoststed;
 		$this->tlf = $inntlf;
 		$this->registert = 10;
-		$this->rettigheter = 0;
+		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
 	}
 	
 	function updateDB()

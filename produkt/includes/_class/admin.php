@@ -18,7 +18,29 @@ class Admin
 	}
 	function nyKat($tittel, $aktiv)
 	{
-			
+		$dbc = new db();
+		$sql = "Insert into kategori(idkategori,tittel,aktiv) 
+		Values(
+		'',
+		'$this->tittel',
+		'$this->aktiv',
+		)";
+		$resultat = $this->dbc->query($sql);
+			if(!$resultat)
+			{
+			echo "Error".$dbc->error;
+			die();
+			}
+			else 
+			{
+				$antrader = $dbc->affected_rows;
+				if($antrader == 0)
+				{
+					echo "Det skjedde en feil med innsettelse i databasen";
+					die();
+				}
+			}
+		echo "Du er nå registert";
 	}
 	public function visKat()
 	{

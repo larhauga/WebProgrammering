@@ -23,7 +23,7 @@
 		 				</tr>
 		 				<tr class="submit">
 			 				<td>Registrer</td>
-			 				<td><input type="submit" name="registrer" id="registrer" /></td>
+			 				<td><input type="submit" name="registrer" id="registrer"/></td>
 			 			</tr>
 	 				</table>
  			</form>

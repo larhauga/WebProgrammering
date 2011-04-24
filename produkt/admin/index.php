@@ -20,6 +20,10 @@ if(isset($_GET['login']))
 	//IP $_SESSION['ip'] = $_SERVER['REMOTE_ADDR']; 
 	
 }
+if(isset($_GET['logout']))
+{
+    unset($_SESSION['login']);
+}
 
 if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
 {
@@ -58,7 +62,7 @@ else if(isset($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
 			<p>Velkommen <b>Lars</b></p>
 		</div>
 		<div id="menyRight">
-			<p><a href="#"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
+			<p><a href="?logout"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -114,7 +118,7 @@ else
 			<p>Velkommen <b>Lars</b></p>
 		</div>
 		<div id="menyRight">
-			<p><a href="#"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
+			<p><a href="?logout"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
