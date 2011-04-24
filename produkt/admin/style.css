@@ -173,3 +173,26 @@ input, textarea {
 img{
 	border:none;
 }
+
+.submit input {
+	width: auto;
+	padding: 9px 15px;
+	background: #617798;
+	border: 0;
+	font-size: 14px;
+	color: #FFFFFF;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	}
+	
+	
+/* Spesial for kategoriside */
+ #formVenstre{
+ 	width:49%;
+ 	float:left;
+ }
+ #formHoyre{
+ 	width:49%;
+ 	float:right;
+ 	
+ }

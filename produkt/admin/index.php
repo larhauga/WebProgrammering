@@ -1,4 +1,6 @@
 <?php
+	include("../includes/_class/admin.php");
+	include("../includes/klasser.php");
 	session_start();
 ?>
 <!DOCTYPE html>
