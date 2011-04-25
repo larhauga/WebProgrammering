@@ -19,6 +19,30 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 			die("Kunne ikke koble til databasen".$this->db->connect_error);
 		}
 	}
+	
+	function errors()
+	{
+		// skal lage så den sjekker for alle mysql errors
+	}
+	
+	function settInn()
+	{
+		// felles innsettelse i databasen
+	}
+	
+	function fjern()
+	{
+		// felles fjern fra databasen
+	}
+	function sikkerhet()
+	{
+		//mot hackers
+	}
+	
+	function select()
+	{
+		//felles select fra databasen
+	}
 }
 
 
