@@ -16,6 +16,10 @@ class db
 	
 function connectDB()
 {
+/*{  if (($_SERVER['SERVER_NAME']!="localhost")){
+     echo "Beklager, men denne databasen er privat.."; // mot hackers
+	 die();	 
+} */ // slår denne av mens vi jobber med siden, slåes på seinere :)
 	$db = new MySQLi("localhostddddddd","xzindor_db1","lol123","xzindor_db1");
 	if($db->connect_error)
 	{
@@ -40,6 +44,8 @@ class bruker
 	public $tlf;
 	public $registert;
 	public $rettigheter;
+	public $dbc; //Database tilkobling du bruker til å gjøre komandoer
+	public $dbcc; //Database server connect kan settes til 0, og database connecten dør..
 	
 	function __construct($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
 	{
@@ -57,7 +63,8 @@ class bruker
 	
 	function updateDB()
 	{
-		$dbc = new db();
+		$this->dbcc = new db();
+		$this->dbc = $dbcc->connectDB();
 		$sql = "Insert into bruker(epost,passord,passord,etternavn,adresse,postnr,registrert,rettigheter,tlf) 
 		Values(
 		'$this->epost',
@@ -73,12 +80,12 @@ class bruker
 		$resultat = $this->dbc->query($sql);
 			if(!$resultat)
 			{
-			echo "Error".$dbc->error;
+			echo "Error".$this->dbc->error;
 			die();
 			}
 			else 
 			{
-				$antrader = $dbc->affected_rows;
+				$antrader = $this->dbc->affected_rows;
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
