@@ -20,7 +20,7 @@ function connectDB()
      echo "Beklager, men denne databasen er privat.."; // mot hackers
 	 die();	 
 } */ // slår denne av mens vi jobber med siden, slåes på seinere :)
-	$db = new MySQLi("localhostddddddd","xzindor_db1","lol123","xzindor_db1");
+	$db = new MySQLi("localhost","xzindor_db1","lol123","xzindor_db1");
 	if($db->connect_error)
 	{
 	die("Kunne ikke koble til databasen".$db->connect_error);
