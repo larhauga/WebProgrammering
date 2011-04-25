@@ -23,6 +23,7 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	function errors()
 	{
 		// skal lage så den sjekker for alle mysql errors
+		// if($this->db->sikkerhet())
 	}
 	
 	function settInn()
@@ -34,9 +35,13 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	{
 		// felles fjern fra databasen
 	}
-	function sikkerhet()
+	function sikkerhet() // mot hackers.. for å kalle denne:  $this->db->sikkerhet()
 	{
-		//mot hackers
+		if (($_SERVER['SERVER_NAME']!="localhost"))
+		{
+     	echo "Beklager, men denne databasen er privat..";
+	 	die();
+		}
 	}
 	
 	function select()
@@ -44,7 +49,6 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		//felles select fra databasen
 	}
 }
-
 
 
 
