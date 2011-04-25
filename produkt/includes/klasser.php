@@ -1,6 +1,6 @@
 <?php
 
-class db
+class db // du bare kaller new db for å opprette en database tilkobling ( eks $dbc = new db )
 {
 	public $ip;
 	public $brukernavn;
@@ -36,8 +36,7 @@ class bruker
 	public $tlf;
 	public $registert;
 	public $rettigheter;
-	public $dbc; //Database tilkobling du bruker til å gjøre komandoer
-	public $dbcc; //Database server connect kan settes til 0, og database connecten dør..
+	public $dbc; //Database tilkobling du bruker til å gjøre komandoer med
 	
 	function __construct($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
 	{
@@ -51,12 +50,11 @@ class bruker
 		$this->tlf = $inntlf;
 		$this->registert = 10;
 		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
+		$this->dbc = new db();
 	}
 	
 	function updateDB()
 	{
-		$this->dbcc = new db();
-		$this->dbc = $dbcc->connectDB();
 		$sql = "Insert into bruker(epost,passord,passord,etternavn,adresse,postnr,registrert,rettigheter,tlf) 
 		Values(
 		'$this->epost',
