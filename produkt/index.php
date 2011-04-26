@@ -10,7 +10,7 @@ include "includes/head.php";
 		</div>
 		  <div id="headerkolonne">
 		  	<div id="logginn">
-			    <form name="login" method="post" action="login.php">
+			    <form name="login" method="post" action="includes/login/login.php">
 						<table>
 						  <tr>
 							<td>Epost: </td>
