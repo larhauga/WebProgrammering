@@ -31,7 +31,9 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 			}
 			else 
 			{
-				
+				$fh = fopen("error_log.php");
+				fwrite($fh, $this->error );
+				fclose($fh);
 			}
 			
 	}
