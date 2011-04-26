@@ -25,6 +25,14 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	{
 		// skal lage så den sjekker for alle mysql errors
 			$this->error = $innError;
+			if(!file_exists("error_log.php"))
+			{
+				die("filen eksiterer ikke...noob admin");
+			}
+			else 
+			{
+				
+			}
 			
 	}
 	
@@ -111,6 +119,8 @@ class bruker
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
+					$innerror = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows";
+					$dbc->errors($innerror);
 					die();
 				}
 			}
