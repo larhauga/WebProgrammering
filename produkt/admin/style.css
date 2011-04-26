@@ -196,3 +196,48 @@ img{
  	float:right;
  	
  }
+ 
+ .even{
+ 	background-color:#e7e7e7;
+ 	
+ }
+ .odd{
+ 		
+ }
+ 
+/* ADMIN SIDE */
+#adminMeny{
+	padding-top:1.3em;
+	margin-bottom:30px;
+}
+#adminMeny ul{
+	list-style-type:none;
+	padding-left:0px;
+	text-align:center;
+}
+#adminMeny li{
+	margin-bottom:20px;
+	float:left;
+	position:relative;
+	display:block;
+	margin-left:1%;
+	width: 170px;
+	height:25px;
+	border-radius: 3px;
+	
+	background: #000000;
+	background:-moz-linear-gradient(bottom,#000000,#adadad);
+	background:-webkit-gradient(linear,left bottom,left top,from(#000000),to(#adadad));
+	background: filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#adadad');
+	background: -o-linear-gradient(bottom, #000000, #adadad);
+}
+#adminMeny li:hover{
+	background: #000000;
+}
+#adminMeny a
+{
+	text-decoration: none;
+	display:block;
+	color: white;
+}
+ 
