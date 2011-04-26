@@ -23,7 +23,7 @@ include "includes/head.php";
 				          <tr>
 					         <td></td>
 						 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
-					           Registrer <a href="includes/login/reg2.php">her</a></td>
+					           Registrer <a href="includes/login/registrer.php">her</a></td>
 					      </tr>
 						</table>
 					</form>
