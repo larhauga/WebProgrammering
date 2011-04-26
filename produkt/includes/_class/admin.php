@@ -81,5 +81,21 @@ class Admin
 		
 	}
 	
+	/* Henter stats til admin siden */
+	function statsVarer()
+	{
+		$sporringen = "SELECT COUNT(*) FROM varer";
+		echo db::select($sporringen);
+	}
+	function statsKat()
+	{
+		$sporringen = "SELECT COUNT(*) FROM kategori";
+		echo db::select($sporringen);
+	}
+	function statsBruker()
+	{
+		$sporringen = "SELECT COUNT(*) FROM bruker";
+		echo db::select($sporringen);
+	}
 }
 ?>

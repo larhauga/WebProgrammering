@@ -1,8 +1,8 @@
 <?php
+	session_start();
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
-	//db::connectDB(); Ikke en ferdig metode tydeligvis
-	session_start();
+	$db = new db();
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,12 +18,18 @@ if(isset($_GET['login']))
 	//validerer input
 	//Sette opp sessions
 	$_SESSION['login'] = true;
+	$_SESSION['brukerid'] = '';
+	$_SESSION['brukernavn'] = '';
+	$_SESSION['tilgang'] = '';
 	//IP $_SESSION['ip'] = $_SERVER['REMOTE_ADDR']; 
 	
 }
 if(isset($_GET['logout']))
 {
-    unset($_SESSION['login']);
+	unset($_SESSION['login']);
+	unset($_SESSION['brukerid']);
+	unset($_SESSION['brukernavn']);
+	unset($_SESSION['tilgang']);
 }
 
 if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
@@ -167,15 +173,21 @@ else
 				<h1>Innhold</h1>
 				<table width="100%">
 					<tr>
-						<td align="right" class="colorTall">147</td>
+						<td align="right" class="colorTall">';
+							Admin::statsVarer();
+					echo'</td>
 						<td>Varer</td>
 					</tr>
 					<tr>
-						<td align="right" class="colorTall1">5</td>
+						<td align="right" class="colorTall1">';
+							Admin::statsKat();
+					echo '</td>
 						<td>Kategorier</td>
 					</tr>
 					<tr>
-						<td align="right" class="colorTall2">146</td>
+						<td align="right" class="colorTall2">';
+							Admin::statsBruker();
+					echo'</td>
 						<td>Brukere</td>
 					</tr>
 				</table>
