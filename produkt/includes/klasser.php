@@ -7,6 +7,7 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	public $passord;
 	public $dbnavn;
 	public $db;
+	public $error;
 	function __construct()
 	{
 		$this->ip = "localhost";
@@ -20,10 +21,11 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		}
 	}
 	
-	function errors()
+	function errors($innError)
 	{
 		// skal lage så den sjekker for alle mysql errors
-		// if($this->db->sikkerhet())
+			$this->error = $innError;
+			
 	}
 	
 	function settInn()
@@ -99,6 +101,8 @@ class bruker
 			if(!$resultat)
 			{
 			echo "Error".$this->dbc->error;
+			$innerror = "Error".$this->dbc->error;
+			$dbc->errors($innerror);
 			die();
 			}
 			else 
