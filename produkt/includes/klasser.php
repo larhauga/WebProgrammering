@@ -7,6 +7,7 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	public $passord;
 	public $dbnavn;
 	public $db;
+	public $error;
 	function __construct()
 	{
 		$this->ip = "localhost";
@@ -20,10 +21,21 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		}
 	}
 	
-	function errors()
+	function errors($innError)
 	{
 		// skal lage så den sjekker for alle mysql errors
-		// if($this->db->sikkerhet())
+			$this->error = $innError;
+			if(!file_exists("error_log.php"))
+			{
+				die("filen eksiterer ikke...noob admin");
+			}
+			else 
+			{
+				$fh = fopen("error_log.php");
+				fwrite($fh, $this->error );
+				fclose($fh);
+			}
+			
 	}
 	
 	function settInn()
@@ -99,6 +111,8 @@ class bruker
 			if(!$resultat)
 			{
 			echo "Error".$this->dbc->error;
+			$innerror = "Error".$this->dbc->error;
+			$dbc->errors($innerror);
 			die();
 			}
 			else 
@@ -107,6 +121,8 @@ class bruker
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
+					$innerror = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows";
+					$dbc->errors($innerror);
 					die();
 				}
 			}
