@@ -10,7 +10,7 @@ include "includes/head.php";
 		</div>
 		  <div id="headerkolonne">
 		  	<div id="logginn">
-			    <form name="login" method="post" action="login.php">
+			    <form name="login" method="post" action="includes/login/login.php">
 						<table>
 						  <tr>
 							<td>Epost: </td>
@@ -23,7 +23,7 @@ include "includes/head.php";
 				          <tr>
 					         <td></td>
 						 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
-					           Registrer <a href="#">her</a></td>
+					           Registrer <a href="includes/login/registrer.php">her</a></td>
 					      </tr>
 						</table>
 					</form>
