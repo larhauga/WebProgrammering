@@ -8,13 +8,13 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	public $dbnavn;
 	public $db;
 	public $error;
-	function __construct()
+	public function __construct()
 	{
 		$this->ip = "localhost";
 		$this->brukernavn = "xzindor_db1";
 		$this->passord = "lol123";
 		$this->dbnavn = "xzindor_db1";
-		$this->db = new MySQLi("localhost","xzindor_db1","lol123","xzindor_db1");
+		$db = new mysqli('localhost','xzindor_db1','lol123','xzindor_db1');
 		if($db->connect_error)
 		{
 			die("Kunne ikke koble til databasen".$this->db->connect_error);
