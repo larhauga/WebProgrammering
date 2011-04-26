@@ -66,11 +66,11 @@ class Admin
 	
 	function produkter()
 	{
-			
+		
 	}
 	function varebeholdning()
 	{
-			
+		
 	}
 	function sikkerhet()
 	{
