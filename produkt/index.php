@@ -1,6 +1,5 @@
 <?php 
 include "includes/head.php";
-include "includes/login";
 ?>
 
 <body>
