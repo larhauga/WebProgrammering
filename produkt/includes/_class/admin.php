@@ -18,14 +18,15 @@ class Admin
 	}
 	function nyKat($tittel, $aktiv)
 	{
-		$dbc = new db();
+		$db = new db();
 		$sql = "Insert into kategori(idkategori,tittel,aktiv) 
 		Values(
 		'',
 		'$this->tittel',
 		'$this->aktiv',
 		)";
-		$resultat = $this->dbc->query($sql);
+		$resultat = $db->db->db->query($sql);
+		//$resultat = $this->dbc->query($sql);
 			if(!$resultat)
 			{
 			echo "Error".$dbc->error;
