@@ -12,7 +12,6 @@ $innadresse = $_GET['adresse'];
 $innpostnr = $_GET['postnr'];
 $innpoststed = $_GET['poststed'];
 $inntlf = $_GET['tlf'];
-
 if($innepost == $innepost2)
 	{
 	if($innpassord == $innpassord2)

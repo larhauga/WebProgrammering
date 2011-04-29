@@ -27,7 +27,7 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 			die("Kunne ikke koble til databasen".$this->db->connect_error);
 		}
 
-	} */ 
+	} 
 	
 	function errors($innError)
 	{
@@ -71,7 +71,7 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		
 	}
 }
-
+*/ 
 
 
 class bruker
@@ -103,7 +103,8 @@ class bruker
 	
 	function updateDB()
 	{
-		$sql = "Insert into bruker(epost,passord,passord,etternavn,adresse,postnr,registrert,rettigheter,tlf) 
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$sql = "Insert into bruker(epost,passord,fornavn,etternavn,adresse,postnr,registrert,rettigheter,tlf) 
 		Values(
 		'$this->epost',
 		'$this->passord',
@@ -119,8 +120,8 @@ class bruker
 			if(!$resultat)
 			{
 			echo "Error".$mysqli->error;
-			$innerror = "Error".$mysqli->error;
-			$mysqli->errors($innerror);
+			//$innerror = "Error".$mysqli->error;
+			//$mysqli->errors($innerror);
 			die();
 			}
 			else 
@@ -129,8 +130,8 @@ class bruker
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
-					$innerror = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows";
-					$mysqli->errors($innerror);
+					//$innerror = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows";
+					//$mysqli->errors($innerror);
 					die();
 				}
 			}
