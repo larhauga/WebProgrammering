@@ -21,13 +21,13 @@ if(!isset($_GET['login']))
                     echo "Error".$mysqli->error;
                     $this->error = "Error".$mysqli->error."\r\n";
                     $bruker->errorTilFil($this->error);
-                    die();
+                    return false;
                  }
             else
              {
-                 return $this->brukernavn;
+                 return true;
              } 
-                $bruker->login($passord,$epost);
+                login($passord,$epost);
              }
             
             if(login)
