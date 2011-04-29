@@ -2,6 +2,7 @@
 	session_start();
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
+	include("../includes/config.php");
 	$Admin = null;
 
 ?>
@@ -14,9 +15,6 @@
 </head>
 <body>
 <?php
-
-
-
 
 if(isset($_GET['login']))
 {
@@ -41,20 +39,19 @@ if(isset($_GET['login']))
 			else if($antallRader == 1)
 			{
 				$rad = $resultat->fetch_object();
+				
 				$Admin = new Admin($rad->epost, $rad->passord, $rad->rettigheter, $rad->idbruker, $rad->fornavn, $_SERVER['REMOTE_ADDR']);
-				$_SESSION['admin'] = serialize($admin);
+				$_SESSION['admin'] = serialize($Admin);
 				$_SESSION['login'] = true;	
 			}
 		} // Else
 	} //Brukernavnsjekk	
 } //If login
+
 if(isset($_GET['logout']))
 {
 	unset($_SESSION['admin']);
 	unset($_SESSION['login']);
-	unset($_SESSION['brukerid']);
-	unset($_SESSION['brukernavn']);
-	unset($_SESSION['tilgang']);
 }
 
 if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
@@ -89,13 +86,14 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
 		</div>
 		';
 }
-else if(isset($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
+else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
 {
 	$id = $_GET['id'];
+	$Admin = unserialize($_SESSION['admin']);
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
-			<p>Velkommen <b>Lars</b></p>
+			<p>Velkommen <b>'.$Admin->fornavn.'</b></p>
 		</div>
 		<div id="menyRight">
 			<p><a href="?logout"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>

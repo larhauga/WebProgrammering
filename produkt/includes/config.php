@@ -7,7 +7,8 @@
 //Kataloger
 $C['DIR']['ROOT'] = "../";
 $C['DIR']['CLASS'] = "includes/";
-$C['DIR']['SIDER'] = "pages/" 
+$C['DIR']['SIDER'] = "pages/";
+$C['DIR']['ADMIN'] = "admin/";
 
 //Brukerconfig
 $C['BRUKER']['REGEX'] = "/[^a-zA-Z0-9]/";

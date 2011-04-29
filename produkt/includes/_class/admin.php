@@ -2,21 +2,21 @@
 
 class Admin
 {
-	public $brukernavn;
+	public $epost;
 	public $passord;
 	public $tilgangstype;
-	public $brukerid;
+	public $idbruker;
 	public $fornavn;
 	public $ip;
 	
-	function __constructor($brukernavn, $passord, $tilgangstype, $brukerid, $fornavn, $ip)
+	function __constructor($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
-		$this->$brukernavn;
-		$this->$passord;
-		$this->$tilgangstype;
-		$this->$brukerid;
-		$this->$fornavn;
-		$this->$ip;
+		$this->$epost = $epost;
+		$this->$passord = $passord;
+		$this->$tilgangstype = $tilgangstype;
+		$this->$idbruker = $idbruker;
+		$this->$fornavn = $fornavn;
+		$this->$ip = $ip;
 	}
 	
 	function brukere()
