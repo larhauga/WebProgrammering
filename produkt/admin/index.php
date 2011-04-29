@@ -2,8 +2,8 @@
 	session_start();
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
-	$db = new db();
-	$Admin = new Admin();
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,28 +14,41 @@
 </head>
 <body>
 <?php
-	$db = new mysqli("193.107.29.49","xzindor_db1","lol123","xzindor_db1");
-	$resultat = $db->query("SELECT * FROM bruker");
-	if(!$resultat)
-	{
-		echo "error: ".$db->error."<br/>";
-	}
-	else
-	{
-		$antallRader = $db->affected_rows;
-		for($i=0;$i<$antallRader;$i++)
-		{
-			$radObjekt = $resultat->fetch_object();
-			echo $radObjekt->etternavn." ". $radObjekt->fornavn."</br>";
-		}
-	}
+
 
 
 
 if(isset($_GET['login']))
 {
+	$brukernavn = sjekk($_POST['']);
+	$passord = sjekk($_POST['']);
+	
+	if($brukernavn != "" && is_email($brukernavn) && $passord != "")
+	
+	$db = new mysqli("193.107.29.49","xzindor_db1","lol123","xzindor_db1");
+	$resultat = $db->query("SELECT * FROM bruker WHERE epost = '".$brukernavn."' AND passord = '".$passord."'");
+	if(!$resultat)
+	{
+		echo "Det oppstod en feil: ".$db->error."<br/>";
+	}
+	else
+	{
+		if($db->affected_rows != 0 && $db->affected_rows > 1)
+		{
+			
+		}
+		$antallRader = $db->affected_rows;
+		for($i=0;$i<$antallRader;$i++)
+		{
+			$rad = $resultat->fetch_object();
+			$Admin = new Admin($rad->epost, $rad->rettigheter, $rad->idbruker, $rad->fornavn);
+			
+			echo $radObjekt->etternavn." ". $radObjekt->fornavn."</br>";
+		}
+	}
 	//validerer input
 	//Sette opp sessions
+	$_SESSION['admin'] = serialize($admin);
 	$_SESSION['login'] = true;
 	$_SESSION['brukerid'] = '';
 	$_SESSION['brukernavn'] = '';
@@ -45,6 +58,7 @@ if(isset($_GET['login']))
 }
 if(isset($_GET['logout']))
 {
+	unset($_SESSION['admin']);
 	unset($_SESSION['login']);
 	unset($_SESSION['brukerid']);
 	unset($_SESSION['brukernavn']);
