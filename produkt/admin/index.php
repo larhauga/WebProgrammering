@@ -3,7 +3,6 @@
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
 	$db = new db();
-	$db->connect();
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +13,27 @@
 </head>
 <body>
 <?php
+	$db = new mysqli("193.107.29.49","xzindor_db1","lol123","xzindor_db1");
+	$resultat = $db->query("SELECT * FROM bruker");
+	if(!$resultat)
+	{
+		echo "error: ".$db->error."<br/>";
+	}
+	else
+	{
+		$antallRader = $db->affected_rows;
+		for($i=0;$i<$antallRader;$i++)
+		{
+			$radObjekt = $resultat->fetch_object();
+			echo $radObjekt->etternavn." ". $radObjekt->fornavn."</br>";
+		}
+	}
+	echo $db->affected_rows;
+
+	$rad = $db->fetch_object();
+	echo $rad->tlf;
+
+
 if(isset($_GET['login']))
 {
 	//validerer input

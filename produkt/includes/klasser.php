@@ -21,6 +21,13 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 
 	}
 	
+		$db = new mysqli($this->ip,$this->brukernavn,$this->passord,$this->dbnavn);
+		if($db->connect_error)
+		{
+			die("Kunne ikke koble til databasen".$this->db->connect_error);
+		}
+
+	}
 	
 	function errors($innError)
 	{
@@ -57,9 +64,11 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		}
 	}
 	
-	function select()
+	function select($sql)
 	{
 		//felles select fra databasen
+		return $this->$db->query($sql);
+		
 	}
 }
 
