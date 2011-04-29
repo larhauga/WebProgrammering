@@ -59,9 +59,29 @@ include "includes/head.php";
 		<div id="main">
 			<div id="path">
 				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
-			</div>
+			</div><!--end of path-->
+<?php
+$default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
+$directory	= "includes";		// mappa filene dine ligger i.
+$extension	= "php";		// filendingen på filene dine.
 
-		</div>
+$page = $_GET['page'];
+
+if (preg_match('/(http:\/\/|^\/|\.+?\/)/', $page)) echo "feil";
+
+
+elseif (!empty($page))											// sjekke at variabelen ikke er tom.
+{
+	if (file_exists("$directory/$page.$extension"))				// sjekke om fila eksisterer.
+	include("$directory/$page.$extension");					// inkluder fila.
+	else														// hvis ikke,
+	echo "<h1>Error 404</h1>\n<p>Finner ikke siden!</p>\n";	// skriv en feilmelding.
+}
+else															// eller,
+	include("$directory/$default.$extension");					// inkluder fila som definert som $default.
+
+?>
+		</div><!--end of main-->
 		<div id="rightbar">
 		  <div id="handlevogn">
 		    <h1>Handlevogn</h1>

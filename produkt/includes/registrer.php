@@ -1,5 +1,5 @@
 <body>
-<form action="reg2.php" method="get" name="login">
+<form action="includes/login/reg2.php" method="get" name="login">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
 <tr>
