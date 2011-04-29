@@ -3,16 +3,20 @@
 class Admin
 {
 	public $brukernavn;
+	public $passord;
 	public $tilgangstype;
 	public $brukerid;
 	public $fornavn;
+	public $ip;
 	
-	function __constructor($brukernavn, $tilgangstype, $brukerid, $fornavn)
+	function __constructor($brukernavn, $passord, $tilgangstype, $brukerid, $fornavn, $ip)
 	{
 		$this->$brukernavn;
+		$this->$passord;
 		$this->$tilgangstype;
 		$this->$brukerid;
 		$this->$fornavn;
+		$this->$ip;
 	}
 	
 	function brukere()
@@ -109,6 +113,18 @@ class Admin
 	function statsBruker()
 	{
 		$sql = "SELECT COUNT(*) FROM bruker";
+	}
+	
+	//Login 
+	function encrypt($innpassord)
+	{
+		$salt = md5($innpassord."%*4!#$;\.k~'(_@"); 
+		$innpassord = md5("$salt$string$salt"); 
+		$this->passord = $innpassord;
+	} 
+	function login()
+	{
+		
 	}
 }
 ?>
