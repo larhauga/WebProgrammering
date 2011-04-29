@@ -3,6 +3,7 @@
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
 	$db = new db();
+	$db->connect();
 ?>
 <!DOCTYPE html>
 <html>

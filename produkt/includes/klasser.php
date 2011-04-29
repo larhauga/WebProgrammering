@@ -10,11 +10,15 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	public $error;
 	public function __construct()
 	{
-		$this->ip = "localhost";
+		$this->ip = "193.107.29.49";
 		$this->brukernavn = "xzindor_db1";
 		$this->passord = "lol123";
 		$this->dbnavn = "xzindor_db1";
-		$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+
+	}
+	public function connect()
+	{
+		$db = new mysqli($this->ip,$this->brukernavn,$this->password,$this->dbnavn);
 		if($db->connect_error)
 		{
 			die("Kunne ikke koble til databasen".$this->db->connect_error);
