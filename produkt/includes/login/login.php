@@ -29,7 +29,7 @@ if(!isset($_GET['login']))
                  return $this->brukernavn;
              } 
                 $bruker->login($passord,$epost);
-          }
+             }
             /*
             mysqli() or die(mysqli_error());
             $sql = "SELECT idbrukere, tilgang, epost FROM brukere WHERE epost = '" . $epost . "' AND passord = '" . $passord . "'";
@@ -38,8 +38,11 @@ if(!isset($_GET['login']))
             {
                 echo "Det skjedde en feil";
             }
+            
             else
             {
+                echo 'hei';
+            }
                 /*
             	$rad = mysql_fetch_row($sql);
 				$_SESSION['login'] = true;
@@ -51,7 +54,7 @@ if(!isset($_GET['login']))
 			else{
 				$passordfeil = "Epost eller passordet er feil!";
 			}*/
-	}
+            }
 	else
 	{
 		$passordfeil = "Epost eller passordet er feil!";
