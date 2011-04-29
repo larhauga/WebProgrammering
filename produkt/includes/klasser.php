@@ -14,10 +14,11 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	public $error;
 	public function __construct()
 	{
-		$this->ip = "localhost";
+		$this->ip = "193.107.29.49";
 		$this->brukernavn = "xzindor_db1";
 		$this->passord = "lol123";
 		$this->dbnavn = "xzindor_db1";
+
 	}
 	
 	
