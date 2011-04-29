@@ -88,10 +88,9 @@ class bruker
 	public $rettigheter;
 	public $error;
 	
-	function __construct($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
+	function __construct($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
 	{
 		$this->epost = $innepost;
-		$this->passord = $innpassord;
 		$this->fornavn = $innfornavn;
 		$this->etternavn = $innetternavn;
 		$this->adresse = $innadresse;
@@ -101,6 +100,15 @@ class bruker
 		$this->registert = 10;
 		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
 	}
+	
+	function encrypt($innpassord)
+	{
+   $salt = md5($innpassord."%*4!#$;\.k~'(_@"); 
+   
+   $innpassord = md5("$salt$string$salt"); 
+   
+   	$this->passord = $innpassord;
+	} 
 	
 	function updateDB()
 	{
@@ -151,6 +159,27 @@ class bruker
 				fwrite($fh, $this->error );
 				fclose($fh);
 			}
+	}
+	
+	function login($passord,$brukernavn)
+	{
+		$passord;
+		$brukernavn;
+		$passord = $bruker->encrypt($passord);
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$sql = "select * from bruker where brukernavn = '$brukernavn' and passord = '$passord'";
+		$resultat = $mysqli->query($sql);
+		if(!resultat)
+			{
+			echo "Error".$mysqli->error;
+			$this->error = "Error".$mysqli->error."\r\n";
+			$bruker->errorTilFil($this->error);
+			die();
+			}
+		else
+		{
+			return $this->brukernavn;
+		}	
 	}
 			
 }
