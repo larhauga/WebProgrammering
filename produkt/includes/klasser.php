@@ -86,6 +86,7 @@ class bruker
 	public $tlf;
 	public $registert;
 	public $rettigheter;
+	public $error;
 	
 	function __construct($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
 	{
@@ -120,8 +121,8 @@ class bruker
 			if(!$resultat)
 			{
 			echo "Error".$mysqli->error;
-			//$innerror = "Error".$mysqli->error;
-			//$mysqli->errors($innerror);
+			$this->error = "Error".$mysqli->error."\r\n";
+			$bruker->errorTilFil($this->error);
 			die();
 			}
 			else 
@@ -130,12 +131,26 @@ class bruker
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
-					//$innerror = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows";
-					//$mysqli->errors($innerror);
+					$this->error = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows"."\r\n";
+					$bruker->errorTilFil($this->error);
 					die();
 				}
 			}
 		echo "Du er nå registert";
+	}
+	function errorTilFil($error)
+	{
+			$this->error = $innError;
+			if(!file_exists("error_log.php"))
+			{
+				die("filen eksiterer ikke...noob admin");
+			}
+			else 
+			{
+				$fh = fopen("error_log.php");
+				fwrite($fh, $this->error );
+				fclose($fh);
+			}
 	}
 			
 }
