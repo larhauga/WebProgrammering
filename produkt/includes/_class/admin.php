@@ -2,13 +2,17 @@
 
 class Admin
 {
-	public $bruker;
+	public $brukernavn;
 	public $tilgangstype;
+	public $brukerid;
+	public $fornavn;
 	
-	function __constructor($bruker, $tilgangstype)
+	function __constructor($brukernavn, $tilgangstype, $brukerid, $fornavn)
 	{
-		$this->$bruker;
+		$this->$brukernavn;
 		$this->$tilgangstype;
+		$this->$brukerid;
+		$this->$fornavn;
 	}
 	
 	function brukere()
@@ -16,34 +20,36 @@ class Admin
 		/*Vise alle brukere. Gi admintilgang, kun tilgang for brukere med superbrukertilgang*/
 			
 	}
+	/* Kategorier */
+	//Innsetting av nye kategorier
 	function nyKat($tittel, $aktiv)
 	{
-		$db = new db();
-		$db->connect();
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 		$sql = "Insert into kategori(idkategori,tittel,aktiv) 
 		Values(
-		'',
-		'$this->tittel',
-		'$this->aktiv',
-		)";
-		$resultat = $db->db->db->query($sql);
-		//$resultat = $this->dbc->query($sql);
-			if(!$resultat)
+			'',
+			'$this->tittel',
+			'$this->aktiv',
+			)";
+		$resultat = $mysqli->query($sql);
+	
+		if(!$resultat)
+		{
+		echo "Error".$dbc->error;
+		die();
+		}
+		else 
+		{
+			$antrader = $dbc->affected_rows;
+			if($antrader == 0)
 			{
-			echo "Error".$dbc->error;
-			die();
+				echo "Det skjedde en feil med innsettelse i databasen";
+				die();
 			}
-			else 
-			{
-				$antrader = $dbc->affected_rows;
-				if($antrader == 0)
-				{
-					echo "Det skjedde en feil med innsettelse i databasen";
-					die();
-				}
-			}
+		}
 		echo "Du er nå registert";
 	}
+	//Vis eksisterende kategorier
 	public function visKat()
 	{
 		$db = new db();
@@ -91,21 +97,18 @@ class Admin
 	/* Henter stats til admin siden */
 	function statsVarer()
 	{
-		$db = new db();
-		$db->connect();
+
 		$sql = "SELECT COUNT(*) FROM varer";
-		$result = mysqli_query($sql);
-		mysqli_free_result($result);
+
 	}
 	function statsKat()
 	{
-		$sporringen = "SELECT COUNT(*) FROM kategori";
-		echo $db->select($sporringen);
+		$sql = "SELECT COUNT(*) FROM kategori";
+
 	}
 	function statsBruker()
 	{
-		$sporringen = "SELECT COUNT(*) FROM bruker";
-		echo $db->select($sporringen);
+		$sql = "SELECT COUNT(*) FROM bruker";
 	}
 }
 ?>
