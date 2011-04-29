@@ -19,6 +19,7 @@ class Admin
 	function nyKat($tittel, $aktiv)
 	{
 		$db = new db();
+		$db->connect();
 		$sql = "Insert into kategori(idkategori,tittel,aktiv) 
 		Values(
 		'',
@@ -45,6 +46,11 @@ class Admin
 	}
 	public function visKat()
 	{
+		$db = new db();
+		$db->connect();
+		$sql = "SELECT * FROM kategori";
+		$resultat = mysqli_query($db, $sql);
+		
 		echo '
 		<table width="100%" border="0">
 					<tr>
@@ -85,18 +91,21 @@ class Admin
 	/* Henter stats til admin siden */
 	function statsVarer()
 	{
-		$sporringen = "SELECT COUNT(*) FROM varer";
-		echo db::select($sporringen);
+		$db = new db();
+		$db->connect();
+		$sql = "SELECT COUNT(*) FROM varer";
+		$result = mysqli_query($sql);
+		mysqli_free_result($result);
 	}
 	function statsKat()
 	{
 		$sporringen = "SELECT COUNT(*) FROM kategori";
-		echo db::select($sporringen);
+		echo $db->select($sporringen);
 	}
 	function statsBruker()
 	{
 		$sporringen = "SELECT COUNT(*) FROM bruker";
-		echo db::select($sporringen);
+		echo $db->select($sporringen);
 	}
 }
 ?>

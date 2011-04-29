@@ -3,6 +3,7 @@
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
 	$db = new db();
+	$Admin = new Admin();
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,10 +29,7 @@
 			echo $radObjekt->etternavn." ". $radObjekt->fornavn."</br>";
 		}
 	}
-	echo $db->affected_rows;
 
-	$rad = $db->fetch_object();
-	echo $rad->tlf;
 
 
 if(isset($_GET['login']))
@@ -195,19 +193,19 @@ else
 				<table width="100%">
 					<tr>
 						<td align="right" class="colorTall">';
-							Admin::statsVarer();
+							$Admin->statsVarer();
 					echo'</td>
 						<td>Varer</td>
 					</tr>
 					<tr>
 						<td align="right" class="colorTall1">';
-							Admin::statsKat();
+							$Admin->statsKat();
 					echo '</td>
 						<td>Kategorier</td>
 					</tr>
 					<tr>
 						<td align="right" class="colorTall2">';
-							Admin::statsBruker();
+							$Admin->statsBruker();
 					echo'</td>
 						<td>Brukere</td>
 					</tr>

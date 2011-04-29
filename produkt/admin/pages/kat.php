@@ -6,7 +6,7 @@
 		$aktiv = $_POST['aktiv'];
 		if($tittel != null)
 		{
-			admin::nyKat($tittel, $aktiv);
+			$Admin->nyKat($tittel, $aktiv);
 			unset($_POST['tittel']);
 			unset($_POST['aktiv']);
 			unset($_POST['registrer']);
@@ -71,7 +71,7 @@
  			</div>
  			<div id="formHoyre">
 	 			<h1>Kategorier</h1>';
-	 			Admin::visKat();
+	 			$Admin->visKat();
 	 			
  			echo '</div>
  			<div style="clear:both;"></div>

@@ -15,6 +15,10 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		$this->passord = "lol123";
 		$this->dbnavn = "xzindor_db1";
 
+
+	}
+	function connect()
+	{
 		$db = new mysqli($this->ip,$this->brukernavn,$this->passord,$this->dbnavn);
 		if($db->connect_error)
 		{
