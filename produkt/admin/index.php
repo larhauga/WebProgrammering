@@ -20,8 +20,8 @@
 
 if(isset($_GET['login']))
 {
-	$brukernavn = sjekk($_POST['']);
-	$passord = sjekk($_POST['']);
+	$brukernavn = sjekkFelt($_POST['user']);
+	$passord = sjekkFelt($_POST['psw']);
 	
 	if($brukernavn != "" && is_email($brukernavn) && $passord != "")
 	
@@ -33,9 +33,9 @@ if(isset($_GET['login']))
 	}
 	else
 	{
-		if($db->affected_rows != 0 && $db->affected_rows > 1)
+		if($db->affected_rows <= 0 && $db->affected_rows > 1)
 		{
-			
+			$feilmelding = "Feil brukernavn eller passord";
 		}
 		$antallRader = $db->affected_rows;
 		for($i=0;$i<$antallRader;$i++)
@@ -82,8 +82,8 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
 				<h1>Login</h1>
 				<p>Uavtorisert tilgang vil bli logget!</p>
 				<form id="adminlogin" action="?login=true" method="post">
-				<p>Brukernavn: <input type="text" id="user" name="bruker" /></p>
-				<p>Passord: <input type="password" id="psw" name="passord" /></p>
+				<p>Brukernavn: <input type="text" id="user" name="user" /></p>
+				<p>Passord: <input type="password" id="psw" name="psw" /></p>
 				<p class="forgetmenot">
 					<label><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="90" /> Husk meg</label>
 				</p>

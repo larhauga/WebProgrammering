@@ -185,7 +185,7 @@ class bruker
 
 	function sjekkFelt($input)
 	{
-		return mysqli->real_escape_string($input);
+		return mysql_real_escape_string($input);
 	}
 	
 	?>
