@@ -1,15 +1,19 @@
 <?php
-if(isset($_GET['login']))
+include "../head.php";
+
+if(!isset($_GET['login']))
 {
-	$epost = mysql_real_escape_string($_POST['epost']);
-	$passord = mysql_real_escape_string($_POST['passord']);
-	
+	$brukernavn = ($_POST['brukernavn']);
+	$passord = ($_POST['passord']);
 	//Sette opp sessions
-	if($epost != "" && $passord != "")
-	{
+	if($brukernavn != "" && $passord != "")
+        {   
+            $bruker->login($passord,$brukernavn);
+            /*
+            mysqli() or die(mysqli_error());
             $sql = "SELECT idbrukere, tilgang, epost FROM brukere WHERE epost = '" . $epost . "' AND passord = '" . $passord . "'";
-            $sql = mysql_query($sql);
-            if(!sql)
+            $sql = mysqli_query($sql) or die(mysqli_error());*/
+            if(!$sql)
             {
                 echo "Det skjedde en feil";
             }

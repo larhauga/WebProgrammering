@@ -13,8 +13,8 @@ include "includes/head.php";
 			    <form name="login" method="post" action="includes/login/login.php">
 						<table>
 						  <tr>
-							<td>Epost: </td>
-							<td><input type="text" name="epost" id="epost" /></td>
+							<td>Brukernavn: </td>
+							<td><input type="text" name="brukernavn" id="brukernavn" /></td>
 					      </tr>
 					      <tr>
 					        <td>Passord: </td>
