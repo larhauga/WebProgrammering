@@ -160,27 +160,6 @@ class bruker
 				fclose($fh);
 			}
 	}
-	
-	function login($passord,$brukernavn)
-	{
-		$passord;
-		$brukernavn;
-		$passord = $bruker->encrypt($passord);
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-		$sql = "select * from bruker where brukernavn = '$brukernavn' and passord = '$passord'";
-		$resultat = $mysqli->query($sql);
-		if(!resultat)
-			{
-			echo "Error".$mysqli->error;
-			$this->error = "Error".$mysqli->error."\r\n";
-			$bruker->errorTilFil($this->error);
-			die();
-			}
-		else
-		{
-			return $this->brukernavn;
-		}	
-	}
 			
 }
 	?>
