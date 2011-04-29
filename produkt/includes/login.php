@@ -30,7 +30,7 @@ if(!isset($_GET['login']))
                 $bruker->login($passord,$epost);
              }
             
-            if($login)
+            if(login)
             {
                  echo 'hei';
                 
