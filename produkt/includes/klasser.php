@@ -180,7 +180,12 @@ class bruker
 		{
 			return $this->brukernavn;
 		}	
-	}
-			
+	}	
 }
+
+	function sjekkFelt($input)
+	{
+		return mysqli->real_escape_string($input);
+	}
+	
 	?>
