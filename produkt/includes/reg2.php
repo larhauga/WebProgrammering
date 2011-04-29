@@ -1,6 +1,4 @@
 <?php 
-include "../head.php";
-
 $innepost = $_GET['epost'];
 $innepost2 = $_GET['epost2'];
 $innpassord = $_GET['passord'];

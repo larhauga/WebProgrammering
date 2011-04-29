@@ -1,5 +1,4 @@
 <?php
-//include "../head.php";
 
 if(!isset($_GET['login']))
 {
@@ -22,26 +21,24 @@ if(!isset($_GET['login']))
                     echo "Error".$mysqli->error;
                     $this->error = "Error".$mysqli->error."\r\n";
                     $bruker->errorTilFil($this->error);
-                    die();
+                    return false;
                  }
             else
              {
-                 return $this->brukernavn;
+                 return true;
              } 
-                $bruker->login($passord,$epost);
+                login($passord,$epost);
              }
-            /*
-            mysqli() or die(mysqli_error());
-            $sql = "SELECT idbrukere, tilgang, epost FROM brukere WHERE epost = '" . $epost . "' AND passord = '" . $passord . "'";
-            $sql = mysqli_query($sql) or die(mysqli_error());*/
-            if(!$bruker)
+            
+            if(login)
             {
-                echo "Det skjedde en feil";
+                 echo 'hei';
+                
             }
             
             else
             {
-                echo 'hei';
+               echo "Epost eller passordet er feil";
             }
                 /*
             	$rad = mysql_fetch_row($sql);
@@ -57,7 +54,7 @@ if(!isset($_GET['login']))
             }
 	else
 	{
-		$passordfeil = "Epost eller passordet er feil!";
+		echo 'Epost eller passordet er ikke skrevet inn!';
 	}
 	
 }

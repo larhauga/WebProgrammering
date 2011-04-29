@@ -1,5 +1,7 @@
 <body>
-<form action="includes/login/reg2.php" method="get" name="login">
+<center>
+<br><br><hr>
+<form action="?page=reg2" method="post" name="login">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
 <tr>
@@ -20,5 +22,7 @@
 </table>
 <input name="submit" type="submit" value="Register">
 </form>
+</center>
+<hr><br><br>
 </body>
 </html>
