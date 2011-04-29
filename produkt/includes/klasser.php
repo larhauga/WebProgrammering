@@ -1,6 +1,6 @@
 <?php
 
-class mysqli
+ /* class mysqli
 {
 	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 }
@@ -27,7 +27,7 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 			die("Kunne ikke koble til databasen".$this->db->connect_error);
 		}
 
-	}
+	} */ 
 	
 	function errors($innError)
 	{
