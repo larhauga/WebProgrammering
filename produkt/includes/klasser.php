@@ -1,12 +1,16 @@
 <?php
 
-class db // du bare kaller new db for å opprette en database tilkobling ( eks $dbc = new db )
+class mysqli
 {
+	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+}
+class db // du bare kaller new db for å opprette en database tilkobling ( eks $dbc = new db )
+{	
+		
 	public $ip;
 	public $brukernavn;
 	public $passord;
 	public $dbnavn;
-	public $db;
 	public $error;
 	public function __construct()
 	{
@@ -14,12 +18,8 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 		$this->brukernavn = "xzindor_db1";
 		$this->passord = "lol123";
 		$this->dbnavn = "xzindor_db1";
-		$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-		if($db->connect_error)
-		{
-			die("Kunne ikke koble til databasen".$this->db->connect_error);
-		}
 	}
+	
 	
 	function errors($innError)
 	{
@@ -76,7 +76,6 @@ class bruker
 	public $tlf;
 	public $registert;
 	public $rettigheter;
-	public $dbc; //Database tilkobling du bruker til å gjøre komandoer med
 	
 	function __construct($innepost,$innpassord,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
 	{
@@ -90,7 +89,6 @@ class bruker
 		$this->tlf = $inntlf;
 		$this->registert = 10;
 		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
-		$this->dbc = new db();
 	}
 	
 	function updateDB()
@@ -107,22 +105,22 @@ class bruker
 		'$this->rettigheter',
 		'$this->tlf'
 		)";
-		$resultat = $this->dbc->query($sql);
+		$resultat = $mysqli->query($sql);
 			if(!$resultat)
 			{
-			echo "Error".$this->dbc->error;
-			$innerror = "Error".$this->dbc->error;
-			$dbc->errors($innerror);
+			echo "Error".$mysqli->error;
+			$innerror = "Error".$mysqli->error;
+			$mysqli->errors($innerror);
 			die();
 			}
 			else 
 			{
-				$antrader = $this->dbc->affected_rows;
+				$antrader = $mysqli->affected_rows;
 				if($antrader == 0)
 				{
 					echo "Det skjedde en feil med innsettelse i databasen";
 					$innerror = "databasefeil. Ingen ting ble lagt til i databasen - affected_rows";
-					$dbc->errors($innerror);
+					$mysqli->errors($innerror);
 					die();
 				}
 			}
