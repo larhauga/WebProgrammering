@@ -1,4 +1,6 @@
 <body>
+<center>
+<br><br><hr>
 <form action="?page=reg2" method="post" name="login">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
@@ -20,5 +22,7 @@
 </table>
 <input name="submit" type="submit" value="Register">
 </form>
+</center>
+<hr><br><br>
 </body>
 </html>
