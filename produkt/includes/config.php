@@ -18,4 +18,9 @@ $C['BRUKER']['NAVN_MAX'] = 30;
 $C['BRUKER']['NAVN_UGYLDIG_REGEX'] = "/[^a-zA-Z0-9æøåÆØÅ\s]/u";
 $C['BRUKER']['PASSORD_MIN'] = 6;
 
+	function sjekkFelt($input)
+	{
+		return mysql_real_escape_string($input);
+	}
+
 ?>
