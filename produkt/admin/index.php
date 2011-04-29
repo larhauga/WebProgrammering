@@ -2,7 +2,7 @@
 	session_start();
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
-
+	$Admin = null;
 
 ?>
 <!DOCTYPE html>
@@ -22,40 +22,32 @@ if(isset($_GET['login']))
 {
 	$brukernavn = sjekkFelt($_POST['user']);
 	$passord = sjekkFelt($_POST['psw']);
-	
-	if($brukernavn != "" && is_email($brukernavn) && $passord != "")
-	
-	$db = new mysqli("193.107.29.49","xzindor_db1","lol123","xzindor_db1");
-	$resultat = $db->query("SELECT * FROM bruker WHERE epost = '".$brukernavn."' AND passord = '".$passord."'");
-	if(!$resultat)
+
+	if($brukernavn != "" && $passord != "")
 	{
-		echo "Det oppstod en feil: ".$db->error."<br/>";
-	}
-	else
-	{
-		if($db->affected_rows <= 0 && $db->affected_rows > 1)
+		$db = new mysqli("193.107.29.49","xzindor_db1","lol123","xzindor_db1");
+		$resultat = $db->query("SELECT * FROM bruker WHERE epost = '".$brukernavn."' AND passord = '".$passord."'");
+		if(!$resultat)
 		{
-			$feilmelding = "Feil brukernavn eller passord";
+			echo "Det oppstod en feil: ".$db->error."<br/>";
 		}
-		$antallRader = $db->affected_rows;
-		for($i=0;$i<$antallRader;$i++)
+		else
 		{
-			$rad = $resultat->fetch_object();
-			$Admin = new Admin($rad->epost, $rad->rettigheter, $rad->idbruker, $rad->fornavn);
-			
-			echo $radObjekt->etternavn." ". $radObjekt->fornavn."</br>";
-		}
-	}
-	//validerer input
-	//Sette opp sessions
-	$_SESSION['admin'] = serialize($admin);
-	$_SESSION['login'] = true;
-	$_SESSION['brukerid'] = '';
-	$_SESSION['brukernavn'] = '';
-	$_SESSION['tilgang'] = '';
-	//IP $_SESSION['ip'] = $_SERVER['REMOTE_ADDR']; 
-	
-}
+			$antallRader = $db->affected_rows;
+			if($antallRader <= 0 || $antallRader > 1)
+			{
+				$feilmelding = "Feil brukernavn eller passord";
+			}
+			else if($antallRader == 1)
+			{
+				$rad = $resultat->fetch_object();
+				$Admin = new Admin($rad->epost, $rad->passord, $rad->rettigheter, $rad->idbruker, $rad->fornavn, $_SERVER['REMOTE_ADDR']);
+				$_SESSION['admin'] = serialize($admin);
+				$_SESSION['login'] = true;	
+			}
+		} // Else
+	} //Brukernavnsjekk	
+} //If login
 if(isset($_GET['logout']))
 {
 	unset($_SESSION['admin']);
@@ -80,9 +72,13 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
 			</div>
 			<div id="loginboks">
 				<h1>Login</h1>
-				<p>Uavtorisert tilgang vil bli logget!</p>
-				<form id="adminlogin" action="?login=true" method="post">
-				<p>Brukernavn: <input type="text" id="user" name="user" /></p>
+					<p>Uavtorisert tilgang vil bli logget!</p>';
+				
+				if(isset($feilmelding) && $feilmelding != "")
+					echo '<p style="color:red">'.$feilmelding.'</p>';
+				
+				echo '<form id="adminlogin" action="?login=true" method="post">
+				<p>Epost: <input type="text" id="user" name="user" /></p>
 				<p>Passord: <input type="password" id="psw" name="psw" /></p>
 				<p class="forgetmenot">
 					<label><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="90" /> Husk meg</label>
