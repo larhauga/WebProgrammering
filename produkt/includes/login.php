@@ -7,7 +7,7 @@ if(!isset($_GET['login']))
 	//Sette opp sessions
 	if($epost != "" && $passord != "")
         {   
-            
+            echo '1';
             function login($passord,$epost)
             {
                  $passord;
@@ -27,8 +27,14 @@ if(!isset($_GET['login']))
              {
                  return true;
              } 
+            }
                 login($passord,$epost);
-             }
+         }
+         else
+	{
+		echo 'Epost eller passordet er ikke skrevet inn!';
+                die();
+        }
             
             if(login)
             {
@@ -51,12 +57,7 @@ if(!isset($_GET['login']))
 			else{
 				$passordfeil = "Epost eller passordet er feil!";
 			}*/
-            }
-	else
-	{
-		echo 'Epost eller passordet er ikke skrevet inn!';
-	}
-	
 }
+	
 
 ?>
