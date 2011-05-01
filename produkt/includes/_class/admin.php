@@ -9,14 +9,22 @@ class Admin
 	public $fornavn;
 	public $ip;
 	
-	function __constructor($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
+	public function __construct($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
-		$this->$epost = $epost;
-		$this->$passord = $passord;
-		$this->$tilgangstype = $tilgangstype;
-		$this->$idbruker = $idbruker;
-		$this->$fornavn = $fornavn;
-		$this->$ip = $ip;
+		$this->epost = $epost;
+		$this->passord = $passord;
+		$this->tilgangstype = $tilgangstype;
+		$this->idbruker = $fornavn; //$idbruker;
+		$this->fornavn = $fornavn;
+		$this->ip = $ip;
+	}
+	public function getNavn()
+	{
+		return $this->fornavn;
+	}
+	public function db()
+	{
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 	}
 	
 	function brukere()
@@ -51,15 +59,14 @@ class Admin
 				die();
 			}
 		}
-		echo "Du er nå registert";
+		echo "Du er nÃ¥ registert";
 	}
 	//Vis eksisterende kategorier
 	public function visKat()
 	{
-		$db = new db();
-		$db->connect();
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 		$sql = "SELECT * FROM kategori";
-		$resultat = mysqli_query($db, $sql);
+		$resultat = mysqli_query($mysqli, $sql);
 		
 		echo '
 		<table width="100%" border="0">
@@ -69,15 +76,15 @@ class Admin
 						<td>Aktiv</td>
 						<td>Slett</td>
 					</tr>';
-		/*while(mysql setning ikke tom )
-			{*/
-			echo '	<tr>
-						<td></td>
-						<td></td>
-						<td></td>
+		while($rad = $resultat->fetch_object())
+		{
+			echo '<tr>
+						<td>'.$rad->idkategori.'</td>
+						<td>'.$rad->tittel.'</td>
+						<td>'.$rad->aktiv.'</td>
 						<td></td>
 					</tr>';
-		//}
+		}
 		echo '</table>';
 	}
 	

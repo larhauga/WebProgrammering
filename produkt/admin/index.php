@@ -3,7 +3,7 @@
 	include("../includes/_class/admin.php");
 	include("../includes/klasser.php");
 	include("../includes/config.php");
-	$Admin = null;
+
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,12 @@
 <body>
 <?php
 
-if(isset($_GET['login']))
+/*	
+	Sjekker om du er i ferd med å logge inn
+	Hvis du er det registrerer den data
+	Oppretter Admin objektet og sender deg videre til index siden.
+*/
+if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
 {
 	$brukernavn = sjekkFelt($_POST['user']);
 	$passord = sjekkFelt($_POST['psw']);
@@ -31,6 +36,7 @@ if(isset($_GET['login']))
 		}
 		else
 		{
+			//Lager sjekk på om det kun er en bruker.
 			$antallRader = $db->affected_rows;
 			if($antallRader <= 0 || $antallRader > 1)
 			{
@@ -39,22 +45,33 @@ if(isset($_GET['login']))
 			else if($antallRader == 1)
 			{
 				$rad = $resultat->fetch_object();
-				
+
+				//Oppretter admin objektet
 				$Admin = new Admin($rad->epost, $rad->passord, $rad->rettigheter, $rad->idbruker, $rad->fornavn, $_SERVER['REMOTE_ADDR']);
+				
+				//Serialiserer og oppretter SESSIONs
 				$_SESSION['admin'] = serialize($Admin);
-				$_SESSION['login'] = true;	
+				$_SESSION['login'] = true;
+
 			}
 		} // Else
 	} //Brukernavnsjekk	
 } //If login
-
+/*
+	Funksjon for å logge ut.
+	Unsetter alle sessionsa.
+*/
 if(isset($_GET['logout']))
 {
 	unset($_SESSION['admin']);
 	unset($_SESSION['login']);
 }
 
-if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
+/*
+	Hvis du ikke er logget inn, eller i ferd med å logge inn:
+	Setter opp login siden (HTML)
+*/
+if(!isset($_SESSION['login']) || $_SESSION['login'] == false) //Not logged inn
 {
 	echo '
 		<div id="containerLogin">
@@ -86,10 +103,16 @@ if(!isset($_SESSION['login']) && $_SESSION['login'] == false) //Not logged inn
 		</div>
 		';
 }
+/*
+	Hvis du er logget inn (og ikke i ferd med å logge inn)
+	Setter opp en av sidene gitt ved ID og henter objektet fra Session.
+	Kjører først sjekk på at det er en lovelig side og importerer den i HTMLen
+*/
 else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_GET['id'] < '8')
 {
 	$id = $_GET['id'];
 	$Admin = unserialize($_SESSION['admin']);
+	
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
@@ -144,12 +167,15 @@ else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_
 	</div>
 	';
 }
-else
+/*
+*/
+else if(isset($_SESSION['login']))
 {
+	$Admin = unserialize($_SESSION['admin']);
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
-			<p>Velkommen <b>Lars</b></p>
+			<p>Velkommen <b>'.$Admin->fornavn.'</b></p>
 		</div>
 		<div id="menyRight">
 			<p><a href="?logout"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
@@ -231,6 +257,9 @@ else
 		</div>
 	</div>
 	';
+}
+else{
+	echo '<h1>404 - Siden eksisterer ikke. Det har skjedd en feil.</h1>';
 }
 ?>
 </body>
