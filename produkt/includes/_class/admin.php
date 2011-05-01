@@ -8,6 +8,7 @@ class Admin
 	public $idbruker;
 	public $fornavn;
 	public $ip;
+        public $error;
 	
 	public function __construct($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
@@ -37,29 +38,33 @@ class Admin
 	function nyKat($tittel, $aktiv)
 	{
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-		$sql = "Insert into kategori(idkategori,tittel,aktiv) 
-		Values(
+		$sql = "Insert into kategori(idkategori,tittel,aktiv) VALUES(
 			'',
-			'$this->tittel',
-			'$this->aktiv',
-			)";
+			'$tittel',
+			'$aktiv'
+			);";
+                
 		$resultat = $mysqli->query($sql);
 	
 		if(!$resultat)
 		{
-		echo "Error".$dbc->error;
-		die();
+                    echo "Error: " . mysqli_error($mysqli);
+                    $bruker->errorTilFil($this->error);
+                    die();
 		}
 		else 
 		{
-			$antrader = $dbc->affected_rows;
+			$antrader = $mysqli->affected_rows;
 			if($antrader == 0)
 			{
 				echo "Det skjedde en feil med innsettelse i databasen";
 				die();
 			}
+                        else if($antrader == 1)
+                        {
+                            echo "<p>Du er nå registert</p>";
+                        }
 		}
-		echo "Du er nå registert";
 	}
 	//Vis eksisterende kategorier
 	public function visKat()

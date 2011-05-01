@@ -1,9 +1,10 @@
 <?php
 /* Kategorier */
-	if(isset($_POST['registrer']))
+	if(isset($_POST['registrer']) && isset($_POST['tittel']))
 	{
-		$tittel = mysqli_real_escape_string($db, $_POST['tittel']);
+		$tittel = sjekkFelt($_POST['tittel']);
 		$aktiv = $_POST['aktiv'];
+
 		if($tittel != null)
 		{
 			$Admin->nyKat($tittel, $aktiv);
@@ -31,8 +32,8 @@
 			 				<td>Aktiv:</td>
 			 				<td>
 			 					<select name="aktiv" id="aktiv">
-			 						<option value="true">Aktiv</option>
-			 						<option value="false">Ikke aktiv</option>
+			 						<option value="TRUE">Aktiv</option>
+			 						<option value="FALSE">Ikke aktiv</option>
 			 					</select>
 			 				</td>
 		 				</tr>
