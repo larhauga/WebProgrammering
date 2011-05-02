@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "klasser.php";
-if(!isset($_GET['login']))
+if(!isset($_get['login']))
 {
 	$epost = ($_POST['epost']);
 	$passord = ($_POST['passord']);
@@ -34,6 +34,7 @@ if(!isset($_GET['login']))
 			{  
 				$feilmelding = "Feil brukernavn eller passord";
                                 echo "Feil brukernavn eller passord";
+                                echo '<br/> <a href="../index.php">Tilbake</a>';
                                 die();
 			}
 			else if($antallRader == 1)
@@ -48,6 +49,7 @@ if(!isset($_GET['login']))
 				$_SESSION['login'] = true;
                                 
                                 echo 'logget inn';
+                                echo '<br/> <a href="../index.php">Tilbake</a>';
                         }
                }
             }
@@ -55,6 +57,7 @@ if(!isset($_GET['login']))
         }
  else {
      echo 'Epost eller brukernavn var ikke skrevet inn';
+     echo '<br/> <a href="../index.php">Tilbake</a>';
     die();
 }
 }
@@ -70,4 +73,3 @@ if(!isset($_GET['login']))
 				$passordfeil = "Epost eller passordet er feil!";
 			}*/
 ?>
-<br/> <a href="../index.php">Tilbake</a></td>
