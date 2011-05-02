@@ -24,12 +24,14 @@
 */
 if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
 {
-	$brukernavn = sjekkFelt($_POST['user']);
-	$passord = sjekkFelt($_POST['psw']);
-
-	if($brukernavn != "" && $passord != "")
+	if($_POST['user'] != "" && $_POST['psw'] != "")
 	{
 		$db = new mysqli("193.107.29.49","xzindor_db1","lol123","xzindor_db1");
+                
+                    //Henter inn dataene etter at mysqli connectionen er satt opp (for å bruke escape)
+                    $brukernavn = mysqli_real_escape_string($db,$_POST['user']);
+                    $passord = mysqli_real_escape_string($db,$_POST['psw']);
+                    
 		$resultat = $db->query("SELECT * FROM bruker WHERE epost = '".$brukernavn."' AND passord = '".$passord."'");
 		if(!$resultat)
 		{
