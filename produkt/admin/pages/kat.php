@@ -2,7 +2,7 @@
 /* Kategorier */
 	if(isset($_POST['registrer']) && isset($_POST['tittel']))
 	{
-		$tittel = sjekkFelt($_POST['tittel']);
+		$tittel = $_POST['tittel'];
 		$aktiv = $_POST['aktiv'];
 
 		if($tittel != null)
@@ -15,13 +15,17 @@
 		else
 		{
 			//Alle feltene var ikke skrevet inn. Skriv en feilmelding til dette	
+                        $feil = "Du må skrive inn en tittel!";
 		}
 	}
 	echo '
 			<h1><img src="images/folders.jpg" alt="Brukere" width="30" height="30" />Kategorier</h1>
  			
  			<div id="formVenstre">
- 			<h1>Ny kategori</h1>
+ 			<h1>Ny kategori</h1>';
+                            if(isset($feil))
+                                echo $feil;
+                        echo '
  			<form action="" method="post">
 	 				<table width="100%" border="0">
 		 				<tr>
@@ -32,8 +36,8 @@
 			 				<td>Aktiv:</td>
 			 				<td>
 			 					<select name="aktiv" id="aktiv">
-			 						<option value="TRUE">Aktiv</option>
-			 						<option value="FALSE">Ikke aktiv</option>
+			 						<option value="1">Aktiv</option>
+			 						<option value="0">Ikke aktiv</option>
 			 					</select>
 			 				</td>
 		 				</tr>

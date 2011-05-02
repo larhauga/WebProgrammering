@@ -41,6 +41,7 @@ class Admin
             
             if($sok != "")
             {
+                //Denne fungerer ikke per dags dato: Denne er mer stabil og bedre for databasen. Den andre settingen gjør akkurat det samme, men er tyngre for databaasen.
                 //$sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf
 		//		FROM bruker
 		//		WHERE MATCH (idbruker, epost, fornavn, etternavn, tlf) 
@@ -121,6 +122,8 @@ class Admin
 	function nyKat($tittel, $aktiv)
 	{
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $tittel = mysqli_real_escape_string($mysqli, $tittel);
+                
 		$sql = "Insert into kategori(idkategori,tittel,aktiv) VALUES(
 			'',
 			'$tittel',
@@ -145,7 +148,7 @@ class Admin
 			}
                         else if($antrader == 1)
                         {
-                            echo "<p>Du er n� registert</p>";
+                            echo "<p>Du er nå registert</p>";
                         }
 		}
 	}
