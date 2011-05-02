@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Innlogging - Admin</title>
+	<title>Admin</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script src="../includes/jquery.js"></script>
@@ -39,34 +39,34 @@ if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
 		}
 		else
 		{
-			//Lager sjekk på om det kun er en bruker.
-			$antallRader = $db->affected_rows;
-			if($antallRader <= 0 || $antallRader > 1)
-			{
-				$feilmelding = "Feil brukernavn eller passord";
-                                unset($_POST['user']);
-                                unset($_POST['psw']);
-			}
-			else if($antallRader == 1)
-			{
-				$rad = $resultat->fetch_object();
-                                if($rad->rettigheter == 0)
-                                {
-                                    //Oppretter admin objektet
-                                    $Admin = new Admin($rad->epost, $rad->passord, $rad->rettigheter, $rad->idbruker, $rad->fornavn, $_SERVER['REMOTE_ADDR']);
+                    //Lager sjekk på om det kun er en bruker.
+                    $antallRader = $db->affected_rows;
+                    if($antallRader <= 0 || $antallRader > 1)
+                    {
+                            $feilmelding = "Feil brukernavn eller passord";
+                            unset($_POST['user']);
+                            unset($_POST['psw']);
+                    }
+                    else if($antallRader == 1)
+                    {
+                        $rad = $resultat->fetch_object();
+                        if($rad->rettigheter == 0)
+                        {
+                            //Oppretter admin objektet
+                            $Admin = new Admin($rad->epost, $rad->passord, $rad->rettigheter, $rad->idbruker, $rad->fornavn, $_SERVER['REMOTE_ADDR']);
 
-                                    //Serialiserer og oppretter SESSIONs
-                                    $_SESSION['admin'] = serialize($Admin);
-                                    $_SESSION['login'] = true;
-                                    unset($_POST['user']);
-                                    unset($_POST['psw']);
-                                }
-                                else{
-                                    unset($_POST['user']);
-                                    unset($_POST['psw']);
-                                    $feilmelding = "Du har ikke tilgang til å logge inn her. Tilbake til <a href='../index.php'>hovedsiden</a>";
-                                }
-			}
+                            //Serialiserer og oppretter SESSIONs
+                            $_SESSION['admin'] = serialize($Admin);
+                            $_SESSION['login'] = true;
+                            unset($_POST['user']);
+                            unset($_POST['psw']);
+                        }
+                        else{
+                            unset($_POST['user']);
+                            unset($_POST['psw']);
+                            $feilmelding = "Du har ikke tilgang til å logge inn her. Tilbake til <a href='../index.php'>hovedsiden</a>";
+                        }
+                    }
 		} // Else
 	} //Brukernavnsjekk	
 } //If login
@@ -88,31 +88,31 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false) //Not logged inn
 {
 	echo '
 		<div id="containerLogin">
-			<div id="menyline">
-				<div id="menyLeft">
-					<p><a href="../index.php">Tilbake</a></p>
-				</div>
-				<div id="menyRight">
+                    <div id="menyline">
+                        <div id="menyLeft">
+                                <p><a href="../index.php">Tilbake</a></p>
+                        </div>
+                        <div id="menyRight">
 
-				</div>
-				<div style="clear:both;"></div>
-			</div>
-			<div id="loginboks">
-				<h1>Login</h1>
-					<p>Uavtorisert tilgang vil bli logget!</p>';
-				
-				if(isset($feilmelding) && $feilmelding != "")
-					echo '<p style="color:red">'.$feilmelding.'</p>';
-				
-				echo '<form id="adminlogin" action="?login" method="post">
-				<p>Epost: <input type="text" id="user" name="user" /></p>
-				<p>Passord: <input type="password" id="psw" name="psw" /></p>
-				<p class="forgetmenot">
-					<label><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="90" /> Husk meg</label>
-				</p>
-				<p><input type="submit" value="Logg inn" /></p>
-				</form>
-			</div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div id="loginboks">
+                        <h1>Login</h1>
+                                <p>Uavtorisert tilgang vil bli logget!</p>';
+
+                        if(isset($feilmelding) && $feilmelding != "")
+                                echo '<p style="color:red">'.$feilmelding.'</p>';
+
+                        echo '<form id="adminlogin" action="?login" method="post">
+                        <p>Epost: <input type="text" id="user" name="user" /></p>
+                        <p>Passord: <input type="password" id="psw" name="psw" /></p>
+                        <p class="forgetmenot">
+                                <label><input name="rememberme" type="checkbox" id="rememberme" value="forever" tabindex="90" /> Husk meg</label>
+                        </p>
+                        <p><input type="submit" value="Logg inn" /></p>
+                        </form>
+                    </div>
 		</div>
 		';
 }

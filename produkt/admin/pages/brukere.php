@@ -90,7 +90,8 @@
 				$("#sett").click(function () {
 					$("#formHoyre").slideToggle("slow");
 				});
-
+                                $
+                                
 			</script>
 ';
 ?>
