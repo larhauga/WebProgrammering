@@ -21,7 +21,7 @@ $C['BRUKER']['PASSORD_MIN'] = 6;
 
 	function sjekkFelt($input)
 	{
-		return mysql_real_escape_string($input);
+		return mysqli_real_escape_string($input);
 	}
 
 ?>
