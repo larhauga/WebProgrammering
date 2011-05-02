@@ -10,12 +10,16 @@ include "includes/head.php";
 		</div>
 		  <div id="headerkolonne">
                       <?php 
-                      if(isset($_GET['login']))
-                        echo 'buhu'.$_GET['login'];
+                      if(isset($_SESSION['login']))
+                      {
+                        echo 'Velkommen, '.$_SESSION['epost'];
+                        echo ' <a href="loggut.php">Logg ut</a>';
+                      }
                       else 
+                      {
                         echo 'ikke logget inn';
-                       ?>
-		  	<div id="logginn">
+                       
+		  	echo '<div id="logginn">
 			    <form name="login" method="post" action="includes/login.php">
 						<table>
 						  <tr>
@@ -29,12 +33,14 @@ include "includes/head.php";
 				          <tr>
 					         <td></td>
 						 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
-					           Registrer <a href="includes/registrer.php">her</a></td>
+					           Registrer <a href="includes/registrer.php">her</a><br/></td>
+                                                         
 					      </tr>
 						</table>
 					</form>
-				</div>
-				
+				</div>';
+                      }
+				?>
 			<div id="sok">
 				<form name="sok" method="post" action="sok.php">
 						<table>
