@@ -16,12 +16,7 @@ $C['BRUKER']['MIN'] = 3;
 $C['BRUKER']['MAX'] = 30;
 $C['BRUKER']['NAVN_MIN'] = 2;
 $C['BRUKER']['NAVN_MAX'] = 30;
-$C['BRUKER']['NAVN_UGYLDIG_REGEX'] = "/[^a-zA-Z0-9æøåÆØÅ\s]/u";
+$C['BRUKER']['NAVN_UGYLDIG_REGEX'] = "/[^a-zA-Z0-9ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\s]/u";
 $C['BRUKER']['PASSORD_MIN'] = 6;
-
-	function sjekkFelt($input)
-	{
-		return mysqli_real_escape_string($input);
-	}
 
 ?>
