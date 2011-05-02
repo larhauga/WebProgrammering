@@ -9,6 +9,12 @@ include "includes/head.php";
 			<h1>Nettbutikken</h1>
 		</div>
 		  <div id="headerkolonne">
+                      <?php 
+                      if(isset($_GET['login']))
+                        echo 'buhu'.$_GET['login'];
+                      else 
+                        echo 'ikke logget inn';
+                       ?>
 		  	<div id="logginn">
 			    <form name="login" method="post" action="includes/login.php">
 						<table>
