@@ -12,12 +12,12 @@ include "includes/head.php";
                       <?php 
                       if(isset($_SESSION['login']))
                       {
+                         
                         echo 'Velkommen, '.$_SESSION['epost'];
-                        echo ' <a href="loggut.php">Logg ut</a>';
+                        echo ' <a href="includes/loggut.php">Logg ut</a>';
                       }
                       else 
                       {
-                        echo 'ikke logget inn';
                        
 		  	echo '<div id="logginn">
 			    <form name="login" method="post" action="includes/login.php">
