@@ -28,10 +28,33 @@ class Admin
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 	}
 	
-	function brukere()
+	function visBrukere()
 	{
 		/*Vise alle brukere. Gi admintilgang, kun tilgang for brukere med superbrukertilgang*/
-			
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf FROM bruker";
+		//ved søk $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf FROM bruker WHERE idbruker = $var OR epost LIKE '%$var%' OR fornavn LIKE '%$var%' OR etternavn LIKE '%$var%' OR registrert !!! OR rettigheter = '$var' OR tlf = '%$var%'";
+		$resultat = mysqli_query($mysqli, $sql);
+
+			$antrader = $mysqli->affected_rows;
+			if($antrader == 0)
+				echo "<p>Ingen brukere er registrert</p>";
+			else
+			{
+				while($rad = $resultat->fetch_object())
+				{
+					echo '
+					<tr>
+						<td><input type="checkbox" name="bruker[ ]" value="'.$rad->idbruker.'" /></td>
+						<td>'.$rad->epost.'</td>
+						<td>'.$rad->fornavn.'</td>
+						<td>'.$rad->etternavn.'</td>
+						<td>'.$rad->registrert.'</td>
+						<td>'.$rad->rettigheter.'</td>
+						<td>'.$rad->tlf.'</td>
+					</tr>';
+				}
+			}
 	}
 	/* Kategorier */
 	//Innsetting av nye kategorier
@@ -62,7 +85,7 @@ class Admin
 			}
                         else if($antrader == 1)
                         {
-                            echo "<p>Du er nÃ¥ registert</p>";
+                            echo "<p>Du er nå registert</p>";
                         }
 		}
 	}
