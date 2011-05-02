@@ -11,7 +11,13 @@
 						<td><input type="text" id="sok" name="sok" /></td>
 					</tr>
 				</table>
-				<table width="100%">
+                                <script type="text/javascript">
+                                    $("#sok").keyup(function() {
+                                      $("#resultat").load("ajax/sok.php?sok="+$("div.sok").text());
+                                    });
+                               </script>
+                               <div id="resultat">
+                                    <table width="100%">
 					<tr>
 						<td></td>
 						<td>Epost</td>
@@ -23,6 +29,7 @@
 					</tr>';
 					$Admin->visBrukere(0,30,"");
 			echo'	</table>
+                            </div>
 			<div id="functions">
 				<p class="submit">
 					<input type="submit" id="slett" value="Slett" />

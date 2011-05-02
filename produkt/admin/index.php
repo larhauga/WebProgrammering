@@ -44,6 +44,8 @@ if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
 			if($antallRader <= 0 || $antallRader > 1)
 			{
 				$feilmelding = "Feil brukernavn eller passord";
+                                unset($_POST['user']);
+                                unset($_POST['psw']);
 			}
 			else if($antallRader == 1)
 			{
@@ -55,7 +57,8 @@ if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
 				//Serialiserer og oppretter SESSIONs
 				$_SESSION['admin'] = serialize($Admin);
 				$_SESSION['login'] = true;
-
+                                unset($_POST['user']);
+                                unset($_POST['psw']);
 			}
 		} // Else
 	} //Brukernavnsjekk	
@@ -169,6 +172,7 @@ else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_
 		</div>
 	</div>
 	';
+        $_SESSION['admin'] = serialize($Admin);
 }
 /*
 */
@@ -261,6 +265,7 @@ else if(isset($_SESSION['login']))
 		</div>
 	</div>
 	';
+         $_SESSION['admin'] = serialize($Admin);
 }
 else{
 	echo '<h1>404 - Siden eksisterer ikke. Det har skjedd en feil.</h1>';

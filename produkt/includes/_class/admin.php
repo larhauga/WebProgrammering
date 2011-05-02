@@ -181,24 +181,56 @@ class Admin
 	/* Henter stats til admin siden */
 	function statsVarer()
 	{
-
-		$sql = "SELECT COUNT(*) FROM varer";
+                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $sql = "SELECT COUNT(*) AS count FROM vare";
+                $resultat = mysqli_query($mysqli, $sql);
+                $antrader = $mysqli->affected_rows;
+                
+                if($antrader == -1)
+                    echo -1;
+                else
+                {
+                    $rad = $resultat->fetch_object();
+                    echo $rad->count;
+                }
 
 	}
 	function statsKat()
 	{
-		$sql = "SELECT COUNT(*) FROM kategori";
+                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $sql = "SELECT COUNT(*) AS count FROM kategori";
+                $resultat = mysqli_query($mysqli, $sql);
+                $antrader = $mysqli->affected_rows;
+                
+                if($antrader == -1)
+                    echo -1;
+                else
+                {
+                    $rad = $resultat->fetch_object();
+                    echo $rad->count;
+                }
 
 	}
 	function statsBruker()
 	{
-		$sql = "SELECT COUNT(*) FROM bruker";
+                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $sql = "SELECT COUNT(*) AS count FROM bruker";
+                $resultat = mysqli_query($mysqli, $sql);
+                $antrader = $mysqli->affected_rows;
+                
+                if($antrader == -1)
+                    echo -1;
+                else
+                {
+                    $rad = $resultat->fetch_object();
+                    echo $rad->count;
+                }
 	}
 	
 	//Login 
-	function hash($innpassord)
+	function hash($br, $pass)
 	{
-                $innpassord = sha1( $s.'aaaaa'.$pass );
+                $innpassord = sha1( $br.'aaaaa'.$pass );
 		$this->passord = $innpassord;
 	} 
 	function login()
