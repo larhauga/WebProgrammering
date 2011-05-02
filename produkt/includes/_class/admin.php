@@ -38,25 +38,33 @@ class Admin
             
             if($sok != "")
             {
-		
                 $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf
-				FROM brukere
-				MATCH (idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf) 
-				AGAINST ('$sok')";
+				FROM bruker
+				WHERE MATCH (idbruker, epost, fornavn, etternavn, tlf) 
+				AGAINST ('$sok' WITH QUERY EXPANSION)";
                 
-		$resultat = mysqli_query($mysqli, $sql);
+		$resultat = mysqli_query($mysqli, $sql) or die(mysqli_error($mysqli));
 		$antrader = $mysqli->affected_rows;
-		if($antrader == 0)
+		if($antrader == 0){
 			echo "<p>Ingen brukere med dette s�ket er registrert.</p>";
-                else if($antrader == -1)
+                }
+                else if($antrader == -1){
                         echo "<p>Det skjedde en feil med søket</p>";
+                }
 		else
 		{
+                    echo '<script type="text/javascript">
+                            function checkToEdit(var ep, var fn, var en, var tlf){
+                                document.getElementById("epost").value="var ep";
+                                document.getElementById("fornavn").value="var fn";
+                                document.getElementById("etternavn").value="var en";
+                                document.getElementById("tlf").value="var tlf";
+                            }</script>';
                     while($rad = $resultat->fetch_object())
                     {
 			echo '
                                 <tr>
-                                    <td><input type="checkbox" name="bruker[ ]" value="'.$rad->idbruker.'" /></td>
+                                    <td><input type="checkbox" name="bruker[ ]" value="'.$rad->idbruker.'" onClick="checkToEdit('.$rad->epost.','.$rad->fornavn.','.$rad->etternavn.', '.$rad->tlf.')"/></td>
                                     <td>'.$rad->epost.'</td>
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>
@@ -71,8 +79,8 @@ class Admin
             else
             {	
 		$resultat = mysqli_query($mysqli, $sql);
-
 		$antrader = $mysqli->affected_rows;
+                
 		if($antrader == 0)
                     echo "<p>Ingen brukere er registrert</p>";
                 else if($antrader == -1)

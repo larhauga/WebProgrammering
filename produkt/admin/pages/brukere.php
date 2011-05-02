@@ -13,7 +13,7 @@
 				</table>
                                 <script type="text/javascript">
                                     $("#sok").keyup(function() {
-                                      $("#resultat").load("ajax/sok.php?sok="+$("div.sok").text());
+                                      $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);
                                     });
                                </script>
                                <div id="resultat">

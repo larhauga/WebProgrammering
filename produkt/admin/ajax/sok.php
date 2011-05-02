@@ -1,6 +1,6 @@
 <?php
     require("../../includes/_class/admin.php");
-    $Admin = new Admin('local', 'sok', '2', '0', 'local', $_SERVER['REMOTE_ADDR']);
+    $Admin = new Admin('local', 'sok', '2', '0', 'local', '');
     
     if(isset($_GET['sok']))
     {   
