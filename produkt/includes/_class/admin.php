@@ -27,6 +27,9 @@ class Admin
 	{
             $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 	}
+        
+        
+        
 	
 	//Brukere
 	function visBrukere($fra, $til, $sok)
@@ -38,10 +41,14 @@ class Admin
             
             if($sok != "")
             {
+                //$sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf
+		//		FROM bruker
+		//		WHERE MATCH (idbruker, epost, fornavn, etternavn, tlf) 
+		//		AGAINST ('$sok' WITH QUERY EXPANSION)";
+                
                 $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf
-				FROM bruker
-				WHERE MATCH (idbruker, epost, fornavn, etternavn, tlf) 
-				AGAINST ('$sok' WITH QUERY EXPANSION)";
+                        FROM bruker
+                        WHERE idbruker = '$sok' OR epost LIKE '%$sok%' OR fornavn LIKE '%$sok%' OR etternavn LIKE '%$sok%' OR registrert LIKE '%$sok%' OR rettigheter LIKE '$sok' OR tlf LIKE '%$sok%'";
                 
 		$resultat = mysqli_query($mysqli, $sql) or die(mysqli_error($mysqli));
 		$antrader = $mysqli->affected_rows;

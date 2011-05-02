@@ -72,12 +72,17 @@
 				<h2>Sett til admin</h2>
 					
 			</div>
-			<div style="clear:both;">
+			<div id="slettet" style="display: none; clear:both;">';
+                            //if(isset($_GET['']))
+                        echo '
+                            <h2>Bruker ... er slettet</h2>
+                            <p>Ikke ferdig</p>
 			</div>
+                        <div style="clear:both;"></div>
 
 			<script>
 				$("#slett").click(function (){
-						$(":checkbox").click(showValues);
+					$("#slettet").slideToggle("slow");
 					});
 				$("#endre").click(function () {
 					$("#formVenstre").slideToggle("slow");
