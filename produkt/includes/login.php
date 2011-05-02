@@ -1,52 +1,55 @@
 <?php
 
+include "klasser.php";
 if(!isset($_GET['login']))
-{
+{echo '1';
 	$epost = ($_POST['epost']);
 	$passord = ($_POST['passord']);
 	//Sette opp sessions
 	if($epost != "" && $passord != "")
-        {   
-            echo '1';
+        {   echo '2';
             function login($passord,$epost)
-            {
-                 $passord;
-                 $epost;
-                 $passord = $bruker->encrypt($passord);
-                 $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-                 $sql = "select * from bruker where brukernavn = '$epost' and passord = '$passord'";
-                 $resultat = $mysqli->query($sql);
-                 if(!resultat)
-                 {
+            {  echo '3';
+                echo'inne i funksjon login'.$passord;
+             //    $passord;
+             //    $epost;
+                // $passord = $bruker->encrypt($passord);
+                 $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+                 $sql = $mysqli->query("SELECT * FROM bruker WHERE epost = '".$epost."' AND passord = '".$passord."'") or die(mysqli_error());
+                 
+                 if(!$sql)
+                 {   echo '4';
                     echo "Error".$mysqli->error;
                     $this->error = "Error".$mysqli->error."\r\n";
                     $bruker->errorTilFil($this->error);
                     return false;
                  }
-            else
-             {
-                 return true;
-             } 
-            }
-                login($passord,$epost);
-         }
-         else
-	{
-		echo 'Epost eller passordet er ikke skrevet inn!';
-                die();
-        }
-            
-            if(login)
-            {
-                 echo 'hei';
                 
-            }
-            
             else
-            {
-               echo "Epost eller passordet er feil";
+             { echo '5';
+			//Lager sjekk på om det kun er en bruker.
+			$antallRader = $mysqli->affected_rows;
+                        echo $antallRader;
+			if($antallRader <= 0 || $antallRader > 1)
+			{  echo '6';
+				$feilmelding = "Feil brukernavn eller passord";
+			}
+			else if($antallRader == 1)
+			{echo '7';
+				$rad = $sql->fetch_object();
+
+				//Oppretter admin objektet
+				$bruker = new bruker($rad->epost, $rad->fornavn, $rad->etternavn, $rad->adresse, $rad->postnr, $rad->poststed, $rad->tlf);
+				//Serialiserer og oppretter SESSIONs
+				$_SESSION['bruker'] = serialize($bruker);
+				$_SESSION['login'] = true;
+                        }
+             }
             }
-                /*
+            login($passord,$epost);
+        }
+}
+                           /*
             	$rad = mysql_fetch_row($sql);
 				$_SESSION['login'] = true;
 				$_SESSION['brukerid'] = $rad[0];
@@ -57,7 +60,3 @@ if(!isset($_GET['login']))
 			else{
 				$passordfeil = "Epost eller passordet er feil!";
 			}*/
-}
-	
-
-?>

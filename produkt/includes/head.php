@@ -6,5 +6,6 @@
 <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
+session_start();
 include "klasser.php";
 ?>
