@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	include("../includes/_class/admin.php");
-	include("../includes/klasser.php");
+	require("../includes/_class/admin.php");
+	require("../includes/klasser.php");
 	include("../includes/config.php");
 
 
@@ -12,6 +12,7 @@
 	<title>Innlogging - Admin</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="../includes/jquery.js"></script>
 </head>
 <body>
 <?php
@@ -171,6 +172,7 @@ else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_
 */
 else if(isset($_SESSION['login']))
 {
+
 	$Admin = unserialize($_SESSION['admin']);
 	echo '
 	<div id="menyline">

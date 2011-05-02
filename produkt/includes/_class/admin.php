@@ -28,11 +28,22 @@ class Admin
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 	}
 	
-	function visBrukere()
+	//Brukere
+	function visBrukere($fra, $til, $sok)
 	{
 		/*Vise alle brukere. Gi admintilgang, kun tilgang for brukere med superbrukertilgang*/
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 		$sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf FROM bruker";
+		$sql.= " LIMIT ".$fra.", ".$til;
+		
+		if($sok != "")
+		{
+			
+			$sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf
+					FROM brukere
+					MATCH (idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf) 
+					AGAINST ('$sok')";			
+		}
 		//ved søk $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf FROM bruker WHERE idbruker = $var OR epost LIKE '%$var%' OR fornavn LIKE '%$var%' OR etternavn LIKE '%$var%' OR registrert !!! OR rettigheter = '$var' OR tlf = '%$var%'";
 		$resultat = mysqli_query($mysqli, $sql);
 
@@ -55,6 +66,11 @@ class Admin
 					</tr>';
 				}
 			}
+	}
+	function slettBrukere()
+	{
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$sql = "DELETE FROM brukere WHERE idbruker = '$'";
 	}
 	/* Kategorier */
 	//Innsetting av nye kategorier
