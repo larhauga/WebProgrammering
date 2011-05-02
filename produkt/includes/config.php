@@ -19,4 +19,12 @@ $C['BRUKER']['NAVN_MAX'] = 30;
 $C['BRUKER']['NAVN_UGYLDIG_REGEX'] = "/[^a-zA-Z0-9������\s]/u";
 $C['BRUKER']['PASSORD_MIN'] = 6;
 
+function encrypt($innpassord)
+	{
+   $salt = md5($innpassord."%*4!#$;\.k~'(_@"); 
+   
+   $innpassord = md5("$salt$string$salt"); 
+   
+   	$this->passord = $innpassord;
+	} 
 ?>

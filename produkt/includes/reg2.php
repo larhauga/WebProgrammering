@@ -1,4 +1,5 @@
 <?php 
+include "head.php";
 $innepost = $_GET['epost'];
 $innepost2 = $_GET['epost2'];
 $innpassord = $_GET['passord'];
@@ -15,7 +16,7 @@ if($innepost == $innepost2)
 	if($innpassord == $innpassord2)
 		{
 			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
-			$bruker->encrypt($innpassord);
+			encrypt($innpassord);
 			$bruker->updateDB();
 		}
 		else 
