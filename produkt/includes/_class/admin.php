@@ -160,12 +160,13 @@ class Admin
 		$resultat = mysqli_query($mysqli, $sql);
 		
 		echo '
+                <form action="" method="post" id="slettKat" name="slettKat">
 		<table width="100%" border="0">
 					<tr>
-						<td>ID</td>
-						<td>Tittel</td>
-						<td>Aktiv</td>
-						<td>Slett</td>
+						<td><b>ID</b></td>
+						<td><b>Tittel</b></td>
+						<td><b>Aktiv</b></td>
+						<td><b>Slett</b></td>
 					</tr>';
 		while($rad = $resultat->fetch_object())
 		{
@@ -173,10 +174,16 @@ class Admin
 						<td>'.$rad->idkategori.'</td>
 						<td>'.$rad->tittel.'</td>
 						<td>'.$rad->aktiv.'</td>
-						<td></td>
+						<td><input type="checkbox" name="slett[]" value="'.$rad->idkategori.'" /></td>
 					</tr>';
 		}
-		echo '</table>';
+		echo '  <tr class="submit">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><input type="submit" value="Slett" id="slett" name="slett" /></td>
+                        </tr>
+                        </table></form>';
 	}
 	
 	function produkter()
@@ -250,7 +257,7 @@ class Admin
 	{
                 $innpassord = sha1( $br.'aaaaa'.$pass );
 		$this->passord = $innpassord;
-	} 
+	}
 	function login()
 	{
 		

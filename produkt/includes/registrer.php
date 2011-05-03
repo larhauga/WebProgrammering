@@ -1,3 +1,35 @@
+<?php 
+if(isset($_GET['login']))
+{
+include "head.php";
+$innepost = $_POST['epost'];
+$innepost2 = $_POST['epost2'];
+$innpassord = $_POST['passord'];
+$innpassord2 = $_POST['passord2'];
+$innfornavn = $_POST['fornavn'];
+$innetternavn = $_POST['etternavn'];
+
+$innadresse = $_POST['adresse'];
+$innpostnr = $_POST['postnr'];
+$innpoststed = $_POST['poststed'];
+$inntlf = $_POST['tlf'];
+if($innepost == $innepost2)
+	{
+	if($innpassord == $innpassord2)
+		{
+                        $passord = encrypt($innpassord, $innepost);
+			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
+			$bruker->passord = $passord;
+			$bruker->updateDB();
+		}
+		else 
+		{ echo "Du har ikke skrevet inn 2 like passord"; }
+	}
+ else
+ { echo "du har ikke skrevet inn 2 like eposter"; }
+}
+?>
+
 <body>
 <center>
 <br><br><hr>
@@ -26,35 +58,3 @@
 <hr><br><br>
 </body>
 </html>
-
-<?php 
-if(isset($_GET['login']))
-{
-echo 'hei';
-//include "head.php";
-$innepost = $_POST['epost'];
-$innepost2 = $_GET['epost2'];
-$innpassord = $_GET['passord'];
-$innpassord2 = $_GET['passord2'];
-$innfornavn = $_GET['fornavn'];
-$innetternavn = $_GET['etternavn'];
-
-$innadresse = $_GET['adresse'];
-$innpostnr = $_GET['postnr'];
-$innpoststed = $_GET['poststed'];
-$inntlf = $_GET['tlf'];
-if($innepost == $innepost2)
-	{
-	if($innpassord == $innpassord2)
-		{
-			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
-			encrypt($innpassord, $innepost);
-			$bruker->updateDB();
-		}
-		else 
-		{ echo "Du har ikke skrevet inn 2 like passord"; }
-	}
- else
- { echo "du har ikke skrevet inn 2 like eposter"; }
-}
-?>
