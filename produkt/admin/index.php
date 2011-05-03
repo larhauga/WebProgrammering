@@ -2,7 +2,7 @@
 	session_start();
 	require("../includes/_class/admin.php");
 	require("../includes/klasser.php");
-	//include("../includes/config.php");
+	include("../includes/config1.php");
 
 
 ?>
@@ -31,6 +31,7 @@ if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
                     //Henter inn dataene etter at mysqli connectionen er satt opp (for å bruke escape)
                     $brukernavn = mysqli_real_escape_string($db,$_POST['user']);
                     $passord = mysqli_real_escape_string($db,$_POST['psw']);
+                    $passord = encrypt($passord, $brukernavn);
                     
 		$resultat = $db->query("SELECT * FROM bruker WHERE epost = '".$brukernavn."' AND passord = '".$passord."'");
 		if(!$resultat)

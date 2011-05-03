@@ -73,7 +73,7 @@
 					
 			</div>
 			<div id="slettet" style="display: none; clear:both;">';
-                            //if(isset($_GET['']))
+                            
                         echo '
                             <h2>Bruker ... er slettet</h2>
                             <p>Ikke ferdig</p>
@@ -82,8 +82,18 @@
 
 			<script>
 				$("#slett").click(function (){
+                                        /*var data = { \'bruker[]\' : []};
+
+                                        $("input:checked").each(function() {
+                                           data[\'bruker[]\'].push($(this).val());
+                                        });
+                                        $.post("test.php", { \'bruker[]\' });
+                                    
+                                        $.post("ajax.php", data);
+                                        
+                                        $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);*/
 					$("#slettet").slideToggle("slow");
-					});
+				});
 				$("#endre").click(function () {
 					$("#formVenstre").slideToggle("slow");
 				});

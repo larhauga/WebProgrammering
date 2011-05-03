@@ -21,44 +21,7 @@
 
                 echo json_encode(array("tittel"=>$rad->tittel,"aktiv"=>$aktiv));
 
-     /*           if(isset($_GET['type']) && $_GET['type'] == "tittel" && isset($_GET['sok']))
-                {
 
-                    echo $rad->tittel;
-                }
-                if(isset($_GET['type']) && $_GET['type'] == "aktiv" && isset($_GET['sok']))
-                {
-                    if($rad->aktiv == 1)
-                    {
-                        echo '
-                                <option value="true">Aktiv</option>
-                                <option value="false">Ikke aktiv</option>                        
-                             ';
-                    }
-                    else
-                    {
-                        echo '
-                                <option value="false">Ikke aktiv</option>
-                                <option value="true">Aktiv</option>
-                             ';
-                    }
-                }
-      *                     $.ajax({
-                          url: "ajax/updKat.php?type=tittel&sok=" + document.getElementById("kategoriID"),
-                          cache: false,
-                          success: function(html){
-                            $("#updtittel").val(html);
-                          }
-                        });
-                        $.ajax({
-                          url: "ajax/updKat.php?type=aktiv&sok=" + document.getElementById("kategoriID"),
-                          cache: false,
-                          success: function(html){
-                            $("#updaktiv").html(html);
-                          }
-                        });
-      * 
-      */
             }
             else
                 echo "";
