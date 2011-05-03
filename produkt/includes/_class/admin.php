@@ -47,6 +47,8 @@ class Admin
 		//		WHERE MATCH (idbruker, epost, fornavn, etternavn, tlf) 
 		//		AGAINST ('$sok' WITH QUERY EXPANSION)";
                 
+                //Hvis søk etter rettigheter: Gjør om til text og ikke tall
+
                 $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf
                         FROM bruker
                         WHERE idbruker = '$sok' OR epost LIKE '%$sok%' OR fornavn LIKE '%$sok%' OR etternavn LIKE '%$sok%' OR registrert LIKE '%$sok%' OR rettigheter LIKE '$sok' OR tlf LIKE '%$sok%'";
@@ -77,7 +79,14 @@ class Admin
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>
                                     <td>'.$rad->registrert.'</td>
-                                    <td>'.$rad->rettigheter.'</td>
+                                    <td>';
+                                        if($rad->rettigheter == 0)
+                                            echo "Admin";
+                                        else if($rad->rettigheter == 1)
+                                            echo "Bruker";
+                                        else if($rad->rettigheter == 2)
+                                            echo "Moderator";
+                                        echo '</td>
                                     <td>'.$rad->tlf.'</td>
 				</tr>
 				';
@@ -104,7 +113,14 @@ class Admin
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>
                                     <td>'.$rad->registrert.'</td>
-                                    <td>'.$rad->rettigheter.'</td>
+                                    <td>';
+                                        if($rad->rettigheter == 0)
+                                            echo "Admin";
+                                        else if($rad->rettigheter == 1)
+                                            echo "Bruker";
+                                        else if($rad->rettigheter == 2)
+                                            echo "Moderator";
+                                        echo '</td>
                                     <td>'.$rad->tlf.'</td>
                                </tr>';
                     } //while
@@ -112,11 +128,69 @@ class Admin
              } //else
 	}
         
-	function slettBrukere()
+	function slettBrukere($idSlett)
 	{
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-		$sql = "DELETE FROM brukere WHERE idbruker = '$'";
+            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($mysqli->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+            }
+            $sql = "DELETE FROM bruker WHERE idbruker = '".$idSlett."'";
+            $resultat = $mysqli->query($sql);
+            if(!$resultat)
+            {
+                $feilSlett = "Error ".$mysqli->error;
+            }
+            else 
+            {
+                $antallRader = $mysqli->affected_rows;
+                if($antallRader == 0)
+                    $feilSlett = "Kunne ikke slette brukeren";
+                else
+                    $feilSlett = "Brukeren er slettet";
+            }
 	}
+        public function endreBruker($idbruker, $epost, $fornavn, $etternavn, $tlf, $passord) //NB! Passordet må sendes kryptert før det kommer hit!!!!
+        {
+            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($mysqli->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+            }
+            $sql = "UPDATE bruker SET idbruker = '$idbruker', epost = '$epost', fornavn = '$fornavn', etternavn = '$etternavn',
+                    tlf = '$tlf', passord = '$passord' WHERE idbruker = '$idbruker'";
+            $resultat = $mysqli->query($sql);
+            if(!$resultat)
+            {
+                $feilUpd = "Error ".$mysqli->error;
+            }
+            else 
+            {
+                $antallRader = $mysqli->affected_rows;
+                if($antallRader == 0)
+                    $feilUpd = "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
+            }
+        }
+        public function settTilAdmin($idbruker, $rettigheter)
+        {
+            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($mysqli->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+            }
+            $sql = "UPDATE bruker SET rettigheter = '$rettigheter' WHERE idbruker = '$idbruker'";
+            $resultat = $mysqli->query($sql);
+            if(!$resultat)
+            {
+                $feilUpd = "Error ".$mysqli->error;
+            }
+            else 
+            {
+                $antallRader = $mysqli->affected_rows;
+                if($antallRader == 0)
+                    $feilUpd = "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
+            }
+        }
 	/* Kategorier */
 	//Innsetting av nye kategorier
 	function nyKat($tittel, $aktiv)
