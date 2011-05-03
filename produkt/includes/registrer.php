@@ -1,5 +1,5 @@
 <?php 
-if(isset($_GET['login']))
+if(isset($_GET['registrer']))
 {
 include "head.php";
 $innepost = $_POST['epost'];
@@ -33,7 +33,7 @@ if($innepost == $innepost2)
 <body>
 <center>
 <br><br><hr>
-<form action="?login" method="post" name="login">
+<form action="?registrer" method="post" name="registrer">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
 <tr>

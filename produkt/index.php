@@ -1,6 +1,72 @@
-<?php 
+<?php
 include "includes/head.php";
+if(isset($_GET['loggut']))
+{
+    unset($_SESSION['bruker']);
+    unset($_SESSION['login']);
+    unset($_SESSION['epost']);
+}
+if(isset($_GET['login']))
+{
+	$epost = ($_POST['epost']);
+	$passord = ($_POST['passord']);
+       // $passord = encrypt($pass);
+	//Sette opp sessions
+	if($epost != "" && $passord != "")
+        {
+            function login($passord,$epost)
+            {
+
+             //    $passord;
+             //    $epost;
+                    $passord = encrypt($passord, $epost);
+                 $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+                 $sql = $mysqli->query("SELECT * FROM bruker WHERE epost = '".$epost."' AND passord = '".$passord."'") or die(mysqli_error());
+                 
+                 if(!$sql)
+                 {
+                    echo "Error".$mysqli->error;
+                    $this->error = "Error".$mysqli->error."\r\n";
+                    $bruker->errorTilFil($this->error);
+                    die();
+                 }
+                
+                 else
+                 {
+                 
+			//Lager sjekk på om det kun er en bruker.
+			$antallRader = $mysqli->affected_rows;
+			if($antallRader == 1)
+			{
+				$rad = $sql->fetch_object();
+
+				//Oppretter bruker objektet
+				$bruker = new bruker($rad->epost, $rad->fornavn, $rad->etternavn, $rad->adresse, $rad->postnr, $rad->poststed, $rad->tlf);
+				//Serialiserer og oppretter SESSIONs
+				$_SESSION['bruker'] = serialize($bruker);
+                                $_SESSION['epost'] = $epost;
+				$_SESSION['login'] = true;
+                       
+			}
+			else
+			{
+				$feilmelding = "Feil brukernavn eller passord";
+                                echo "Feil brukernavn eller passord";
+                        
+                        }
+               }
+            }
+            login($passord,$epost);
+        }
+       else
+       {
+           $feilmelding = 'Epost eller brukernavn var ikke skrevet inn';
+            echo 'Epost eller brukernavn var ikke skrevet inn';
+       }
+
+}
 ?>
+
 
 <body>
 	<div id="container">
@@ -14,13 +80,17 @@ include "includes/head.php";
                       {
                          
                         echo 'Velkommen, '.$_SESSION['epost'];
-                        echo ' <a href="includes/loggut.php">Logg ut</a>';
+                        echo ' <a href="?loggut">Logg ut</a>';
                       }
                       else 
                       {
-                       
+                       if(isset($_GET['feilmelding']))
+                       {
+                           echo $feilmelding;
+                       }
 		  	echo '<div id="logginn">
-			    <form name="login" method="post" action="includes/login.php">
+                            
+			    <form name="login" method="post" action="?login">
 						<table>
 						  <tr>
 							<td>Epost: </td>
