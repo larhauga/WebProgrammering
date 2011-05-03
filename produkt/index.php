@@ -84,7 +84,7 @@ if(isset($_GET['login']))
                       }
                       else 
                       {
-                       if(isset($_GET['feilmelding']))
+                       if(isset($feilmelding))
                        {
                            echo $feilmelding;
                        }
