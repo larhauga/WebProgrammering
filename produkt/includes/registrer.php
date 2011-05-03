@@ -1,7 +1,6 @@
 <?php 
-if(isset($_GET['login']))
+if(isset($_GET['registrer']))
 {
-echo 'hei';
 include "head.php";
 $innepost = $_POST['epost'];
 $innepost2 = $_POST['epost2'];
@@ -18,8 +17,9 @@ if($innepost == $innepost2)
 	{
 	if($innpassord == $innpassord2)
 		{
+                        $passord = encrypt($innpassord, $innepost);
 			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
-			encrypt($innpassord, $innepost);
+			$bruker->passord = $passord;
 			$bruker->updateDB();
 		}
 		else 
@@ -33,7 +33,7 @@ if($innepost == $innepost2)
 <body>
 <center>
 <br><br><hr>
-<form action="?login" method="post" name="login">
+<form action="?registrer" method="post" name="registrer">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
 <tr>
