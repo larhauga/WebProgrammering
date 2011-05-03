@@ -4,8 +4,8 @@ include "head.php";
 if(!isset($_get['login']))
 {
 	$epost = ($_POST['epost']);
-	$pass = ($_POST['passord']);
-        $passord = encrypt($pass);
+	$passord = ($_POST['passord']);
+       // $passord = encrypt($pass);
 	//Sette opp sessions
 	if($epost != "" && $passord != "")
         {

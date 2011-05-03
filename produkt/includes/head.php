@@ -7,6 +7,6 @@
 </head>
 <?php
 session_start();
-include "config.php";
+include "config1.php";
 include "klasser.php";
 ?>
