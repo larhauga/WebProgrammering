@@ -1,7 +1,7 @@
 <body>
 <center>
 <br><br><hr>
-<form action="?login" method="get" name="login">
+<form action="?login" method="post" name="login">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
 <tr>
@@ -31,8 +31,8 @@
 if(isset($_GET['login']))
 {
 echo 'hei';
-include "head.php";
-$innepost = $_GET['epost'];
+//include "head.php";
+$innepost = $_POST['epost'];
 $innepost2 = $_GET['epost2'];
 $innpassord = $_GET['passord'];
 $innpassord2 = $_GET['passord2'];
