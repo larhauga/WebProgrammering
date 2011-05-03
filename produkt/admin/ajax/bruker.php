@@ -5,8 +5,10 @@
     //Slett
     if(isset($_POST['slett']))
     {
-        foreach($_POST['slett'] as $idSlett)
+        foreach($_POST['bruker'] as $idSlett){
             $Admin->slettBrukere($idSlett);
+            echo "<p>Bruker ".$Admin->finnBrukernavn($idSlett)." er slettet</p>";
+        }
     }
     //Oppdater
     if(isset($_POST['upd']))

@@ -16,7 +16,6 @@
 </head>
 <body>
 <?php
-
 /*	
 	Sjekker om du er i ferd med å logge inn
 	Hvis du er det registrerer den data

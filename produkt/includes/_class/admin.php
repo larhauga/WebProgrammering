@@ -32,6 +32,27 @@ class Admin
         
 	
 	//Brukere
+        public function finnBrukernavn($idbruker)
+        {
+            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+
+            if($db->connect_error)
+            {
+                die("Kunne ikke koble til databasen: ".$db->connect_error);
+            }
+            else
+            {
+                $sql = "SELECT epost FROM bruker WHERE idbruker = '$idbruker'";
+                $resultat = $db->query($sql);
+                $antRader = $db->affected_rows;
+                    
+                if($antRader == 1)
+                {
+                    $rad = $resultat->fetch_object();
+                    echo $rad->epost;
+                }
+            }
+        }
 	function visBrukere($fra, $til, $sok)
 	{
 	/*Vise alle brukere. Gi admintilgang, kun tilgang for brukere med superbrukertilgang*/
