@@ -16,7 +16,20 @@
         {
                 //Alle feltene var ikke skrevet inn. Skriv en feilmelding til dette	
                 $feil = "Du må skrive inn en tittel!";
+                unset($_POST['tittel']);
+                unset($_POST['aktiv']);
+                unset($_POST['registrer']);
         }
+    }
+    if(isset($_POST['slett']) && isset($_POST['slettArr']))
+    {
+        $array = $_POST['slettArr'];
+        foreach($array as $teller=>$idSlett)
+        {
+            $Admin->slettKat($idSlett);
+        }
+        unset($_POST['slett']);
+        unset($_POST['slettArr']);
     }
     echo '
         <h1><img src="images/folders.jpg" alt="Brukere" width="30" height="30" />Kategorier</h1>
@@ -52,7 +65,9 @@
                         <table width="100%" border="0">
                                 <tr>
                                         <td>ID:</td>
-                                        <td></td>
+                                        <td>';
+                                            $Admin->listValgKat();
+                                    echo '</td>
                                 </tr>
                                 <tr>
                                         <td>Tittel:</td>
@@ -73,9 +88,14 @@
                                 </tr>
                         </table>
         </form>
+            <script type="text/javascript">
+                
+            </script>
         </div>
         <div id="formHoyre">
                 <h1>Kategorier</h1>';
+                if(isset($feilSlett))
+                    echo "<p style='color:red;'>".$feilSlett."</p>";
                 $Admin->visKat();
 
         echo '</div>

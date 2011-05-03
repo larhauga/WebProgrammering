@@ -143,16 +143,16 @@ class Admin
 			$antrader = $mysqli->affected_rows;
 			if($antrader == 0)
 			{
-				echo "Det skjedde en feil med innsettelse i databasen";
-				die();
+				$feil = "<p style='color:red;'>Det skjedde en feil med innsettelse i databasen</p>";
+                                
 			}
                         else if($antrader == 1)
                         {
-                            echo "<p>Du er nå registert</p>";
+                            $feil = "<p>Du er nå registert</p>";
                         }
 		}
 	}
-	//Vis eksisterende kategorier
+	//Vis eksisterende kategorier og setter opp slettingen
 	public function visKat()
 	{
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
@@ -174,8 +174,8 @@ class Admin
 						<td>'.$rad->idkategori.'</td>
 						<td>'.$rad->tittel.'</td>
 						<td>'.$rad->aktiv.'</td>
-						<td><input type="checkbox" name="slett[]" value="'.$rad->idkategori.'" /></td>
-					</tr>';
+						<td><input type="checkbox" name="slettArr[]" value="'.$rad->idkategori.'" /></td>
+                             </tr>';
 		}
 		echo '  <tr class="submit">
                             <td></td>
@@ -185,6 +185,51 @@ class Admin
                         </tr>
                         </table></form>';
 	}
+        public function listValgKat()
+        {
+            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($db->connect_error)
+            {
+                die("Kunne ikke koble til databasen: ".$db->connect_error);
+            }
+            else
+            {
+                $sql = "SELECT * FROM kategori";
+                $resultat = $db->query($sql);
+                $antRader = $db->affected_rows;
+
+                if($antRader >= 1)
+                {
+                    echo '<select name="kategoriID" id="kategoriID">';
+                    for($i = 0; $i<$antRader; $i++)
+                    {
+                        $rad = $resultat->fetch_object();
+                        echo '<option value="'.$rad->idkategori.'">'.$rad->idkategori.' - '.$rad->tittel.'</option>';
+                    }
+                    echo '</select>';
+                }
+            }
+        }
+        public function slettKat($idSlett)
+        {
+            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($mysqli->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+            }
+            $sql = "DELETE FROM kategori WHERE idkategori = '".$idSlett."'";
+            $resultat = $mysqli->query($sql);
+            if(!$resultat)
+            {
+                $feilSlett = "Error ".$mysqli->error;
+            }
+            else 
+            {
+                $antallRader = $mysqli->affected_rows;
+                if($antallRader == 0)
+                    $feilSlett = "Kunne ikke slette kategorien";
+            }
+        }
 	
 	function produkter()
 	{

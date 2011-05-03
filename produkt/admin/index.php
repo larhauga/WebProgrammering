@@ -2,7 +2,7 @@
 	session_start();
 	require("../includes/_class/admin.php");
 	require("../includes/klasser.php");
-	include("../includes/config.php");
+	//include("../includes/config.php");
 
 
 ?>
@@ -41,7 +41,7 @@ if(isset($_GET['login']) && isset($_POST['user']) && isset($_POST['psw']))
 		{
                     //Lager sjekk på om det kun er en bruker.
                     $antallRader = $db->affected_rows;
-                    if($antallRader <= 0 || $antallRader > 1)
+                    if($antallRader != 1)
                     {
                             $feilmelding = "Feil brukernavn eller passord";
                             unset($_POST['user']);
