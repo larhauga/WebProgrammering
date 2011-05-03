@@ -156,7 +156,7 @@ class Admin
 	public function visKat()
 	{
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-		$sql = "SELECT * FROM kategori";
+		$sql = "SELECT * FROM kategori ORDER BY idkategori ASC";
 		$resultat = mysqli_query($mysqli, $sql);
 		
 		echo '
@@ -194,19 +194,17 @@ class Admin
             }
             else
             {
-                $sql = "SELECT * FROM kategori";
+                $sql = "SELECT * FROM kategori ORDER BY idkategori ASC";
                 $resultat = $db->query($sql);
                 $antRader = $db->affected_rows;
 
                 if($antRader >= 1)
                 {
-                    echo '<select name="kategoriID" id="kategoriID">';
-                    for($i = 0; $i<$antRader; $i++)
+                    for($i = 0; $i < $antRader; $i++)
                     {
                         $rad = $resultat->fetch_object();
                         echo '<option value="'.$rad->idkategori.'">'.$rad->idkategori.' - '.$rad->tittel.'</option>';
                     }
-                    echo '</select>';
                 }
             }
         }
@@ -228,6 +226,26 @@ class Admin
                 $antallRader = $mysqli->affected_rows;
                 if($antallRader == 0)
                     $feilSlett = "Kunne ikke slette kategorien";
+            }
+        }
+        public function updateKat($idkat, $tittel, $aktiv)
+        {
+            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($mysqli->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+            }
+            $sql = "UPDATE kategori SET idkategori = '$idkat', tittel = '$tittel', aktiv = '$aktiv' WHERE idkategori = '$idkat'";
+            $resultat = $mysqli->query($sql);
+            if(!$resultat)
+            {
+                $feilUpd = "Error ".$mysqli->error;
+            }
+            else 
+            {
+                $antallRader = $mysqli->affected_rows;
+                if($antallRader == 0)
+                    $feilUpd = "<p style='color:red'>Kunne ikke oppdatere kategorien</p>";
             }
         }
 	
