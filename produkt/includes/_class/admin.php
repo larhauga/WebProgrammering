@@ -84,18 +84,11 @@ class Admin
                 }
 		else
 		{
-                    echo '<script type="text/javascript">
-                            function checkToEdit(var ep, var fn, var en, var tlf){
-                                document.getElementById("epost").value="var ep";
-                                document.getElementById("fornavn").value="var fn";
-                                document.getElementById("etternavn").value="var en";
-                                document.getElementById("tlf").value="var tlf";
-                            }</script>';
                     while($rad = $resultat->fetch_object())
                     {
 			echo '
                                 <tr>
-                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" onClick="checkToEdit('.$rad->epost.','.$rad->fornavn.','.$rad->etternavn.', '.$rad->tlf.')"/></td>
+                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" /></td>
                                     <td>'.$rad->epost.'</td>
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>
@@ -194,20 +187,20 @@ class Admin
         }
         public function settTilAdmin($idbruker, $rettigheter)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-            if($mysqli->connect_error)
+            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($db->connect_error)
             {
-                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+                die("Kunne ikke koble til databasen: " . $db->connect_error);
             }
             $sql = "UPDATE bruker SET rettigheter = '$rettigheter' WHERE idbruker = '$idbruker'";
-            $resultat = $mysqli->query($sql);
+            $resultat = $db->query($sql);
             if(!$resultat)
             {
-                $feilUpd = "Error ".$mysqli->error;
+                $feilUpd = "Error ".$db->error;
             }
             else 
             {
-                $antallRader = $mysqli->affected_rows;
+                $antallRader = $db->affected_rows;
                 if($antallRader == 0)
                     $feilUpd = "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
             }

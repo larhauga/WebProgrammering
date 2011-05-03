@@ -19,13 +19,13 @@
                                <div id="resultat">
                                     <table width="100%">
 					<tr>
-						<td>Alle:<input type="checkbox" id="selectAll" /></td>
-						<td>Epost</td>
-						<td>Fornavn</td>
-						<td>Etternavn</td>
-						<td>RegDate</td>
-						<td>Rettighet</td>
-						<td>TLF</td>
+						<td><input type="checkbox" id="selectAll" name="selectAll" value="selectAll" /></td>
+						<td><b>Epost</b></td>
+						<td><b>Fornavn</b></td>
+						<td><b>Etternavn</b></td>
+						<td><b>RegDate</b></td>
+						<td><b>Rettighet</b></td>
+						<td><b>TLF</b></td>
 					</tr>';
 					$Admin->visBrukere(0,30,"");
 			echo'	</table>
@@ -43,7 +43,12 @@
 			<div id="formVenstre" style="display: none">
                         <form action="" method="post" name="endre" id="endre">
 				<h2>Endre bruker</h2>
+                                <p>Trykk på checkboxene for å velge hvilken bruker du vil endre</p>
 				<table width="100%">
+                                        <tr>
+                                            <td>ID: </td>
+                                            <td><label name="idbruker" id="idbruker" /> </td>
+                                        </tr>
 					<tr>
 						<td>Epost:</td>
 						<td><input type="text" id="epost" name="epost" /></td>
@@ -73,13 +78,24 @@
 			</div>
 			<div id="formHoyre" style="display: none">
 				<h2>Sett til admin</h2>
-					
+                                <table="100%">
+                                <tr>
+                                    <td>
+                                    <select name="status" id="status">
+                                            <option value="0">Admin</option>
+                                            <option value="1">Bruker</option>
+                                            <option value="2">Moderator</option>
+                                    </select>
+                                    </td>
+                                    <td><input type="submit" id="sendAdmin" name="sendAdmin" /></td>
+                                </tr>
+				</table>
 			</div>
 			<div id="slettet" style="display: none; clear:both;">';
                             
                         echo '
-                            <h2>Brukeren ble ikke slettet</h2>
-                            <p>Det skjedde en feil og brukeren ble ikke slettet.</p>
+                            <h2>Brukeren ble slettet</h2>
+                            <p></p>
 			</div>
                         <div style="clear:both;"></div>
 

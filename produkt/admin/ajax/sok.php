@@ -8,13 +8,13 @@
         echo '
             <table width="100%">
                 <tr>
-                        <td></td>
-                        <td>Epost</td>
-                        <td>Fornavn</td>
-                        <td>Etternavn</td>
-                        <td>RegDate</td>
-                        <td>Rettighet</td>
-                        <td>TLF</td>
+                    <td><input type="checkbox" id="selectAll" name="selectAll" value="selectAll" /></td>
+                    <td><b>Epost</b></td>
+                    <td><b>Fornavn</b></td>
+                    <td><b>Etternavn</b></td>
+                    <td><b>RegDate</b></td>
+                    <td><b>Rettighet</b></td>
+                    <td><b>TLF</b></td>
                 </tr>';
              $Admin->visBrukere(0, 2000, $sok);
              
