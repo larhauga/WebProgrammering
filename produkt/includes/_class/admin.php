@@ -56,7 +56,7 @@ class Admin
 		$resultat = mysqli_query($mysqli, $sql) or die(mysqli_error($mysqli));
 		$antrader = $mysqli->affected_rows;
 		if($antrader == 0){
-			echo "<p>Ingen brukere med dette s�ket er registrert.</p>";
+			echo "<p>Ingen brukere med dette s&oslash;ket er registrert.</p>";
                 }
                 else if($antrader == -1){
                         echo "<p>Det skjedde en feil med søket</p>";
@@ -74,7 +74,7 @@ class Admin
                     {
 			echo '
                                 <tr>
-                                    <td><input type="checkbox" name="bruker[ ]" value="'.$rad->idbruker.'" onClick="checkToEdit('.$rad->epost.','.$rad->fornavn.','.$rad->etternavn.', '.$rad->tlf.')"/></td>
+                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" onClick="checkToEdit('.$rad->epost.','.$rad->fornavn.','.$rad->etternavn.', '.$rad->tlf.')"/></td>
                                     <td>'.$rad->epost.'</td>
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>

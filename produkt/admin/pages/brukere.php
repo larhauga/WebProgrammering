@@ -19,7 +19,7 @@
                                <div id="resultat">
                                     <table width="100%">
 					<tr>
-						<td></td>
+						<td>Alle:<input type="checkbox" id="selectAll" /></td>
 						<td>Epost</td>
 						<td>Fornavn</td>
 						<td>Etternavn</td>
@@ -29,6 +29,7 @@
 					</tr>';
 					$Admin->visBrukere(0,30,"");
 			echo'	</table>
+                            
                             </div>
 			<div id="functions">
 				<p class="submit">
@@ -40,33 +41,35 @@
 
 
 			<div id="formVenstre" style="display: none">
+                        <form action="" method="post" name="endre" id="endre">
 				<h2>Endre bruker</h2>
 				<table width="100%">
 					<tr>
 						<td>Epost:</td>
-						<td><input type="text" id="epost" /></td>
+						<td><input type="text" id="epost" name="epost" /></td>
 					</tr>
 					<tr>
 						<td>Fornavn:</td>
-						<td><input type="text" id="fornavn" /></td>
+						<td><input type="text" id="fornavn" name="fornavn" /></td>
 					</tr>
 					<tr>
 						<td>Etternavn:</td>
-						<td><input type="text" id="etternavn" /></td>
+						<td><input type="text" id="etternavn" name="etternavn" /></td>
 					</tr>
 					<tr>
 						<td>Tlf:</td>
-						<td><input type="text" id="tlf" /></td>
+						<td><input type="text" id="tlf" name="tlf" /></td>
 					</tr>
 					<tr>
 						<td>Passord</td>
-						<td><input type="passord" id="passord" /></td>
+						<td><input type="passord" id="psw" name="psw" /></td>
 					</tr>
 					<tr class="submit">
 						<td></td>
 						<td><input type="submit" id="endreSend" name="endreSend" /></td>
 					</tr>
 				</table>
+                                </form>
 			</div>
 			<div id="formHoyre" style="display: none">
 				<h2>Sett til admin</h2>
@@ -81,26 +84,64 @@
                         <div style="clear:both;"></div>
 
 			<script>
+                                /* Utføres når man trykker slett: Skal utføre slettingen og sende et array */
 				$("#slett").click(function (){
-                                        /*var data = { \'bruker[]\' : []};
-
-                                        $("input:checked").each(function() {
-                                           data[\'bruker[]\'].push($(this).val());
-                                        });
-                                        $.post("test.php", { \'bruker[]\' });
-                                    
-                                        $.post("ajax.php", data);
+                                   var data = $(":checkbox:checked").map(function(i,n)
+                                   {
+                                      return $(n).val();
+                                   }).get();
+                                    $.post("ajax/bruker.php", { "bruker[]": data, slett: "true" },
+                                          function(){
+                                                        $("#formHoyre").html("Brukerne er slettet");
+                                                  });
+                                   });
                                         
-                                        $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);*/
-					$("#slettet").slideToggle("slow");
+                                        
+					$("#slettet").slideDown("slow");
+                                        setTimeout(
+                                          function() 
+                                          {
+                                            $("#slettet").fadeOut("slow");
+                                            $("#slettet").slideUp("slow");
+                                          }, 5000);
 				});
+                                
+                                /* Endre skal kun ta seg av slidinga */
 				$("#endre").click(function () {
 					$("#formVenstre").slideToggle("slow");
 				});
+                                
+                                /* Må hente arrayet. Ajax for å sette brukere til admin */
 				$("#sett").click(function () {
 					$("#formHoyre").slideToggle("slow");
+
 				});
-                                $
+                                
+                                /* Setter data til endringsfeltet når en checkbox er valgt */
+                                $("#bruker").change(function() {
+                                /*
+                                var katID = $("#kategoriID").val();
+                                
+                                    $.post("process.php", { \'deleteCB[]\': data },
+                                          function(){
+                                                 $(\'body\').load(\'index.php\', function() {
+                                                 $dialog.dialog({title: \'Item(s) Deleted\'});
+                                                  });
+                                   });
+                                   */
+                                });
+                                
+                                $(function() {
+                                    $("#selectAll").click(function()
+                                      {
+                                        var checked_status = this.checked;
+                                        $(\'input[name="bruker[]"]\').each(function()
+                                            {
+                                              this.checked = checked_status;
+                                            });
+                                       });
+                                    $("#brukerForm").submit(function(e) {
+                                          return false;       });
                                 
 			</script>
 ';
