@@ -338,13 +338,49 @@ class Admin extends dbase
             }
         }
 	
-	function nyttProdukt()
+	function nyttProdukt($idkategori, $dato, $aktiv, $tittel, $tekst, $pris, $idbruker)
 	{
-		$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-                if($db->connect_error)
-                        die("Kunne ikke koble til databasen: " . $db->connect_error);
-                
-                $sql = "INSERT INTO produkt (date, tittel, tekst, idkategori, bildeurl, pris, statusAktiv, idbruker) VALUES();";
+            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($db->connect_error)
+                    die("Kunne ikke koble til databasen: " . $db->connect_error);
+
+            $idkategori = mysqli_escape_string($idkategori);
+            $aktiv = mysqli_escape_string($aktiv);
+            $tittel = mysqli_escape_string($tittel);
+            $filnavn = mysqli_escape_string($filnavn);
+            $tekst = mysql_escape_string($tekst);
+            $pris = mysqli_escape_string($pris);
+
+            $sql = "INSERT INTO produkt (
+                        date, 
+                        tittel, 
+                        tekst, 
+                        idkategori, 
+                        bildeurl, 
+                        pris, 
+                        statusAktiv, 
+                        idbruker) 
+                VALUES('$dato','$tittel','$tekst','$idkategori','$filurl','$pris','$aktiv','$idbruker');";
+
+            $resultat = $db->query($sql);
+
+            if(!$resultat)
+            {
+                echo "Det skjedde en feil med spørringen.";
+            }
+            else 
+            {
+                    $antrader = $db->affected_rows;
+                    if($antrader == 0)
+                    {
+                            $feil = "<p style='color:red;'>Det skjedde en feil med innsettelse i databasen</p>";
+
+                    }
+                    else if($antrader == 1)
+                    {
+                        $feil = "<p>Produktet er registrert</p>";
+                    }
+            }
 	}
         
  	public function visProdukter($fra, $til, $sok)
