@@ -100,16 +100,7 @@ class bruker
 		$this->registert = 10;
 		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
 	}
-	/*
-	function encrypt($innpassord)
-	{
-   $salt = md5($innpassord."%*4!#$;\.k~'(_@"); 
-   
-   $innpassord = md5("$salt$string$salt"); 
-   
-   	$this->passord = $innpassord;
-	} 
-	*/
+
 	function updateDB()
 	{
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');

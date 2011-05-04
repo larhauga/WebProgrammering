@@ -88,8 +88,25 @@
             var etternavn = $("#etternavn").val();
             var tlf = $("#tlf").val();
             var psw = $("#psw").val();
-            $.post("ajax/bruker.php", { "hentData": brukerid},
+            
+            $.post("ajax/bruker.php", { 
+                "send": idbruker,
+                "epost": epost,
+                "fornavn": fornavn,
+                "etternavn": etternavn,
+                "tlf": tlf,
+                "psw": psw
+            },
              function(data){
-                 
+                 $("#melding").html(data);
+                $('#resultat').fadeOut('slow', function() {});
+                $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);
+                $('#resultat').fadeIn('slow', function() {});
+                setTimeout(
+                  function() 
+                  {
+                    $("#formVenstre").slideUp("slow");
+                    $("#melding").html("");
+                  }, 5000);
              });
         });

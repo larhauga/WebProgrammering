@@ -1,5 +1,6 @@
 <?php
     require("../../includes/_class/admin.php");
+    include("../../includes/config1.php");
     $Admin = new Admin('local', 'sok', '2', '0', 'local', ''); //Dummydata for å slippe unna konstruktør
 
     //Slett
@@ -48,13 +49,23 @@
             }
         }
     }
-    if(isset($_POST['send']) != "")
+    if(isset($_POST['send']))
     {
-        $idbrukernavn = $_POST['send'];
+        
+        $idbruker = $_POST['send'];
         $epost = $_POST['epost'];
         $fornavn = $_POST['fornavn'];
         $etternavn = $_POST['etternavn'];
         $tlf = $_POST['tlf'];
         $psw = $_POST['psw'];
+        
+
+        $psw1 = "";
+        if($psw != "")
+        {
+            $psw1 = ", passord = '".encrypt($psw, $epost)."'";
+        }
+        $sql = "UPDATE bruker SET epost = '$epost', fornavn = '$fornavn', etternavn = '$etternavn', tlf = '$tlf'$psw1 WHERE idbruker = '$idbruker'";
+        $Admin->endreBruker($sql);
     }
 ?>

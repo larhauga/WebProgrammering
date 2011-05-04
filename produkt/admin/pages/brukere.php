@@ -41,13 +41,14 @@
 
 
 			<div id="formVenstre" style="display: none">
-                        <form action="" method="post" name="endre" id="endre">
+                        
 				<h2>Endre bruker</h2>
                                 <p>Trykk på checkboxene for å velge hvilken bruker du vil endre</p>
-				<table width="100%">
+				<label id="melding" ></label>
+                                <table width="100%">
                                         <tr>
                                             <td>ID: </td>
-                                            <td><label name="idbruker" id="idbruker" /> </td>
+                                            <td><label name="idbruker" id="idbruker" ></label> </td>
                                         </tr>
 					<tr>
 						<td>Epost:</td>
@@ -74,7 +75,7 @@
 						<td><input type="submit" id="endreSend" name="endreSend" /></td>
 					</tr>
 				</table>
-                                </form>
+                                
 			</div>
 			<div id="formHoyre" style="display: none">
 				<h2>Sett til admin</h2>

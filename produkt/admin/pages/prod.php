@@ -10,10 +10,9 @@
 					<tr>
 						<td>Kategori: </td>
 						<td>
-			 					<select name="grad" id="grad">
-			 						<option value="">Kat1</option>
-			 						<option value="">k2</option>
-			 						<option value="">k3</option>
+			 					<select name="grad" id="grad">';
+                                                                    $Admin->listValgKat();
+                                                                    echo '
 			 					</select>
 						</td>
 					</tr>
@@ -55,7 +54,13 @@
 					<tr>
 						<td><input type="text" id="sok" name="sok" /></td>
 					</tr>
+                                        <script type="text/javascript">
+                                            $("#sok").keyup(function() {
+                                              $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);
+                                            });
+                                       </script>
 				</table>
+                                <div id="resultat">
 				<table width="100%">
 					<tr>
 						<td></td>
@@ -63,15 +68,11 @@
 						<td>Navn</td>
 						<td>Bilde</td>
 						<td>Pris</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="meldinger[ ]" value="'.$rad[0].'" /></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					</tr>';
+                                             $Admin->visProdukt(0,10,"");
+                               echo '             
 				</table>
+                                </div>
 				</form>
 			</div>
 			<div style="clear:both;">
