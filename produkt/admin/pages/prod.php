@@ -56,7 +56,7 @@
 					</tr>
                                         <script type="text/javascript">
                                             $("#sok").keyup(function() {
-                                              $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);
+                                              $("#resultat").load("ajax/produkt.php?sok=" + document.getElementById("sok").value);
                                             });
                                        </script>
 				</table>
@@ -69,7 +69,7 @@
 						<td>Bilde</td>
 						<td>Pris</td>
 					</tr>';
-                                             $Admin->visProdukt(0,10,"");
+                                             $Admin->visProdukter(0,10,"");
                                echo '             
 				</table>
                                 </div>
