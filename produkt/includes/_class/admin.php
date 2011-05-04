@@ -358,8 +358,19 @@ class Admin extends dbase
             if($sok != "")
             {
 
-                $sql = "SELECT idvare, kategori.tittel as kategori, vare.tittel as tittel, bildeurl, pris FROM vare, kategori WHERE vare.idkategori = kategori.idkategori
-                        AND idvare = '$sok' OR kategori.tittel LIKE '%$sok%' OR vare.tittel LIKE '%$sok%' OR bildeurl LIKE '%$sok%' OR pris LIKE '%$sok%'";
+                $sql = "SELECT 
+                            idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            bildeurl, pris 
+                        FROM vare, kategori 
+                        WHERE 
+                            vare.idkategori = kategori.idkategori
+                            AND (idvare = '$sok' 
+                                OR kategori.tittel LIKE '$sok%' 
+                                OR vare.tittel LIKE '%$sok%' 
+                                OR bildeurl LIKE '%$sok%' 
+                                OR pris LIKE '%$sok%')";
                 
 		$resultat = mysqli_query($db, $sql);
                     if($db->connect_error)

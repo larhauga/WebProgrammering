@@ -2,7 +2,7 @@
     require("../../includes/_class/admin.php");
     $Admin = new Admin('local', 'sok', '2', '0', 'local', ''); //Dummydata for å slippe unna konstruktør
 
-    if(isset($_GET['sok']) && $_GET['sok'] != "")
+    if(isset($_GET['sok']))
     {
         $fra = 0;
         $til = 10;
@@ -17,7 +17,7 @@
         <table width="100%">
                 <tr>
                         <td></td>
-                        <td>Kat</td>
+                        <td>Kategori</td>
                         <td>Navn</td>
                         <td>Bilde</td>
                         <td>Pris</td>

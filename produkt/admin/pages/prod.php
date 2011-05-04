@@ -64,7 +64,7 @@
 				<table width="100%">
 					<tr>
 						<td></td>
-						<td>Kat</td>
+						<td>Kategori</td>
 						<td>Navn</td>
 						<td>Bilde</td>
 						<td>Pris</td>
