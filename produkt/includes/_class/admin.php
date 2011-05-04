@@ -338,9 +338,13 @@ class Admin extends dbase
             }
         }
 	
-	function produkter()
+	function nyttProdukt()
 	{
-		
+		$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                if($db->connect_error)
+                        die("Kunne ikke koble til databasen: " . $db->connect_error);
+                
+                $sql = "INSERT INTO produkt (date, tittel, tekst, idkategori, bildeurl, pris, statusAktiv, idbruker) VALUES();";
 	}
         
  	public function visProdukter($fra, $til, $sok)
@@ -390,7 +394,7 @@ class Admin extends dbase
                     {
 			echo '
                         <tr>
-                            <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idvare.'" /></td>
+                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
                             <td>'.$rad->kategori.'</td>
                             <td>'.$rad->tittel.'</td>
                             <td>'.$rad->bildeurl.'</td>
@@ -419,7 +423,7 @@ class Admin extends dbase
                     {
                         echo '
                             <tr>
-                                <td><input type="checkbox" name="bruker[]" value="'.$rad->idvare.'" /></td>
+                                <td><input type="checkbox" name="produkt[]" value="'.$rad->idvare.'" /></td>
                                 <td>'.$rad->kategori.'</td>
                                 <td>'.$rad->tittel.'</td>
                                 <td>'.$rad->bildeurl.'</td>
@@ -429,6 +433,27 @@ class Admin extends dbase
 		} //else
              } //else
 	}
+        
+        public function slettProd($idSlett)
+        {
+            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($mysqli->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+            }
+            $sql = "DELETE FROM produkt WHERE idprodukt = '".$idSlett."'";
+            $resultat = $mysqli->query($sql);
+            if(!$resultat)
+            {
+                $feilSlett = "Error ".$mysqli->error;
+            }
+            else 
+            {
+                $antallRader = $mysqli->affected_rows;
+                if($antallRader == 0)
+                    $feilSlett = "Kunne ikke slette produktet";
+            }
+        }
         
 	function varebeholdning()
 	{

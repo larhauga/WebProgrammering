@@ -1,8 +1,17 @@
-<?php
+<?php  
+/* Produktoppdateringsside */
+if(isset($_POST['slett']) && isset($_POST['produkt']))
+    {
+        $array = $_POST['produkt'];
+        foreach($array as $teller=>$idSlett)
+        {
+            $Admin->slettProd($idSlett);
+        }
+        unset($_POST['slett']);
+        unset($_POST['produkt']);
+    }
 	echo '
 			<h1><img src="images/Cardboard-Box.png" alt="Brukere" width="30" height="30" />Produkter</h1>
-
-			- Endre og Slette<br />
 			<div id="formVenstre">
 			<h2>Legg til produkt</h2>
 				<form action="?id=4" name="vare" method="post">
@@ -10,7 +19,7 @@
 					<tr>
 						<td>Kategori: </td>
 						<td>
-			 					<select name="grad" id="grad">';
+			 					<select name="kategori" id="kategori">';
                                                                     $Admin->listValgKat();
                                                                     echo '
 			 					</select>
@@ -23,10 +32,10 @@
 					<tr>
 						<td>Bilde: </td>
 						<td>
-			 					<form action="upload.php" method="post" enctype="multipart/form-data" target="upload_target" >
-			 						<input type="file" size="10" name="filstreng" />
-			 						<input type="submit" name="knapp" value="Last opp"/>
-			 					</form>
+                                                    <form action="upload.php" method="post" enctype="multipart/form-data" target="upload_target" />
+                                                            <input type="file" size="10" name="filstreng" />
+                                                            <input type="submit" name="knapp" value="Last opp"/>
+                                                    </form>
 						</td>
 					</tr>
 					<tr>
@@ -48,9 +57,10 @@
 				</form>
 			</div>
 			<div id="formHoyre">
-			<h2>Produkter</h2>
-				<form action="?id=4" name="masseopperasjon" method="get">
-				<table width="100%">
+			<h2>Produkter</h2>';
+				if(isset($feilSlett))
+                                    echo $feilSlett;
+		echo'		<table width="100%">
 					<tr>
 						<td><input type="text" id="sok" name="sok" /></td>
 					</tr>
@@ -60,6 +70,7 @@
                                             });
                                        </script>
 				</table>
+                                <form action="" name="slett" method="POST">
                                 <div id="resultat">
 				<table width="100%">
 					<tr>
@@ -70,9 +81,16 @@
 						<td>Pris</td>
 					</tr>';
                                              $Admin->visProdukter(0,10,"");
-                               echo '             
+                               echo '
 				</table>
-                                </div>
+                                </div>                                
+                                <table width="100%">
+                                    <tr class="submit">
+                                        <td width="80%"></td>
+                                        <td><input type="submit" id="slett" name="slett" value="Slett" /></td>
+                                    </tr>
+                               </table>
+                                
 				</form>
 			</div>
 			<div style="clear:both;">
