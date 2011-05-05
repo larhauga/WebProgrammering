@@ -2,7 +2,6 @@
 	//Her må det være sjekk for at adminen er superbruker og ikke moderator (altså ha type 0-tilgang)
 
 	echo '
-
 			<h1><img src="images/user-icon.png" alt="Brukere" width="30" height="30" />Brukeradministrasjon</h1>
 
 				<table width="100%">

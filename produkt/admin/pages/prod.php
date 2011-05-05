@@ -1,4 +1,6 @@
 <?php  
+$Admin = unserialize($_SESSION['admin']);
+
 /* Produktoppdateringsside */
 if(isset($_POST['slett']) && isset($_POST['produkt']))
     {
@@ -19,8 +21,10 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $filnavn = "";
      $tekst = $_POST['text'];
      $pris = $_POST['pris'];
+     $idbruker = $Admin->idbruker;
      
-     $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $Admin->idbruker);
+     
+     $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $idbruker);
      
         //header('Location:'.$_SERVER["PHP_SELF"].'?id=4');
  }
@@ -83,7 +87,8 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                 </form>
         </div>
         <div id="formHoyre">
-        <h2>Produkter</h2>';
+        <h2>Produkter</h2>
+        <p>Det er totalt '.$Admin->visAntVarer().' varer.</p>';
                 if(isset($feilSlett))
                     echo $feilSlett;
         echo'<table width="100%">
