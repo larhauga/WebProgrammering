@@ -14,7 +14,7 @@ function meny()
 		for($i=0;$i<$num;$i++)
                  {
                      $valg=mysqli_fetch_row($resultat);
-                     echo('<li><a href="kategori.php?'.$valg[0].'">'.$valg[1].'</a></li>');
+                     echo('<li><a href="kategori.php?id='.$valg[0].'">'.$valg[1].'</a></li>');
                  }
    echo '</ul>';
     
@@ -29,7 +29,6 @@ function varer($katid)
     $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
 
     $varer = "SELECT vare.idvare,
-              kategori.tittel as kategori, 
               vare.tittel as tittel, 
               vare.pris as pris,
               DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
@@ -50,7 +49,7 @@ function varer($katid)
                  {
                      
                      $valg=mysqli_fetch_row($resultat);
-                     echo('<tr><td>Kategori: '.$valg[1].'</td><td> Tittel: '.$valg[2].'</td><td> Pris: '.$valg[3].'</td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td></tr>');
+                     echo('<tr><td> Tittel: '.$valg[1].'</td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td></tr>');
                  }
     echo '</table>';
 }
