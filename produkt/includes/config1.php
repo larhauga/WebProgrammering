@@ -19,6 +19,16 @@ $C['BRUKER']['NAVN_MAX'] = 30;
 $C['BRUKER']['NAVN_UGYLDIG_REGEX'] = "/[^a-zA-Z0-9������\s]/u";
 $C['BRUKER']['PASSORD_MIN'] = 6;
 
+//Handlekurv
+$C['handlekurv'][''] = " ";
+$C['handlekurv'][''] = " ";
+$C['handlekurv'][''] = " ";
+$C['handlekurv'][''] = " ";
+$C['handlekurv'][''] = " ";
+$C['handlekurv'][''] = " ";
+$C['handlekurv'][''] = " ";
+
+
 function encrypt($innpassord, $innepost)
 {
    $salt = md5($innpassord."%*4!#$;\.k~'(_@"); 
