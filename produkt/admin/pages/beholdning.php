@@ -6,7 +6,7 @@ echo '
             <tr>
                     <td width="10%">Kategorier: </td>
                     <td>
-                <select name="kategoriID" id="kategoriID" onChange="">';
+                <select name="kategoriID" id="kategoriID">';
                     $Admin->listValgKat();
            echo '</select>
                     </td>
@@ -18,6 +18,14 @@ echo '
                     <td><input type="text" id="sok" name="sok" /></td>
             </tr>
     </table>
+    <script type="text/javascript">
+            $("#kategoriID").change(function () {
+                $("#resultat").load("ajax/beholdning.php?kategori=" + $("#kategoriID").val());
+            });
+            $("#sok").keyup(function() {
+              $("#resultat").load("ajax/beholdning.php?sok=" + document.getElementById("sok").value);
+            });
+   </script>
 
     <div id="resultat">
     <table width="100%">
@@ -47,12 +55,5 @@ echo '
     </div>
     <div id="formHoyre"></div>
     <div style="clear:both"></div>
-
-   
-    <script type="text/javascript">
-        $("#sok").keyup(function() {
-          $("#resultat").load("ajax/beholdning.php?sok=" + document.getElementById("sok").value);
-        });
-    </script>
 ';
 ?>

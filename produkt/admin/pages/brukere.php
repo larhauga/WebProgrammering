@@ -1,6 +1,9 @@
 <?php
 	//Her må det være sjekk for at adminen er superbruker og ikke moderator (altså ha type 0-tilgang)
-
+        $Admin = unserialize($_SESSION['admin']);
+        
+        if($Admin->getTilgang() == 0)
+        {
 	echo '
 			<h1><img src="images/user-icon.png" alt="Brukere" width="30" height="30" />Brukeradministrasjon</h1>
 
@@ -100,5 +103,11 @@
                         <div style="clear:both;"></div>
 
                         <script src="ajax/bruker.js"></script>
-';
+                    ';
+        }
+        else
+        {
+            echo "<h1>Du har ikke tilstrekkelig med rettigheter for å vise denne siden.</h1>
+                <p>Ta kontakt med en systemansvarlig for å få tilgang.</p>";
+        }
 ?>
