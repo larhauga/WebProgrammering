@@ -22,9 +22,10 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $tekst = $_POST['text'];
      $pris = $_POST['pris'];
      $idbruker = $Admin->idbruker;
+     $antall = $_POST['antall'];
      
      
-     $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $idbruker);
+     $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall ,$idbruker);
      
         //header('Location:'.$_SERVER["PHP_SELF"].'?id=4');
  }
@@ -78,6 +79,10 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                         <tr>
                                 <td>Pris: </td>
                                 <td><input type="text" id="pris" name="pris" /></td>
+                        </tr>
+                        <tr>
+                            <td>Antall: </td>
+                            <td><input type="text" id="antall" name="antall" /></td>
                         </tr>
                         <tr class="submit">
                                 <td></td>

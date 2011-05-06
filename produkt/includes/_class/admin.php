@@ -338,18 +338,20 @@ class Admin extends dbase
             }
         }
 	
-	function nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $idbruker)
+	function nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall, $idbruker)
 	{
             $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
             if($db->connect_error)
                     die("Kunne ikke koble til databasen: " . $db->connect_error);
-
+            
+            $db->autocommit(false);
             $idkategori = mysqli_escape_string($db,$idkategori);
             $aktiv = mysqli_escape_string($db,$aktiv);
             $tittel = mysqli_escape_string($db,$tittel);
             $filnavn = mysqli_escape_string($db,$filnavn);
             $tekst = mysqli_escape_string($db,$tekst);
             $pris = mysqli_escape_string($db,$pris);
+            $antall = mysqli_escape_string($db, $antall);
 
             $sql = "INSERT INTO vare (
                         idvare,
@@ -364,23 +366,50 @@ class Admin extends dbase
                 VALUES('', '$dato','$tittel','$tekst','$idkategori','$filnavn','$pris','$aktiv','$idbruker')";
 
             $resultat = $db->query($sql);
-
+            $ok = true;
             if(!$resultat)
             {
-                echo "Det skjedde en feil med spørringen.";
+                $ok = false;
             }
             else 
             {
-                    $antrader = $db->affected_rows;
-                    if($antrader == 0)
+                    if($db->affected_rows == 0)
                     {
-                            $feil = "<p style='color:red;'>Det skjedde en feil med innsettelse i databasen</p>";
-
+                            $ok = false;
                     }
-                    else if($antrader == 1)
+                    else
                     {
-                        $feil = "<p>Produktet er registrert</p>";
+                        $idvare = $db->insert_id;
                     }
+            }
+            $sqlregister = "INSERT INTO vareregister (
+                                idvareregister,
+                                idvare,
+                                sistoppdatert,
+                                antall)
+                            VALUES('',$idvare,'".date('Y-m-d H:i:s')."','$antall');
+                                ";
+            $resultat = $db->query($sqlregister);
+            if(!$resultat)
+            {
+                $ok = false;
+            }
+            else
+            {
+                if($db->affected_rows == 0)
+                {
+                    $ok = false;
+                }
+            }
+            if($ok)
+            {
+                $db->commit();
+                $feilProd = "<p>Varen ble registrert</p>";
+            }
+            else
+            {
+                $db->rollback();
+                $feilProd = "<p style='color:red;'>Varen ble ikke registrert.</p>";
             }
 	}
         
@@ -499,7 +528,18 @@ class Admin extends dbase
             $sok = mysqli_escape_string($db, $sok);
             
             
-            $sql = "SELECT idvare, kategori.tittel as kategori, vare.tittel as tittel, bildeurl, pris FROM vare, kategori WHERE vare.idkategori = kategori.idkategori";
+            $sql = "SELECT  vare.idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            vare.pris as pris, 
+                            DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                            vareregister.sistoppdatert as sisteDato,
+                            vareregister.antall as antall,
+                            bruker.fornavn as fornavn
+                    FROM vare, kategori, bruker, vareregister
+                    WHERE vare.idkategori = kategori.idkategori
+                        AND vare.idbruker = bruker.idbruker
+                        AND vare.idvare = vareregister.idvare";
             $sql.= " LIMIT ".$fra.", ".$til;
             
             if($sok != "")
@@ -538,10 +578,13 @@ class Admin extends dbase
 			echo '
                         <tr>
                             <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
-                            <td>'.$rad->kategori.'</td>
                             <td>'.$rad->tittel.'</td>
-                            <td>'.$rad->bildeurl.'</td>
+                            <td>'.$rad->dato.'</td>
                             <td>'.$rad->pris.'</td>
+                            <td>'.$rad->kategori.'</td>
+                            <td>'.$rad->sisteDato.'</td>
+                            <td>'.$rad->antall.'</td>
+                            <td>'.$rad->fornavn.'</td>
                         </tr>
                         ';
                     }
@@ -558,20 +601,24 @@ class Admin extends dbase
 		$antrader = $db->affected_rows;
 		if($antrader == 0)
                     echo "<p>Ingen varer er registrert</p>";
-                else if($antrader == -1)
+                else if($antrader == -1){
                         echo "<p>Det skjedde en feil med søket etter varer</p>";
+                }
 		else
 		{
                     while($rad = $resultat->fetch_object())
                     {
                         echo '
-                            <tr>
-                                <td><input type="checkbox" name="produkt[]" value="'.$rad->idvare.'" /></td>
-                                <td>'.$rad->kategori.'</td>
-                                <td>'.$rad->tittel.'</td>
-                                <td>'.$rad->bildeurl.'</td>
-                                <td>'.$rad->pris.'</td>
-                           </tr>';
+                        <tr>
+                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
+                            <td>'.$rad->tittel.'</td>
+                            <td>'.$rad->dato.'</td>
+                            <td>'.$rad->pris.'</td>
+                            <td>'.$rad->kategori.'</td>
+                            <td>'.$rad->sisteDato.'</td>
+                            <td>'.$rad->antall.'</td>
+                            <td>'.$rad->fornavn.'</td>
+                        </tr>';
                     } //while
 		} //else
              } //else
