@@ -1,6 +1,7 @@
 <?php
+include('dbase.php');
 
-class Admin
+class Admin extends dbase
 {
 	public $epost;
 	public $passord;
@@ -12,10 +13,12 @@ class Admin
 	
 	public function __construct($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
+            parent::__construct();
+            
             $this->epost = $epost;
             $this->passord = $passord;
             $this->tilgangstype = $tilgangstype;
-            $this->idbruker = $fornavn; //$idbruker;
+            $this->idbruker = $idbruker;
             $this->fornavn = $fornavn;
             $this->ip = $ip;
 	}
@@ -23,18 +26,16 @@ class Admin
 	{
             return $this->fornavn;
 	}
-	public function db()
-	{
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-	}
-        
-        
-        
+        public function adminConnect()
+        {
+            return parent::connect();
+        }
+
 	
 	//Brukere
         public function finnBrukernavn($idbruker)
         {
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
 
             if($db->connect_error)
             {
@@ -56,7 +57,7 @@ class Admin
 	function visBrukere($fra, $til, $sok)
 	{
 	/*Vise alle brukere. Gi admintilgang, kun tilgang for brukere med superbrukertilgang*/
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf FROM bruker";
             $sql.= " LIMIT ".$fra.", ".$til;
             
@@ -84,18 +85,11 @@ class Admin
                 }
 		else
 		{
-                    echo '<script type="text/javascript">
-                            function checkToEdit(var ep, var fn, var en, var tlf){
-                                document.getElementById("epost").value="var ep";
-                                document.getElementById("fornavn").value="var fn";
-                                document.getElementById("etternavn").value="var en";
-                                document.getElementById("tlf").value="var tlf";
-                            }</script>';
                     while($rad = $resultat->fetch_object())
                     {
 			echo '
                                 <tr>
-                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" onClick="checkToEdit('.$rad->epost.','.$rad->fornavn.','.$rad->etternavn.', '.$rad->tlf.')"/></td>
+                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" /></td>
                                     <td>'.$rad->epost.'</td>
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>
@@ -151,7 +145,7 @@ class Admin
         
 	function slettBrukere($idSlett)
 	{
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -171,43 +165,48 @@ class Admin
                     $feilSlett = "Brukeren er slettet";
             }
 	}
-        public function endreBruker($idbruker, $epost, $fornavn, $etternavn, $tlf, $passord) //NB! Passordet må sendes kryptert før det kommer hit!!!!
+        public function endreBruker($sqlRemote) //NB! Passordet må sendes kryptert før det kommer hit!!!!
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
-                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+                echo "Kunne ikke koble til databasen: " . $mysqli->connect_error;
             }
-            $sql = "UPDATE bruker SET idbruker = '$idbruker', epost = '$epost', fornavn = '$fornavn', etternavn = '$etternavn',
-                    tlf = '$tlf', passord = '$passord' WHERE idbruker = '$idbruker'";
+            /*$sql = "UPDATE bruker SET idbruker = '$idbruker', epost = '$epost', fornavn = '$fornavn', etternavn = '$etternavn',
+                    tlf = '$tlf', passord = '$passord' WHERE idbruker = '$idbruker'"; */
+            $sql = $sqlRemote;
+            
             $resultat = $mysqli->query($sql);
             if(!$resultat)
             {
-                $feilUpd = "Error ".$mysqli->error;
+                echo "Error ".$mysqli->error;
             }
             else 
             {
                 $antallRader = $mysqli->affected_rows;
                 if($antallRader == 0)
-                    $feilUpd = "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
+                    echo "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
+                else
+                    echo "<p>Brukeren ble endret</p>";
             }
         }
         public function settTilAdmin($idbruker, $rettigheter)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-            if($mysqli->connect_error)
+            $db = parent::connect();
+            //$dbase->connect();
+            if($db->connect_error)
             {
-                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+                die("Kunne ikke koble til databasen: " . $db->connect_error);
             }
             $sql = "UPDATE bruker SET rettigheter = '$rettigheter' WHERE idbruker = '$idbruker'";
-            $resultat = $mysqli->query($sql);
+            $resultat = $db->query($sql);
             if(!$resultat)
             {
-                $feilUpd = "Error ".$mysqli->error;
+                $feilUpd = "Error ".$db->error;
             }
             else 
             {
-                $antallRader = $mysqli->affected_rows;
+                $antallRader = $db->affected_rows;
                 if($antallRader == 0)
                     $feilUpd = "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
             }
@@ -216,7 +215,7 @@ class Admin
 	//Innsetting av nye kategorier
 	function nyKat($tittel, $aktiv)
 	{
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$mysqli = parent::connect();
                 $tittel = mysqli_real_escape_string($mysqli, $tittel);
                 
 		$sql = "Insert into kategori(idkategori,tittel,aktiv) VALUES(
@@ -250,7 +249,7 @@ class Admin
 	//Vis eksisterende kategorier og setter opp slettingen
 	public function visKat()
 	{
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$mysqli = parent::connect();
 		$sql = "SELECT * FROM kategori ORDER BY idkategori ASC";
 		$resultat = mysqli_query($mysqli, $sql);
 		
@@ -282,7 +281,7 @@ class Admin
 	}
         public function listValgKat()
         {
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
             if($db->connect_error)
             {
                 die("Kunne ikke koble til databasen: ".$db->connect_error);
@@ -305,7 +304,7 @@ class Admin
         }
         public function slettKat($idSlett)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -325,7 +324,7 @@ class Admin
         }
         public function updateKat($idkat, $tittel, $aktiv)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -344,13 +343,322 @@ class Admin
             }
         }
 	
-	function produkter()
+	function nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall, $idbruker)
 	{
-		
+            /*$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            if($db->connect_error)
+                    die("Kunne ikke koble til databasen: " . $db->connect_error);
+            */
+            $db = parent::connect();
+            
+            $db->autocommit(false);
+            $idkategori = mysqli_escape_string($db,$idkategori);
+            $aktiv = mysqli_escape_string($db,$aktiv);
+            $tittel = mysqli_escape_string($db,$tittel);
+            $filnavn = mysqli_escape_string($db,$filnavn);
+            $tekst = mysqli_escape_string($db,$tekst);
+            $pris = mysqli_escape_string($db,$pris);
+            $antall = mysqli_escape_string($db, $antall);
+
+            $sql = "INSERT INTO vare (
+                        idvare,
+                        date, 
+                        tittel, 
+                        tekst, 
+                        idkategori, 
+                        bildeurl, 
+                        pris, 
+                        statusAktiv, 
+                        idbruker) 
+                VALUES('', '$dato','$tittel','$tekst','$idkategori','$filnavn','$pris','$aktiv','$idbruker')";
+
+            $resultat = $db->query($sql);
+            $ok = true;
+            if(!$resultat)
+            {
+                $ok = false;
+            }
+            else 
+            {
+                    if($db->affected_rows == 0)
+                    {
+                            $ok = false;
+                    }
+                    else
+                    {
+                        $idvare = $db->insert_id;
+                    }
+            }
+            $sqlregister = "INSERT INTO vareregister (
+                                idvareregister,
+                                idvare,
+                                sistoppdatert,
+                                antall)
+                            VALUES('',$idvare,'".date('Y-m-d H:i:s')."','$antall');
+                                ";
+            $resultat = $db->query($sqlregister);
+            if(!$resultat)
+            {
+                $ok = false;
+            }
+            else
+            {
+                if($db->affected_rows == 0)
+                {
+                    $ok = false;
+                }
+            }
+            if($ok)
+            {
+                $db->commit();
+                return $feilProd = "<p>Varen ble registrert</p>";
+            }
+            else
+            {
+                $db->rollback();
+                return $feilProd = "<p style='color:red;'>Varen ble ikke registrert.</p>";
+            }
 	}
-	function varebeholdning()
+        
+ 	public function visProdukter($fra, $til, $sok)
 	{
-		
+            $db = parent::connect();
+            $fra = mysqli_escape_string($db, $fra);
+            $til = mysqli_escape_string($db, $til);
+            $sok = mysqli_escape_string($db, $sok);
+            
+            
+            $sql = "SELECT idvare, kategori.tittel as kategori, vare.tittel as tittel, bildeurl, pris FROM vare, kategori WHERE vare.idkategori = kategori.idkategori";
+            $sql.= " LIMIT ".$fra.", ".$til;
+            
+            if($sok != "")
+            {
+
+                $sql = "SELECT 
+                            idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            bildeurl, pris 
+                        FROM vare, kategori 
+                        WHERE 
+                            vare.idkategori = kategori.idkategori
+                            AND (idvare = '$sok' 
+                                OR kategori.tittel LIKE '$sok%' 
+                                OR vare.tittel LIKE '%$sok%' 
+                                OR bildeurl LIKE '%$sok%' 
+                                OR pris LIKE '%$sok%')";
+                
+		$resultat = mysqli_query($db, $sql);
+                    if($db->connect_error)
+                    {
+                        die("Kunne ikke koble til databasen: ".$db->connect_error);
+                    }
+		$antrader = $db->affected_rows;
+		if($antrader == 0){
+			echo "<p>Ingen varer med dette s&oslash;ket er registrert.</p>";
+                }
+                else if($antrader == -1){
+                        echo "<p>Det skjedde en feil med søket</p>";
+                }
+		else
+		{
+                    while($rad = $resultat->fetch_object())
+                    {
+			echo '
+                        <tr>
+                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idvare.'" /></td>
+                            <td>'.$rad->tittel.'</td>
+                            <td>'.$rad->kategori.'</td>
+                            <td>'.$rad->bildeurl.'</td>
+                            <td>'.$rad->pris.'</td>
+                        </tr>
+                        ';
+                    }
+                }
+            }
+            else
+            {	
+		$resultat = mysqli_query($db, $sql);
+                if($db->connect_error)
+                {
+                    die("Kunne ikke koble til databasen: ".$db->connect_error);
+                }
+                
+		$antrader = $db->affected_rows;
+		if($antrader == 0)
+                    echo "<p>Ingen varer er registrert</p>";
+                else if($antrader == -1)
+                        echo "<p>Det skjedde en feil med søket etter varer</p>";
+		else
+		{
+                    while($rad = $resultat->fetch_object())
+                    {
+                        echo '
+                            <tr>
+                                <td><input type="checkbox" name="produkt[]" value="'.$rad->idvare.'" /></td>
+                                <td>'.$rad->kategori.'</td>
+                                <td>'.$rad->tittel.'</td>
+                                <td>'.$rad->bildeurl.'</td>
+                                <td>'.$rad->pris.'</td>
+                           </tr>';
+                    } //while
+		} //else
+             } //else
+	}
+        
+        public function slettProd($idSlett)
+        {
+            $db = parent::connect();
+            if($db->connect_error)
+            {
+                die("Kunne ikke koble til databasen: " . $db->connect_error);
+            }
+            $db->autocommit(false);
+            $ok = true;
+            
+            $sql = "DELETE FROM vare WHERE idvare = '".$idSlett."'";
+            $resultat = $db->query($sql);
+            if(!$resultat)
+            {
+                //$feilSlett = "Error ".$db->error;
+                $ok = false;
+            }
+            else 
+            {
+                if($db->affected_rows == 0)
+                        $ok = false;
+                    //$feilSlett = "Kunne ikke slette produktet";
+            }
+            $sql = "DELETE FROM vareregister WHERE idvare = $idSlett";
+            $resultat = $db->query($sql);
+            if(!$resultat)
+            {
+                $ok = false;
+            }
+            else
+            {
+                if($db->affected_rows == 0)
+                        $ok = false;
+            }
+            
+            if($ok)
+            {
+                $db->commit();
+                $feilSlett = "Varen ble slettet";
+            }
+            else
+            {
+                $db->rollback();
+                $feilSlett = "<p style='color:red'>Det skjedde en feil ved slettingen. Prøv igjen senere.</p>";
+            }
+        }
+        
+	function visBeholdning($fra, $til, $sok)
+	{
+            $db = parent::connect();
+            $fra = mysqli_escape_string($db, $fra);
+            $til = mysqli_escape_string($db, $til);
+            $sok = mysqli_escape_string($db, $sok);
+            
+            
+            $sql = "SELECT  vare.idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            vare.pris as pris, 
+                            DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                            DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
+                            vareregister.antall as antall,
+                            bruker.fornavn as fornavn
+                    FROM vare, kategori, bruker, vareregister
+                    WHERE vare.idkategori = kategori.idkategori
+                        AND vare.idbruker = bruker.idbruker
+                        AND vare.idvare = vareregister.idvare";
+            $sql.= " LIMIT ".$fra.", ".$til;
+            
+            if($sok != "")
+            {
+
+                $sql = "SELECT  
+                            vare.idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            vare.pris as pris, 
+                            DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                            DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
+                            vareregister.antall as antall,
+                            bruker.fornavn as fornavn
+                    FROM vare, kategori, bruker, vareregister
+                    WHERE vare.idkategori = kategori.idkategori
+                        AND vare.idbruker = bruker.idbruker
+                        AND vare.idvare = vareregister.idvare
+                            AND (idvare = '$sok' 
+                                OR kategori.tittel LIKE '$sok%' 
+                                OR vare.tittel LIKE '%$sok%' 
+                                OR pris LIKE '$sok')";
+                
+		$resultat = mysqli_query($db, $sql);
+                    if($db->connect_error)
+                    {
+                        die("Kunne ikke koble til databasen: ".$db->connect_error);
+                    }
+		$antrader = $db->affected_rows;
+		if($antrader == 0){
+			echo "<p>Ingen varer med dette s&oslash;ket er registrert.</p>";
+                }
+                else if($antrader == -1){
+                        echo "<p>Det skjedde en feil med søket</p>";
+                }
+		else
+		{
+                    while($rad = $resultat->fetch_object())
+                    {
+			echo '
+                        <tr>
+                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
+                            <td>'.$rad->tittel.'</td>
+                            <td>'.$rad->dato.'</td>
+                            <td>'.$rad->pris.'</td>
+                            <td>'.$rad->kategori.'</td>
+                            <td>'.$rad->sisteDato.'</td>
+                            <td>'.$rad->antall.'</td>
+                            <td>'.$rad->fornavn.'</td>
+                        </tr>
+                        ';
+                    }
+                }
+            }
+            else
+            {	
+		$resultat = mysqli_query($db, $sql);
+                if($db->connect_error)
+                {
+                    die("Kunne ikke koble til databasen: ".$db->connect_error);
+                }
+                
+		$antrader = $db->affected_rows;
+		if($antrader == 0)
+                    echo "<p>Ingen varer er registrert</p>";
+                else if($antrader == -1){
+                        echo "<p>Det skjedde en feil med søket etter varer</p>";
+                }
+		else
+		{
+                    while($rad = $resultat->fetch_object())
+                    {
+                        echo '
+                        <tr>
+                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
+                            <td>'.$rad->tittel.'</td>
+                            <td>'.$rad->dato.'</td>
+                            <td>'.$rad->pris.'</td>
+                            <td>'.$rad->kategori.'</td>
+                            <td>'.$rad->sisteDato.'</td>
+                            <td>'.$rad->antall.'</td>
+                            <td>'.$rad->fornavn.'</td>
+                        </tr>';
+                    } //while
+		} //else
+             } //else
 	}
 	function sikkerhet()
 	{
@@ -364,7 +672,7 @@ class Admin
 	/* Henter stats til admin siden */
 	function statsVarer()
 	{
-                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $mysqli = parent::connect();
                 $sql = "SELECT COUNT(*) AS count FROM vare";
                 $resultat = mysqli_query($mysqli, $sql);
                 $antrader = $mysqli->affected_rows;
@@ -380,7 +688,7 @@ class Admin
 	}
 	function statsKat()
 	{
-                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $mysqli = parent::connect();
                 $sql = "SELECT COUNT(*) AS count FROM kategori";
                 $resultat = mysqli_query($mysqli, $sql);
                 $antrader = $mysqli->affected_rows;
@@ -396,7 +704,7 @@ class Admin
 	}
 	function statsBruker()
 	{
-                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $mysqli = parent::connect();
                 $sql = "SELECT COUNT(*) AS count FROM bruker";
                 $resultat = mysqli_query($mysqli, $sql);
                 $antrader = $mysqli->affected_rows;
@@ -409,16 +717,36 @@ class Admin
                     echo $rad->count;
                 }
 	}
-	
+        function visAntVarer()
+        {
+            $db = parent::connect();
+
+            if($db->connect_error)
+            {
+                die("Kunne ikke koble til databasen: ".$db->connect_error);
+            }
+            else
+            {
+                $sql = "SELECT count(*) as antall FROM vare";
+                $resultat = $db->query($sql);
+                
+                if(!$resultat)
+                {
+                    return 0;
+                }
+                else
+                {
+                    $rad = $resultat->fetch_object();
+                    return $rad->antall;
+                }
+            }
+        }
+        
 	//Login 
 	function hash($br, $pass)
 	{
                 $innpassord = sha1( $br.'aaaaa'.$pass );
 		$this->passord = $innpassord;
-	}
-	function login()
-	{
-		
 	}
         
 	function sjekkFelt($input)

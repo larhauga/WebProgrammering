@@ -30,36 +30,83 @@
                 $("#formVenstre").slideToggle("slow");
         });
 
-        /* Må hente arrayet. Ajax for å sette brukere til admin */
+        /* Når man trykker på set til admin, kommer en ny boks opp hvor man må velge hvilken tilgangstype den skal ha. */
         $("#sett").click(function () {
                 $("#formHoyre").slideToggle("slow");
-
         });
-
-        /* Setter data til endringsfeltet når en checkbox er valgt */
-        $("#bruker").change(function() {
-        /*
-        var katID = $("#kategoriID").val();
-
-            $.post("process.php", { \'deleteCB[]\': data },
+        
+        /* Kjører funksjonen som setter adminrettighetene.*/
+        $("#sendAdmin").click(function () {
+           var data = $(":checkbox:checked").map(function(i,n)
+           {
+              return $(n).val();
+           }).get();
+           var tilgang = document.getElementById("status").value;
+           
+            $.post("ajax/bruker.php", { admin: 'true', 'bruker[]': data, rettigheter: tilgang },
                   function(){
-                         $(\'body\').load(\'index.php\', function() {
-                         $dialog.dialog({title: \'Item(s) Deleted\'});
+                                $('#resultat').fadeOut('slow', function() {});
+                                $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);
+                                $('#resultat').fadeIn('slow', function() {});
+                                $("#formHoyre").slideUp("slow");
                           });
-           });
-           */
         });
+        
+        /* Setter data til endringsfeltet når en checkbox er valgt 
+         * Bruker også denne metoden til å selecte alle. Bare for enkelhetens skyld*/
+        $(':checkbox').click(function() {
+            if($(this).val() != "selectAll"){
+            var brukerid = $(this).val();
 
-        $(function() {
-            $("#selectAll").click(function()
-              {
+
+                    $.post("ajax/bruker.php", { "hentData": brukerid},
+                     function(data){
+                       $("#idbruker").html(data.idbruker); // Henter og printer ut ID
+                       $("#epost").val(data.epost); // EPOST
+                       $("#fornavn").val(data.fornavn); // Fornavn
+                       $("#etternavn").val(data.etternavn); // Etternavn
+                       $("#tlf").val(data.tlf); //Telefonnummer
+                       //Passordet skrives ikke ut av sikkerhetsmessige årsaker!
+                     }, "json");
+            }
+            else if($(this).val() == "selectAll")
+            {
+                // Denne metoden velger alle checkboxene.
                 var checked_status = this.checked;
-                $('input[name="bruker[]"]').each(function()
+                $(':checkbox').each(function()
                     {
                       this.checked = checked_status;
                     });
-               });
-            $("#brukerForm").submit(function(e) {
-                  return false;       
-              });
+            }
+
+        });
+        //Sender dataene til ajax side ved endring av bruker
+        $('#endreSend').click(function(){
+            var idbruker = $("#idbruker").html();
+            var epost = $("#epost").val();
+            var fornavn = $("#fornavn").val();
+            var etternavn = $("#etternavn").val();
+            var tlf = $("#tlf").val();
+            var psw = $("#psw").val();
+            
+            $.post("ajax/bruker.php", { 
+                "send": idbruker,
+                "epost": epost,
+                "fornavn": fornavn,
+                "etternavn": etternavn,
+                "tlf": tlf,
+                "psw": psw
+            },
+             function(data){
+                 $("#melding").html(data);
+                $('#resultat').fadeOut('slow', function() {});
+                $("#resultat").load("ajax/sok.php?sok=" + document.getElementById("sok").value);
+                $('#resultat').fadeIn('slow', function() {});
+                setTimeout(
+                  function() 
+                  {
+                    $("#formVenstre").slideUp("slow");
+                    $("#melding").html("");
+                  }, 5000);
+             });
         });
