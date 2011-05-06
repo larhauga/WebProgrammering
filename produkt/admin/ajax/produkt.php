@@ -43,7 +43,7 @@
                                 vare.pris,
                                 vareregister.antall
                         FROM vare, vareregister
-                        WHERE vare.idvare = vareregister.idvare AND idvare = ".$_POST['hentData'];
+                        WHERE vare.idvare = vareregister.idvare AND vare.idvare = ".$_POST['hentData'];
                 $resultat = $mysqli->query($sql);
                 $ant = $mysqli->affected_rows;
                 if($ant == 1)

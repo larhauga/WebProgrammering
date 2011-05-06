@@ -62,7 +62,7 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                         <tr>
                                 <td>Bilde: </td>
                                 <td>
-                                            <input type="file" size="10" name="filstreng" />
+                                            <input id="file" type="file" size="10" name="filstreng" />
                                             <input type="submit" name="knapp" value="Last opp"/>
                                 </td>
                         </tr>

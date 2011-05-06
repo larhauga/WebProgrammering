@@ -5,12 +5,13 @@
 
                     $.post("ajax/produkt.php", { "hentData": brukerid},
                      function(data){
-                       $("#idbruker").html(data.idbruker); // Henter og printer ut ID
-                       $("#epost").val(data.epost); // EPOST
-                       $("#fornavn").val(data.fornavn); // Fornavn
-                       $("#etternavn").val(data.etternavn); // Etternavn
-                       $("#tlf").val(data.tlf); //Telefonnummer
-                       //Passordet skrives ikke ut av sikkerhetsmessige årsaker!
+                       $("#kategori").val(data.idkategori);  // kategori til id
+                       $("#aktiv").val(data.statusAktiv);      // aktiv
+                       $("#tittel").val(data.tittel);           // tittel
+                       $("#file").val(data.bildeurl);            // Bildeurl
+                       $("#text").val(data.tekst);             // Tekst
+                       $("#pris").val(data.pris);               // Pris
+                       $("#antall").val(data.antall);           // Antall
                      }, "json");
             }
             else if($(this).val() == "selectAll")
@@ -22,3 +23,4 @@
                       this.checked = checked_status;
                     });
             }
+        });
