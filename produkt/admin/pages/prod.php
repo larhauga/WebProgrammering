@@ -110,8 +110,8 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                 <table width="100%">
                         <tr>
                                 <td></td>
-                                <td>Kategori</td>
                                 <td>Navn</td>
+                                <td>Kategori</td>
                                 <td>Bilde</td>
                                 <td>Pris</td>
                         </tr>';
