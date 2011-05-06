@@ -24,4 +24,36 @@
                 </tr>';
         $Admin->visProdukter($fra, $til, $sok);
     }
+    if(isset($_POST['hentData']))
+    {
+        $mysqli = $Admin->adminConnect();
+        if($mysqli->connect_error)
+        {
+            echo $mysqli->connect_error;
+        }
+        else
+        {
+            if($_POST['hentData'] != "")
+            {
+                $sql = "SELECT  vare.idkategori,
+                                vare.statusAktiv,
+                                vare.tittel,
+                                vare.bildeurl,
+                                vare.tekst,
+                                vare.pris,
+                                vareregister.antall
+                        FROM vare, vareregister
+                        WHERE vare.idvare = vareregister.idvare AND idvare = ".$_POST['hentData'];
+                $resultat = $mysqli->query($sql);
+                $ant = $mysqli->affected_rows;
+                if($ant == 1)
+                {
+                    $rad = $resultat->fetch_object();
+                    echo json_encode(array("idkategori"=>$rad->idkategori, "statusAktiv"=>$rad->statusAktiv,"tittel"=>$rad->tittel,"bildeurl"=>$rad->bildeurl,"tekst"=>$rad->tekst,"pris"=>$rad->pris,"antall"=>$rad->antall));
+                }
+                else
+                    echo "";
+            }
+        }
+    }
 ?>

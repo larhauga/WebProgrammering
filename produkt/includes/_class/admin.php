@@ -127,7 +127,7 @@ class Admin extends dbase
                     {
                         echo '
                                 <tr>
-                                    <td><input type="checkbox" name="bruker[ ]" value="'.$rad->idbruker.'" /></td>
+                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" /></td>
                                     <td>'.$rad->epost.'</td>
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>

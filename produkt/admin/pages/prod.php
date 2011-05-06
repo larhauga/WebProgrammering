@@ -3,14 +3,14 @@ $Admin = unserialize($_SESSION['admin']);
 
 /* Produktoppdateringsside */
 if(isset($_POST['slett']) && isset($_POST['produkt']))
+{
+    foreach ($_POST['produkt'] as $idSlett)
     {
-        foreach ($_POST['produkt'] as $idSlett)
-        {
-            $Admin->slettProd($idSlett);
-        }
-        unset($_POST['slett']);
-        unset($_POST['produkt']);
+        $Admin->slettProd($idSlett);
     }
+    unset($_POST['slett']);
+    unset($_POST['produkt']);
+}
  if(isset($_POST['regVare']))
  {
      $idkategori = $_POST['kategori'];
@@ -128,5 +128,6 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
         </div>
         <div style="clear:both;">
         </div>
+        <script src="ajax/produkt.js"></script>
 ';
 ?>
