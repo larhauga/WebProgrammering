@@ -33,7 +33,7 @@ body
 	height: 200px;
 	border-radius: 0.4em;
 }
-#header a, a:visited{
+#header h1 a, h1 a:visited{
     color:white;
     text-decoration: none;
 }

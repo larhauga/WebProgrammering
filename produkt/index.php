@@ -20,7 +20,8 @@ if(isset($_GET['login']))
 
              //    $passord;
              //    $epost;
-                    $passord = encrypt($passord, $epost);
+                 $passord = encrypt($passord, $epost);
+                 $Vare = new Vare();
                  $mysqli = $Vare->vareConnect();
                  $sql = $mysqli->query("SELECT * FROM bruker WHERE epost = '".$epost."' AND passord = '".$passord."'") or die(mysqli_error());
                  
