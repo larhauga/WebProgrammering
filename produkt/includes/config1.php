@@ -20,7 +20,7 @@ $C['BRUKER']['NAVN_UGYLDIG_REGEX'] = "/[^a-zA-Z0-9������\s]/u";
 $C['BRUKER']['PASSORD_MIN'] = 6;
 
 //Handlekurv
-$C['handlekurv'][''] = " ";
+$C['handlekurv']['pengesymbol'] = "kr";
 $C['handlekurv'][''] = " ";
 $C['handlekurv'][''] = " ";
 $C['handlekurv'][''] = " ";

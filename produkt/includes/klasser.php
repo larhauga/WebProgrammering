@@ -1,84 +1,12 @@
 <?php
-
- /* class mysqli
-{
-	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-}
-class db // du bare kaller new db for å opprette en database tilkobling ( eks $dbc = new db )
-{	
-		
-	public $ip;
-	public $brukernavn;
-	public $passord;
-	public $dbnavn;
-	public $error;
-	public function __construct()
-	{
-		$this->ip = "193.107.29.49";
-		$this->brukernavn = "xzindor_db1";
-		$this->passord = "lol123";
-		$this->dbnavn = "xzindor_db1";
-
-	}
-	
-		$db = new mysqli($this->ip,$this->brukernavn,$this->passord,$this->dbnavn);
-		if($db->connect_error)
-		{
-			die("Kunne ikke koble til databasen".$this->db->connect_error);
-		}
-
-	} 
-	
-	function errors($innError)
-	{
-		// skal lage så den sjekker for alle mysql errors
-			$this->error = $innError;
-			if(!file_exists("error_log.php"))
-			{
-				die("filen eksiterer ikke...noob admin");
-			}
-			else 
-			{
-				$fh = fopen("error_log.php");
-				fwrite($fh, $this->error );
-				fclose($fh);
-			}
-			
-	}
-	
-	function settInn()
-	{
-		// felles innsettelse i databasen
-	}
-	
-	function fjern()
-	{
-		// felles fjern fra databasen
-	}
-	function sikkerhet() // mot hackers.. for å kalle denne:  $this->db->sikkerhet()
-	{
-		if (($_SERVER['SERVER_NAME']!="localhost"))
-		{
-     	echo "Beklager, men denne databasen er privat..";
-	 	die();
-		}
-	}
-	
-	function select($sql)
-	{
-		//felles select fra databasen
-		return $this->$db->query($sql);
-		
-	}
-}
-*/ 
+session_start();
 class handlekurv
 {
 	public $varer;
 	public $pris;
 	public $navn;
 	
-	function handlekurv()
+	function __construct($test)
 	{
 		$this->varer = array();
 		$this->pris = array();
@@ -112,45 +40,47 @@ class handlekurv
 		{
 			$this->varer[$innvare] = $innatall;
 		}
-	function aktivHandlekurv()
+	/*function aktivHandlekurv()
 	{
-	$cart = $_SESSION['cart'];
+	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');	
+	$handlekurv = $_SESSION['handlekurv'];
 	if ($cart) 
 	{
-		$items = explode(',',$cart);
-		$contents = array();
-		foreach ($items as $item) 
+		$varer = explode(',',$hanndlekurv);
+		$liste = array(); 
+		foreach ($varer as $vare) 
 		{
-		$contents[$item] = (isset($contents[$item])) ? $contents[$item] + 1 : 1;
+		$liste[$vare] = (isset($liste[$vare])) ? $liste[$vare] + 1 : 1;
 		}
-	$output[] = '<form action="cart.php?action=update" method="post" id="cart">';
-	$output[] = '<table>';
-	foreach ($contents as $id=>$qty) {
+	$utskrift[] = '<form action="handlekurv.php?action=update" method="post" id="handlekurv">';
+	$utskrift[] = '<table>';
+	foreach ($liste as $id=>$antall) {
 	$sql = 'SELECT * FROM varer WHERE id = '.$id;
-	$result = $db->query($sql);
-	$row = $result->fetch();
-	extract($row);
-	$output[] = '<tr>';
-	$output[] = '<td><a href="cart.php?action=delete&id='.$id.'" class="r">Slett</a></td>';
-	$output[] = '<td>'.$title.' by '.$author.'</td>';
-	$output[] = '<td>&pound;'.$price.'</td>';
-	$output[] = '<td><input type="text" name="qty'.$id.'" value="'.$qty.'" size="3" maxlength="3" /></td>';
-	$output[] = '<td>&pound;'.($price * $qty).'</td>';
-	$total += $price * $qty;
-	$output[] = '</tr>';
+	$result = $mysqli->query($sql);
+	$rad = $result->fetch();
+	extract($rad);
+	$utskrift[] = '<tr>';
+	$utskrift[] = '<td><a href="handlekurv.php?action=delete&id='.$id.'" class="r">Slett</a></td>';
+	//$utskrift[] = '<td>'.$title.' by '.$author.'</td>';
+	$utskrift[] = '<td>'.$price.$C['handlekurv']['pengesymbol'].'</td>';
+	$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
+	$utskrift[] = '<td>&pound;'.($price * $antall).'</td>';
+	$total += $price * $antall;
+	$utskrift[] = '</tr>';
 	}
 	
-		$output[] = '</table>';
-		$output[] = '<pTotalsum:'.$total.'</p>';
-		$output[] = '<div><button type="submit">Opptater handlevogn</button></div>';
-		$output[] = '</form>';
+		$utskrift[] = '</table>';
+		$utskrift[] = '<p>Totalsum:'.$total.'</p>';
+		$utskrift[] = '<div><button type="submit">Opptater handlevogn</button></div>';
+		$utskrift[] = '</form>';
 	} else 
 	{
-		$output[] = '<p>Handlevogna er tom..</p>';
+		$utskrift[] = '<p>Handlevogna er tom..</p>';
 	}
-return join('',$output);
+return join('',$utskrift);
 }
-	}
+	} */
+}
 
 
 }// end of class 

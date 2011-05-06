@@ -9,4 +9,5 @@
 session_start();
 include "config1.php";
 include "klasser.php";
+include "class_handlekurv.php";
 ?>

@@ -137,7 +137,7 @@ if(isset($_GET['login']))
 <?php
 echo 'Dette er hovedsiden <br/>';
 echo 'Halla';
-/*
+
 $default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
 $directory	= "includes";		// mappa filene dine ligger i.
 $extension	= "php";		// filendingen på filene dine.
@@ -156,14 +156,14 @@ elseif (!empty($page))											// sjekke at variabelen ikke er tom.
 }
 else															// eller,
 	include("$directory/$default.$extension");					// inkluder fila som definert som $default.
-*/
+
 ?>
 		</div><!--end of main-->
 		<div id="rightbar">
 		  <div id="handlevogn">
-		    <h1>Handlevogn</h1>
-		  	<p>Vare 1</p>
-		  	<p>Vare 2</p>
+          <?php
+		  include "includes/handlekurv.php";
+		  ?>
 	  	  </div>
 		</div><!--end of rightbar -->
         <?php
