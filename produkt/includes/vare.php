@@ -14,10 +14,10 @@ function meny()
 		for($i=0;$i<$num;$i++)
                  {
                      $valg=mysqli_fetch_row($resultat);
-                     echo('<li><a href="kategori.php?id='.$valg[0].'">'.$valg[1].'</a></li>');
+                     echo('<li><a href="index.php?id='.$valg[0].'">'.$valg[1].'</a></li>');
                  }
    echo '</ul>';
-    
+   
 }
 
 
@@ -26,6 +26,7 @@ function meny()
 
 function varer($katid)
 {
+ 
     $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
 
     $varer = "SELECT vare.idvare,
@@ -39,6 +40,7 @@ function varer($katid)
               AND vare.idvare = vareregister.idvare AND kategori.idkategori = $katid " ;
     $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
     $num=$resultat->num_rows;
+
     echo '<table id = varer>';
     if($num < 1)
     {
@@ -53,4 +55,15 @@ function varer($katid)
                  }
     echo '</table>';
 }
+
+function getkat($katid)
+{
+    $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+
+    $varer = "select tittel from kategori where idkategori = $katid " ;
+    $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
+    $valg=mysqli_fetch_row($resultat);
+    return $valg[0];
+}
+
 ?>
