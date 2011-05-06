@@ -133,9 +133,22 @@ if(isset($_GET['login']))
 			
                       
 <?php
+if(isset($_GET['id']))
+{
+if(is_numeric($_GET['id']))
+{
+$side = getkat($_GET['id']);
 echo '<div id="path">
-				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
+				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">'.$side.'</a>
 			</div><!--end of path-->';
+}}
+else
+{
+    echo '<div id="path">
+				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Hjem</a>
+			</div><!--end of path-->';
+}
+echo '<br/>';
 if(isset($_GET['id']))
 if(is_numeric($_GET['id']))
 varer($_GET['id']);
