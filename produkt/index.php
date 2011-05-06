@@ -50,6 +50,11 @@ if(isset($_GET['login']))
 				$_SESSION['loggetinn'] = true;
                        
 			}
+                        else
+                       {
+                        $feilmelding = 'Epost eller brukernavn var ikke skre vet inn';
+                        return $feilmelding;
+                       }
                }
             }
             login($passord,$epost);
