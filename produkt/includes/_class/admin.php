@@ -14,6 +14,7 @@ class Admin extends dbase
 	public function __construct($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
             parent::__construct();
+            
             $this->epost = $epost;
             $this->passord = $passord;
             $this->tilgangstype = $tilgangstype;
@@ -30,7 +31,7 @@ class Admin extends dbase
 	//Brukere
         public function finnBrukernavn($idbruker)
         {
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
 
             if($db->connect_error)
             {
@@ -52,7 +53,7 @@ class Admin extends dbase
 	function visBrukere($fra, $til, $sok)
 	{
 	/*Vise alle brukere. Gi admintilgang, kun tilgang for brukere med superbrukertilgang*/
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             $sql = "SELECT idbruker, epost, fornavn, etternavn, registrert, rettigheter, tlf FROM bruker";
             $sql.= " LIMIT ".$fra.", ".$til;
             
@@ -140,7 +141,7 @@ class Admin extends dbase
         
 	function slettBrukere($idSlett)
 	{
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -162,7 +163,7 @@ class Admin extends dbase
 	}
         public function endreBruker($sqlRemote) //NB! Passordet må sendes kryptert før det kommer hit!!!!
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 echo "Kunne ikke koble til databasen: " . $mysqli->connect_error;
@@ -187,7 +188,7 @@ class Admin extends dbase
         }
         public function settTilAdmin($idbruker, $rettigheter)
         {
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
             //$dbase->connect();
             if($db->connect_error)
             {
@@ -210,7 +211,7 @@ class Admin extends dbase
 	//Innsetting av nye kategorier
 	function nyKat($tittel, $aktiv)
 	{
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$mysqli = parent::connect();
                 $tittel = mysqli_real_escape_string($mysqli, $tittel);
                 
 		$sql = "Insert into kategori(idkategori,tittel,aktiv) VALUES(
@@ -244,7 +245,7 @@ class Admin extends dbase
 	//Vis eksisterende kategorier og setter opp slettingen
 	public function visKat()
 	{
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$mysqli = parent::connect();
 		$sql = "SELECT * FROM kategori ORDER BY idkategori ASC";
 		$resultat = mysqli_query($mysqli, $sql);
 		
@@ -276,7 +277,7 @@ class Admin extends dbase
 	}
         public function listValgKat()
         {
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
             if($db->connect_error)
             {
                 die("Kunne ikke koble til databasen: ".$db->connect_error);
@@ -299,7 +300,7 @@ class Admin extends dbase
         }
         public function slettKat($idSlett)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -319,7 +320,7 @@ class Admin extends dbase
         }
         public function updateKat($idkat, $tittel, $aktiv)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -340,9 +341,11 @@ class Admin extends dbase
 	
 	function nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall, $idbruker)
 	{
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            /*$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
             if($db->connect_error)
                     die("Kunne ikke koble til databasen: " . $db->connect_error);
+            */
+            $db = parent::connect();
             
             $db->autocommit(false);
             $idkategori = mysqli_escape_string($db,$idkategori);
@@ -404,18 +407,18 @@ class Admin extends dbase
             if($ok)
             {
                 $db->commit();
-                $feilProd = "<p>Varen ble registrert</p>";
+                return $feilProd = "<p>Varen ble registrert</p>";
             }
             else
             {
                 $db->rollback();
-                $feilProd = "<p style='color:red;'>Varen ble ikke registrert.</p>";
+                return $feilProd = "<p style='color:red;'>Varen ble ikke registrert.</p>";
             }
 	}
         
  	public function visProdukter($fra, $til, $sok)
 	{
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
             $fra = mysqli_escape_string($db, $fra);
             $til = mysqli_escape_string($db, $til);
             $sok = mysqli_escape_string($db, $sok);
@@ -501,7 +504,7 @@ class Admin extends dbase
         
         public function slettProd($idSlett)
         {
-            $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $mysqli = parent::connect();
             if($mysqli->connect_error)
             {
                 die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
@@ -522,7 +525,7 @@ class Admin extends dbase
         
 	function visBeholdning($fra, $til, $sok)
 	{
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
             $fra = mysqli_escape_string($db, $fra);
             $til = mysqli_escape_string($db, $til);
             $sok = mysqli_escape_string($db, $sok);
@@ -635,7 +638,7 @@ class Admin extends dbase
 	/* Henter stats til admin siden */
 	function statsVarer()
 	{
-                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $mysqli = parent::connect();
                 $sql = "SELECT COUNT(*) AS count FROM vare";
                 $resultat = mysqli_query($mysqli, $sql);
                 $antrader = $mysqli->affected_rows;
@@ -651,7 +654,7 @@ class Admin extends dbase
 	}
 	function statsKat()
 	{
-                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $mysqli = parent::connect();
                 $sql = "SELECT COUNT(*) AS count FROM kategori";
                 $resultat = mysqli_query($mysqli, $sql);
                 $antrader = $mysqli->affected_rows;
@@ -667,7 +670,7 @@ class Admin extends dbase
 	}
 	function statsBruker()
 	{
-                $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+                $mysqli = parent::connect();
                 $sql = "SELECT COUNT(*) AS count FROM bruker";
                 $resultat = mysqli_query($mysqli, $sql);
                 $antrader = $mysqli->affected_rows;
@@ -682,7 +685,7 @@ class Admin extends dbase
 	}
         function visAntVarer()
         {
-            $db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+            $db = parent::connect();
 
             if($db->connect_error)
             {

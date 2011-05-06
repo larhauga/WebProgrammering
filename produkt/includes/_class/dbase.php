@@ -23,6 +23,7 @@ class dbase
         {
             die("Feil ved henting av data. Kunne ikke koble til databasen." . $db->connect_error);
         }
+        return $db;
     }
 }
 
