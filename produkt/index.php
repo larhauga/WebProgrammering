@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 //include "includes/kategori.php";
 require_once("includes/head.php");
 include "includes/vare.php";
