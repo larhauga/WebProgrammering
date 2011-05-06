@@ -40,16 +40,17 @@ function varer($katid)
               AND vare.idvare = vareregister.idvare AND kategori.idkategori = $katid";
     $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
     $num=$resultat->num_rows;
+    echo '<table id = varer>';
     if($num < 1)
     {
-        echo 'Ingen varer i denne kategorien';
+        echo '<tr><td>Ingen varer i denne kategorien</td></tr>';
     }
-    echo '<table id = varer>';
+
                  for($i=0;$i<$num;$i++)
                  {
                      
                      $valg=mysqli_fetch_row($resultat);
-                     echo('<tr><td>Kategori: '.$valg[1].'</td><td> Tittel: '.$valg[2].'</td><td> Pris: '.$valg[3].'</td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td><br/>');
+                     echo('<tr><td>Kategori: '.$valg[1].'</td><td> Tittel: '.$valg[2].'</td><td> Pris: '.$valg[3].'</td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td></tr>');
                  }
     echo '</table>';
 }
