@@ -140,13 +140,7 @@ if(isset($_GET['login']))
                         
 <?php
 
-$test = $_SERVER['REQUEST_URI'];
-$trimmed = trim($test, "/phpprosjekt/produkt/kategori.php?");
-if(is_numeric($trimmed))
-{
-    varer($trimmed);
-}
-
+varer($_GET['id']);
 
 /*
 $default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
