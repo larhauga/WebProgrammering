@@ -3,13 +3,13 @@ include('dbase.php');
 
 class Admin extends dbase
 {
-	public $epost;
-	public $passord;
-	public $tilgangstype;
+	private $epost;
+	private $passord;
+	private $tilgangstype;
 	public $idbruker;
-	public $fornavn;
-	public $ip;
-        public $error;
+	private $fornavn;
+	private $ip;
+        private $error;
 	
 	public function __construct($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
@@ -26,6 +26,10 @@ class Admin extends dbase
 	{
             return $this->fornavn;
 	}
+        public function getTilgang()
+        {
+            return $this->tilgangstype;
+        }
         public function adminConnect()
         {
             return parent::connect();
@@ -297,7 +301,7 @@ class Admin extends dbase
                     for($i = 0; $i < $antRader; $i++)
                     {
                         $rad = $resultat->fetch_object();
-                        echo '<option value="'.$rad->idkategori.'">'.$rad->idkategori.' - '.$rad->tittel.'</option>';
+                        echo '<option value="'.$rad->idkategori.'">'.$rad->tittel.'</option>';
                     }
                 }
             }
@@ -428,17 +432,25 @@ class Admin extends dbase
             $sok = mysqli_escape_string($db, $sok);
             
             
-            $sql = "SELECT idvare, kategori.tittel as kategori, vare.tittel as tittel, bildeurl, pris FROM vare, kategori WHERE vare.idkategori = kategori.idkategori";
+            $sql = "SELECT 
+                            vare.idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            vare.bildeurl, 
+                            vare.pris 
+                   FROM vare, kategori 
+                   WHERE vare.idkategori = kategori.idkategori";
             $sql.= " LIMIT ".$fra.", ".$til;
             
             if($sok != "")
             {
 
                 $sql = "SELECT 
-                            idvare, 
+                            vare.idvare, 
                             kategori.tittel as kategori, 
                             vare.tittel as tittel, 
-                            bildeurl, pris 
+                            vare.bildeurl, 
+                            vare.pris 
                         FROM vare, kategori 
                         WHERE 
                             vare.idkategori = kategori.idkategori
@@ -496,8 +508,8 @@ class Admin extends dbase
                         echo '
                             <tr>
                                 <td><input type="checkbox" name="produkt[]" value="'.$rad->idvare.'" /></td>
-                                <td>'.$rad->kategori.'</td>
                                 <td>'.$rad->tittel.'</td>
+                                <td>'.$rad->kategori.'</td>
                                 <td>'.$rad->bildeurl.'</td>
                                 <td>'.$rad->pris.'</td>
                            </tr>';
@@ -591,7 +603,8 @@ class Admin extends dbase
                     WHERE vare.idkategori = kategori.idkategori
                         AND vare.idbruker = bruker.idbruker
                         AND vare.idvare = vareregister.idvare
-                            AND (idvare = '$sok' 
+                            AND (
+                                   vare.idvare = '$sok' 
                                 OR kategori.tittel LIKE '$sok%' 
                                 OR vare.tittel LIKE '%$sok%' 
                                 OR pris LIKE '$sok')";
@@ -614,7 +627,7 @@ class Admin extends dbase
                     {
 			echo '
                         <tr>
-                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
+                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idvare.'" /></td>
                             <td>'.$rad->tittel.'</td>
                             <td>'.$rad->dato.'</td>
                             <td>'.$rad->pris.'</td>
@@ -647,7 +660,7 @@ class Admin extends dbase
                     {
                         echo '
                         <tr>
-                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
+                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idvare.'" /></td>
                             <td>'.$rad->tittel.'</td>
                             <td>'.$rad->dato.'</td>
                             <td>'.$rad->pris.'</td>
@@ -659,7 +672,60 @@ class Admin extends dbase
                     } //while
 		} //else
              } //else
+             $db->close();
 	}
+        public function visBeholdningPrKategori($kategori)
+        {
+            $db = parent::connect();
+            $kategori = mysqli_escape_string($db, $kategori);
+
+            if(!is_numeric($kategori))
+                die("Kategori må være et tall");
+            
+            $sql = "SELECT  vare.idvare, 
+                            kategori.tittel as kategori, 
+                            vare.tittel as tittel, 
+                            vare.pris as pris, 
+                            DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                            DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
+                            vareregister.antall as antall,
+                            bruker.fornavn as fornavn
+                    FROM vare, kategori, bruker, vareregister
+                    WHERE vare.idkategori = kategori.idkategori
+                        AND vare.idbruker = bruker.idbruker
+                        AND vare.idvare = vareregister.idvare
+                        AND vare.idkategori = '$kategori'";
+            
+                $resultat = $db->query($sql);
+                if($db->connect_error)
+                {
+                    die("Kunne ikke koble til databasen");
+                }
+                
+		$antrader = $db->affected_rows;
+		if($antrader == 0)
+                    echo "<p>Ingen varer er registrert</p>";
+                else if($antrader == -1){
+                        echo "<p>Det skjedde en feil med søket etter varer</p>";
+                }
+		else
+		{
+                    while($rad = $resultat->fetch_object())
+                    {
+                        echo '
+                        <tr>
+                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idvare.'" /></td>
+                            <td>'.$rad->tittel.'</td>
+                            <td>'.$rad->dato.'</td>
+                            <td>'.$rad->pris.'</td>
+                            <td>'.$rad->kategori.'</td>
+                            <td>'.$rad->sisteDato.'</td>
+                            <td>'.$rad->antall.'</td>
+                            <td>'.$rad->fornavn.'</td>
+                        </tr>';
+                    } //while
+		} //else
+        }
 	function sikkerhet()
 	{
 		

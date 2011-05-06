@@ -18,6 +18,21 @@
                 <td>Registrert av</td>
             </tr>';
              $Admin->visBeholdning(0, 2000, $sok);
-             
+    }
+    if(isset($_GET['kategori']) && $_GET['kategori'] != "")
+    {
+        echo '
+            <table width="100%">
+            <tr>
+                <td></td>
+                <td>Tittel</td>
+                <td>Regdato</td>
+                <td>Pris</td>
+                <td>Kategori</td>
+                <td>Sist oppdatert</td>
+                <td>Antall varer</td>
+                <td>Registrert av</td>
+            </tr>';
+        $Admin->visBeholdningPrKategori($_GET['kategori']);
     }
 ?>

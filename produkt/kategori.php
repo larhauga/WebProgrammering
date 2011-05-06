@@ -1,5 +1,9 @@
 <?php
 include 'includes/vare.php';
+?>
+
+<?php
+
 //include "includes/kategori.php";
 include "includes/head.php";
 if(isset($_GET['loggut']))
@@ -138,37 +142,10 @@ if(isset($_GET['login']))
 
 $test = $_SERVER['REQUEST_URI'];
 $trimmed = trim($test, "/phpprosjekt/produkt/kategori.php?");
-
-if($trimmed == 1)
+if(is_numeric($trimmed))
 {
-    datautstyr($trimmed);
-    echo '1';
+    varer($trimmed);
 }
-else if($trimmed == 2)
-{
-    echo '2';
-}
-else if($trimmed == 3)
-{
-    echo '3';
-}
-else if($trimmed == 4)
-{
-    echo '4';
-}
-else if($trimmed == 5)
-{
-    echo '5';
-}
-else if($trimmed == 6)
-{
-    echo '6';
-}
-else if($trimmed == 7)
-{
-    echo '7';
-}
-
 
 
 /*

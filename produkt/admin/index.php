@@ -129,7 +129,7 @@ else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
-			<p>Velkommen <b>'.$Admin->fornavn.'</b></p>
+			<p>Velkommen <b>'.$Admin->getNavn().'</b></p>
 		</div>
 		<div id="menyRight">
 			<p><a href="?logout"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
@@ -190,7 +190,7 @@ else if(isset($_SESSION['login']))
 	echo '
 	<div id="menyline">
 		<div id="menyLeft">
-			<p>Velkommen <b>'.$Admin->fornavn.'</b></p>
+			<p>Velkommen <b>'.$Admin->getNavn().'</b></p>
 		</div>
 		<div id="menyRight">
 			<p><a href="?logout"><img src="images/key.png" width="15" height="15" alt="Logg ut" />Logg ut</a></p>
