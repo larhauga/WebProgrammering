@@ -112,6 +112,9 @@ class handlekurv
 		{
 			$this->varer[$innvare] = $innatall;
 		}
+	function aktivHandlekurv()
+	{
+	}
 	}
 
 
