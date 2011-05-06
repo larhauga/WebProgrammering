@@ -1,6 +1,7 @@
 <?php
+//include "includes/kategori.php";
+require_once("includes/head.php");
 include "includes/vare.php";
-include "includes/head.php";
 if(isset($_GET['loggut']))
 {
     unset($_SESSION['bruker']);

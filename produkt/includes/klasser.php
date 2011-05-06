@@ -72,6 +72,54 @@ class db // du bare kaller new db for å opprette en database tilkobling ( eks $
 	}
 }
 */ 
+class handlekurv
+{
+	public $varer;
+	public $pris;
+	public $navn;
+	
+	function handlekurv()
+	{
+		$this->varer = array();
+		$this->pris = array();
+		$this->navn = array();
+	}
+	
+	function leggtil($innvare)
+	{
+		if($this->varer[$innvare])
+		{
+			$this->varer[$innvare] +=1;
+		}
+		else
+		{
+			$this->varer[$innvare] = 1;
+		}
+	}
+	
+	function slettvare($innvare)
+	{
+		$this->varer[$innvare] = 0;
+	}
+	
+	function antallAvEnVare($innvare,$innantall)
+	{
+		if($innaltall == 0)
+		{
+			$this->slettvare($innvare);
+		}
+		else
+		{
+			$this->varer[$innvare] = $innatall;
+		}
+	function aktivHandlekurv()
+	{
+	}
+	}
+
+
+}// end of class 
+		
 
 
 class bruker

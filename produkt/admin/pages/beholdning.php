@@ -49,10 +49,15 @@ echo '
         <table width="100%">
             <tr>
                 <td width="20%"><input type="text" id="antall" name="antall" /></td>
-                <td class="submit"><input type="submit" id="endreAntall" name="endreAntall" /></td>
+                <td class="submit"><input type="submit" id="endreAntall" name="endreAntall" value="Sett" /></td>
             </tr>
         </table>
     </div>
+        <script type="text/javascript">
+            $("#endreAntall").click(function () {
+                $("#resultat").load("ajax/beholdning.php?endre=" + document.getElementById("antall").value);
+            });
+        </script>
     <div id="formHoyre"></div>
     <div style="clear:both"></div>
 ';

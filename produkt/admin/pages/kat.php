@@ -42,7 +42,7 @@
     }
     echo '
         <h1><img src="images/folders.jpg" alt="Brukere" width="30" height="30" />Kategorier</h1>
-
+        
         <div id="formVenstre">
         <h1>Ny kategori</h1>';
             if(isset($feil))
@@ -65,7 +65,7 @@
                                 </tr>
                                 <tr class="submit">
                                         <td>Registrer</td>
-                                        <td><input type="submit" name="registrer" id="registrer"/></td>
+                                        <td><input type="submit" name="registrer" id="registrer" value="Registrer" /></td>
                                 </tr>
                         </table>
         </form>
