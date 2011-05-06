@@ -14,7 +14,7 @@ function meny()
 		for($i=0;$i<$num;$i++)
                  {
                      $valg=mysqli_fetch_row($resultat);
-                     echo('<li><a href="?'.$valg[0].'">'.$valg[1].'</a></li>');
+                     echo('<li><a href="kategori.php?'.$valg[0].'">'.$valg[1].'</a></li>');
                  }
    echo '</ul>';
     
@@ -26,10 +26,9 @@ function meny()
 
 function varer($katid)
 {
-    echo $katid;
     $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
 
-    $varer = "SELECT  vare.idvare, 
+    $varer = "SELECT  vare.idvare,
               kategori.tittel as kategori, 
               vare.tittel as tittel, 
               vare.pris as pris, 
@@ -38,12 +37,17 @@ function varer($katid)
               vareregister.antall as antall
               FROM vare, kategori, vareregister
               WHERE vare.idkategori = kategori.idkategori
-              AND vare.idvare = vareregister.idvare AND kategori.idKategori=$katid;";
+              AND vare.idvare = vareregister.idvare AND kategori.idkategori = $katid";
     $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
-    $num=mysqli_num_rows($resultat);
+    $num=$resultat->num_rows;
+    if($num < 1)
+    {
+        echo 'Ingen varer i denne kategorien';
+    }
     echo '<table id = varer>';
                  for($i=0;$i<$num;$i++)
                  {
+                     
                      $valg=mysqli_fetch_row($resultat);
                      echo('<tr><td>Kategori: '.$valg[1].'</td><td> Tittel: '.$valg[2].'</td><td> Pris: '.$valg[3].'</td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td><br/>');
                  }
