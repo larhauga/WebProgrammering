@@ -1,5 +1,5 @@
 <?php
-//include "includes/kategori.php";
+include "includes/vare.php";
 include "includes/head.php";
 if(isset($_GET['loggut']))
 {
@@ -123,15 +123,9 @@ if(isset($_GET['login']))
 		
 
 		<div id="meny">
-		<ul>
-			<li><a href="kategori.php?1">Datautstyr</a></li>
-			<li><a href="kategori.php?2">PC</a></li>
-			<li><a href="kategori.php?3">Lyd og Bilde</a></li>
-			<li><a href="kategori.php?4">Foto og Video</a></li>
-			<li><a href="kategori.php?5">Telefoni og Gps</a></li>
-			<li><a href="kategori.php?6">Spill</a></li>
-			<li><a href="kategori.php?7">Hjem og Fritid</a></li>
-		</ul>
+		<?php
+		meny();
+                ?>
 		</div>
 		
 		<div id="main">
@@ -140,6 +134,8 @@ if(isset($_GET['login']))
 			</div><!--end of path-->
                       
 <?php
+echo 'Dette er hovedsiden <br/>';
+echo 'Halla';
 /*
 $default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
 $directory	= "includes";		// mappa filene dine ligger i.
