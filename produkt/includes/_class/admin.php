@@ -301,7 +301,7 @@ class Admin extends dbase
                     for($i = 0; $i < $antRader; $i++)
                     {
                         $rad = $resultat->fetch_object();
-                        echo '<option value="'.$rad->idkategori.'">'.$rad->idkategori.' - '.$rad->tittel.'</option>';
+                        echo '<option value="'.$rad->idkategori.'">'.$rad->tittel.'</option>';
                     }
                 }
             }
