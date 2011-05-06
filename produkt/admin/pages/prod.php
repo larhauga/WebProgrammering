@@ -32,7 +32,7 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
         <h1><img src="images/Cardboard-Box.png" alt="Brukere" width="30" height="30" />Produkter</h1>
         <div id="formVenstre">
         <h2>Legg til produkt</h2>
-                <form action="" name="ny" id="ny" method="post">';
+                <form action="" name="ny" id="ny" method="post" enctype="multipart/form-data">';
                     if(isset($feilProd))
                         echo $feilProd;
         echo '
@@ -62,10 +62,8 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                         <tr>
                                 <td>Bilde: </td>
                                 <td>
-                                    <form action="upload.php" method="post" enctype="multipart/form-data" target="upload_target" />
                                             <input type="file" size="10" name="filstreng" />
                                             <input type="submit" name="knapp" value="Last opp"/>
-                                    </form>
                                 </td>
                         </tr>
                         <tr>
@@ -85,7 +83,7 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                         </tr>
                         <tr class="submit">
                                 <td></td>
-                                <td><input type="submit" name="regVare" id="regVare" /></td>
+                                <td><input type="submit" name="regVare" id="regVare" value="Registrer vare" /></td>
                         </tr>
                 </table>
                 </form>
