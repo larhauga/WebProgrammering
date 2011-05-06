@@ -23,6 +23,25 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $idbruker = $Admin->idbruker;
      $antall = $_POST['antall'];
      
+     /* Opplastning av fil */
+     $filnavn = $_FILES['filstreng']['name'];
+     $filnavn = str_replace("#", "No.", $filnavn); 
+     $filnavn = str_replace("$", "Dollar", $filnavn); 
+     $filnavn = str_replace("%", "Percent", $filnavn); 
+     $filnavn = str_replace("^", "", $filnavn); 
+     $filnavn = str_replace("&", "and", $filnavn); 
+     $filnavn = str_replace("*", "", $filnavn); 
+     $filnavn = str_replace("?", "", $filnavn); 
+     
+     $updir = $_SERVER['DOCUMENT_ROOT']."/Informatikk/2.%20semester/Webprogrammering/butikk/produkt/bilder/produkt/";
+     $path = $updir.$filnavn;
+
+     if(copy($_FILES['filstreng']['tmp_name'], $path))
+     {
+         $filnavnet = $_FILES['filstreng']['name'];
+         $filsize = $_FILES['filstreng']['size'];
+     }
+     echo "<img src='$helt_filnavn' height = '200' align = 'left'>";
      
      $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall ,$idbruker);
      
@@ -62,8 +81,9 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                         <tr>
                                 <td>Bilde: </td>
                                 <td>
-                                            <input id="file" type="file" size="10" name="filstreng" />
-                                            <input type="submit" name="knapp" value="Last opp"/>
+                                            <input id="file" type="file" size="10" name="filstreng" />';
+                                            //<input type="submit" name="knapp" value="Last opp"/>
+                                                    echo'
                                 </td>
                         </tr>
                         <tr>
