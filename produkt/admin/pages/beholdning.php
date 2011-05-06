@@ -39,9 +39,9 @@ echo '
     <div id="formVenstre">
         <h2>Sett antall varer</h2>
         <table width="100%">
-            <tr class="submit">
+            <tr>
                 <td width="20%"><input type="text" id="antall" name="antall" /></td>
-                <td><input type="submit" id="endreAntall" name="endreAntall" /></td>
+                <td class="submit"><input type="submit" id="endreAntall" name="endreAntall" /></td>
             </tr>
         </table>
     </div>

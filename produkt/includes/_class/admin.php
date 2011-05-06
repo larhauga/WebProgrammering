@@ -566,7 +566,7 @@ class Admin extends dbase
                             vare.tittel as tittel, 
                             vare.pris as pris, 
                             DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
-                            vareregister.sistoppdatert as sisteDato,
+                            DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
                             vareregister.antall as antall,
                             bruker.fornavn as fornavn
                     FROM vare, kategori, bruker, vareregister
@@ -578,19 +578,23 @@ class Admin extends dbase
             if($sok != "")
             {
 
-                $sql = "SELECT 
-                            idvare, 
+                $sql = "SELECT  
+                            vare.idvare, 
                             kategori.tittel as kategori, 
                             vare.tittel as tittel, 
-                            bildeurl, pris 
-                        FROM vare, kategori 
-                        WHERE 
-                            vare.idkategori = kategori.idkategori
+                            vare.pris as pris, 
+                            DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                            DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
+                            vareregister.antall as antall,
+                            bruker.fornavn as fornavn
+                    FROM vare, kategori, bruker, vareregister
+                    WHERE vare.idkategori = kategori.idkategori
+                        AND vare.idbruker = bruker.idbruker
+                        AND vare.idvare = vareregister.idvare
                             AND (idvare = '$sok' 
                                 OR kategori.tittel LIKE '$sok%' 
                                 OR vare.tittel LIKE '%$sok%' 
-                                OR bildeurl LIKE '%$sok%' 
-                                OR pris LIKE '%$sok%')";
+                                OR pris LIKE '$sok')";
                 
 		$resultat = mysqli_query($db, $sql);
                     if($db->connect_error)
