@@ -82,36 +82,26 @@ class bruker
 	public $etternavn;
 	public $adresse;
 	public $postnr;
-	public $poststed;
 	public $tlf;
 	public $registert;
 	public $rettigheter;
 	public $error;
 	
-	function __construct($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf)
+	function __construct($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$inntlf)
 	{
 		$this->epost = $innepost;
 		$this->fornavn = $innfornavn;
 		$this->etternavn = $innetternavn;
 		$this->adresse = $innadresse;
 		$this->postnr = $innpostnr;
-		$this->posted = $innpoststed;
 		$this->tlf = $inntlf;
 		$this->registert = 10;
 		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
 	}
-	/*
-	function encrypt($innpassord)
-	{
-   $salt = md5($innpassord."%*4!#$;\.k~'(_@"); 
-   
-   $innpassord = md5("$salt$string$salt"); 
-   
-   	$this->passord = $innpassord;
-	} 
-	*/
+
 	function updateDB()
 	{
+                $regtid = date('Y-m-d H:i:s');
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 		$sql = "Insert into bruker(epost,passord,fornavn,etternavn,adresse,postnr,registrert,rettigheter,tlf) 
 		Values(
@@ -121,7 +111,7 @@ class bruker
 		'$this->etternavn',
 		'$this->adresse',
 		'$this->postnr',
-		'$this->registert',
+		'$regtid',
 		'$this->rettigheter',
 		'$this->tlf'
 		)";

@@ -41,19 +41,13 @@ if(isset($_GET['login']))
 				$rad = $sql->fetch_object();
 
 				//Oppretter bruker objektet
-				$bruker = new bruker($rad->epost, $rad->fornavn, $rad->etternavn, $rad->adresse, $rad->postnr, $rad->poststed, $rad->tlf);
+				$bruker = new bruker($rad->epost, $rad->fornavn, $rad->etternavn, $rad->adresse, $rad->postnr, $rad->tlf);
 				//Serialiserer og oppretter SESSIONs
 				$_SESSION['bruker'] = serialize($bruker);
                                 $_SESSION['epost'] = $epost;
 				$_SESSION['login'] = true;
                        
 			}
-			else
-			{
-				$feilmelding = "Feil brukernavn eller passord";
-                                echo "Feil brukernavn eller passord";
-                        
-                        }
                }
             }
             login($passord,$epost);
@@ -61,7 +55,6 @@ if(isset($_GET['login']))
        else
        {
            $feilmelding = 'Epost eller brukernavn var ikke skrevet inn';
-            echo 'Epost eller brukernavn var ikke skrevet inn';
        }
 
 }
@@ -86,7 +79,7 @@ if(isset($_GET['login']))
                       {
                        if(isset($feilmelding))
                        {
-                           echo $feilmelding;
+                           echo '<div id=loginerror>'.$feilmelding.'</div>';
                        }
 		  	echo '<div id="logginn">
                             
