@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +11,7 @@
 <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
-session_start();
 include "config1.php";
 include "klasser.php";
+include "includes/_class/vare.php";
 ?>

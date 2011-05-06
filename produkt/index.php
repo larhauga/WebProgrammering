@@ -1,7 +1,8 @@
 <?php
 //include "includes/kategori.php";
 require_once("includes/head.php");
-include "includes/vare.php";
+$Vare = new Vare();
+
 if(isset($_GET['loggut']))
 {
     unset($_SESSION['bruker']);
@@ -22,7 +23,7 @@ if(isset($_GET['login']))
              //    $passord;
              //    $epost;
                     $passord = encrypt($passord, $epost);
-                 $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+                 $mysqli = $Vare->vareConnect();
                  $sql = $mysqli->query("SELECT * FROM bruker WHERE epost = '".$epost."' AND passord = '".$passord."'") or die(mysqli_error());
                  
                  if(!$sql)
@@ -126,7 +127,7 @@ if(isset($_GET['login']))
 
 		echo '<div id="meny">';
 		
-		meny();
+		$Vare->meny();
                 
 		echo '</div>
 		

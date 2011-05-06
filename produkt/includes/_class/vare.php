@@ -1,10 +1,21 @@
 <?php
+include('dbase.php');
 
 class Vare extends dbase
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
+    public function vareConnect()
+    {
+        return parent::connect();
+    }
+    
     function meny()
     {
-        $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+        $mysqli = parent::connect();
         $kategori = "select * from kategori where aktiv ='1' limit 7;";
         $resultat = mysqli_query($mysqli,$kategori ) or die(mysqli_error($mysqli));
         $num=$resultat->num_rows;
@@ -29,7 +40,7 @@ class Vare extends dbase
     function varer($katid)
     {
 
-        $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+        $mysqli = parent::connect();
 
         $varer = "SELECT vare.idvare,
                   vare.tittel as tittel, 
@@ -60,7 +71,7 @@ class Vare extends dbase
 
     function getkat($katid)
     {
-        $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+        $mysqli = parent::connect();
 
         $varer = "select tittel from kategori where idkategori = $katid " ;
         $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
