@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ session_start();
 <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
-include "config1.php";
-include "klasser.php";
-include "includes/_class/vare.php";
+    include "config1.php";
+    require "klasser.php";
+    require "includes/_class/vare.php";
 ?>
