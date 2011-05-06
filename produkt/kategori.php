@@ -142,12 +142,10 @@ if(isset($_GET['login']))
 
 $test = $_SERVER['REQUEST_URI'];
 $trimmed = trim($test, "/phpprosjekt/produkt/kategori.php?");
-
-
-
-    echo 'KategoriID:'.$trimmed.'<br/>';
+if(is_numeric($trimmed))
+{
     varer($trimmed);
-
+}
 
 
 /*
