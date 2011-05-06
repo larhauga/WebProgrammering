@@ -63,6 +63,7 @@ if(isset($_GET['login']))
 ?>
 
 
+
 <body>
 	<div id="container">
 		<div id="header">
@@ -121,18 +122,18 @@ if(isset($_GET['login']))
 		 </div>
 
 		</div>
-		
+	<?php	
 
-		<div id="meny">
-		<?php
-		meny();
-                ?>
-		</div>
+		echo '<div id="meny">';
 		
-		<div id="main">
+		meny();
+                
+		echo '</div>
+		
+		<div id="main">';
 			
                       
-<?php
+
 if(isset($_GET['id']))
 {
 if(is_numeric($_GET['id']))
