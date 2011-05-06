@@ -11,14 +11,14 @@ $innetternavn = $_POST['etternavn'];
 
 $innadresse = $_POST['adresse'];
 $innpostnr = $_POST['postnr'];
-$innpoststed = $_POST['poststed'];
+
 $inntlf = $_POST['tlf'];
 if($innepost == $innepost2)
 	{
 	if($innpassord == $innpassord2)
 		{
                         $passord = encrypt($innpassord, $innepost);
-			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$innpoststed,$inntlf);
+			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$inntlf);
 			$bruker->passord = $passord;
 			$bruker->updateDB();
 		}
@@ -49,7 +49,6 @@ if($innepost == $innepost2)
 <tr>
 <td width="66">Adresse:</td><td width="170"><input name="adresse" type="text"></td></tr>
 <tr><td>Postnr:</td><td><input name="postnr" type="text"></td><tr>
-<tr><td>Poststed</td><td><input name="poststed" type="text" readonly="readonly"></td><tr>
 <tr><td>Tlf:</td><td><input name="tlf" type="text"></td><tr>
 </table>
 <input name="submit" type="submit" value="Register">

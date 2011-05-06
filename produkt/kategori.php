@@ -124,13 +124,13 @@ if(isset($_GET['login']))
 
 		<div id="meny">
 		<ul>
-			<li><a href="kategori.php?1">Datautstyr</a></li>
-			<li><a href="kategori.php?2">PC</a></li>
-			<li><a href="kategori.php?3">Lyd og Bilde</a></li>
-			<li><a href="kategori.php?4">Foto og Video</a></li>
-			<li><a href="kategori.php?5">Telefoni og Gps</a></li>
-			<li><a href="kategori.php?6">Spill</a></li>
-			<li><a href="kategori.php?7">Hjem og Fritid</a></li>
+			<li><a href="?1">Datautstyr</a></li>
+			<li><a href="?2">PC</a></li>
+			<li><a href="?3">Lyd og Bilde</a></li>
+			<li><a href="?4">Foto og Video</a></li>
+			<li><a href="?5">Telefoni og Gps</a></li>
+			<li><a href="?6">Spill</a></li>
+			<li><a href="?7">Hjem og Fritid</a></li>
 		</ul>
 		</div>
 		
@@ -138,8 +138,44 @@ if(isset($_GET['login']))
 			<div id="path">
 				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
 			</div><!--end of path-->
-                      
+                        
 <?php
+include 'includes/vare.php';
+$test = $_SERVER['REQUEST_URI'];
+$trimmed = trim($test, "/phpprosjekt/produkt/kategori.php?");
+
+if($trimmed == 1)
+{
+    datautstyr();
+    echo '1';
+}
+else if($trimmed == 2)
+{
+    echo '2';
+}
+else if($trimmed == 3)
+{
+    echo '3';
+}
+else if($trimmed == 4)
+{
+    echo '4';
+}
+else if($trimmed == 5)
+{
+    echo '5';
+}
+else if($trimmed == 6)
+{
+    echo '6';
+}
+else if($trimmed == 7)
+{
+    echo '7';
+}
+
+
+
 /*
 $default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
 $directory	= "includes";		// mappa filene dine ligger i.
