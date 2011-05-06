@@ -1,7 +1,11 @@
 <?php
+include 'includes/vare.php';
+?>
+
+<?php
+
 //include "includes/kategori.php";
-require_once("includes/head.php");
-include "includes/vare.php";
+include "includes/head.php";
 if(isset($_GET['loggut']))
 {
     unset($_SESSION['bruker']);
@@ -124,34 +128,20 @@ if(isset($_GET['login']))
 		
 
 		<div id="meny">
-		<?php
+                    <?php
 		meny();
                 ?>
 		</div>
 		
 		<div id="main">
-			
-                      
+			<div id="path">
+				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
+			</div><!--end of path-->
+                        
 <?php
-if(isset($_GET['id']))
-{
-if(is_numeric($_GET['id']))
-{
-$side = getkat($_GET['id']);
-echo '<div id="path">
-				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">'.$side.'</a>
-			</div><!--end of path-->';
-}}  
-else
-{
-    echo '<div id="path">
-				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Hjem</a>
-			</div><!--end of path-->';
-}
-echo '<br/>';
-if(isset($_GET['id']))
-if(is_numeric($_GET['id']))
+
 varer($_GET['id']);
+
 /*
 $default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
 $directory	= "includes";		// mappa filene dine ligger i.
