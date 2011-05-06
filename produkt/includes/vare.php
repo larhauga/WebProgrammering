@@ -14,7 +14,7 @@ function meny()
 		for($i=0;$i<$num;$i++)
                  {
                      $valg=mysqli_fetch_row($resultat);
-                     echo('<li><a href="kategori.php?id='.$valg[0].'">'.$valg[1].'</a></li>');
+                     echo('<li><a href="index.php?id='.$valg[0].'">'.$valg[1].'</a></li>');
                  }
    echo '</ul>';
    
