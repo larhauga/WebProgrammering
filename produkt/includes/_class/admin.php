@@ -726,6 +726,13 @@ class Admin extends dbase
                     } //while
 		} //else
         }
+        public function settAntVarer($idvare, $antall)
+        {
+            $db = parent::connect();
+            $antall = mysqli_real_escape_string($db,$antall);
+            
+            
+        }
 	function sikkerhet()
 	{
 		

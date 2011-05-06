@@ -18,14 +18,6 @@ echo '
                     <td><input type="text" id="sok" name="sok" /></td>
             </tr>
     </table>
-    <script type="text/javascript">
-            $("#kategoriID").change(function () {
-                $("#resultat").load("ajax/beholdning.php?kategori=" + $("#kategoriID").val());
-            });
-            $("#sok").keyup(function() {
-              $("#resultat").load("ajax/beholdning.php?sok=" + document.getElementById("sok").value);
-            });
-   </script>
 
     <div id="resultat">
     <table width="100%">
@@ -53,12 +45,9 @@ echo '
             </tr>
         </table>
     </div>
-        <script type="text/javascript">
-            $("#endreAntall").click(function () {
-                $("#resultat").load("ajax/beholdning.php?endre=" + document.getElementById("antall").value);
-            });
-        </script>
+
     <div id="formHoyre"></div>
     <div style="clear:both"></div>
+    <script src="ajax/beholdning.js"></script>
 ';
 ?>
