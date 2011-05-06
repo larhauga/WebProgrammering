@@ -40,7 +40,9 @@
         $antall = $_POST['antall'];
         foreach($_POST['varer'] as $idvare)
         {
-            $Admin->settAntVarer($idvare, $antall);
+            if(!$Admin->settAntVarer($idvare, $antall))
+                    echo '<p>Varen nr. '.$idvare.' ble ikke oppdatert.</p>';
+            
         }
     }
 ?>

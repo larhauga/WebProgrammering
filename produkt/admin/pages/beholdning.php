@@ -46,7 +46,7 @@ echo '
         </table>
     </div>
 
-    <div id="formHoyre"></div>
+    <div id="formHoyre" style="display: none;"></div>
     <div style="clear:both"></div>
     <script src="ajax/beholdning.js"></script>
 ';

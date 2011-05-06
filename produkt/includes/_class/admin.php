@@ -729,9 +729,27 @@ class Admin extends dbase
         public function settAntVarer($idvare, $antall)
         {
             $db = parent::connect();
-            $antall = mysqli_real_escape_string($db,$antall);
+            $antall = mysqli_escape_string($db,$antall);
             
-            
+            $sql = "UPDATE vareregister
+                        SET antall = '$antall'
+                    WHERE
+                        idvare = '$idvare';";
+            $resultat = $db->query($sql); 
+            if($db->connect_error)
+            {
+                echo "<p>Det skjedde en feil med spørringen.</p>";
+                return false;
+            }
+            else
+            {
+                if($db->affected_rows == 1)
+                {
+                        echo "<p>Antallet ble oppdatert.</p>";
+                        return true;
+                }
+            }
+              
         }
 	function sikkerhet()
 	{

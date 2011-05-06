@@ -15,11 +15,20 @@ $("#kategoriID").change(function () {
    var antallet = document.getElementById("antall").value;
 
     $.post("ajax/beholdning.php", { 'varer[]': data, antall: antallet },
-          function(){
+          function(data){
+                        $("#formHoyre").html(data);
+                        $("#antall").val("");
+                        $("#formHoyre").fadeIn("slow", function() {});
                         $('#resultat').fadeOut('slow', function() {});
                         $("#resultat").load("ajax/beholdning.php?sok=" + document.getElementById("sok").value);
                         $('#resultat').fadeIn('slow', function() {});
-                        $("#formHoyre").slideUp("slow");
+                        setTimeout(
+                          function() 
+                          {
+                            $("#formHoyre").fadeOut("slow", function() {});
+                            $("#formHoyre").html("");
+                          }, 5000);
+                        
                   });
     });
             
