@@ -1,5 +1,10 @@
 <?php
-    $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+
+    require("../../includes/_class/admin.php");
+    include("../../includes/config1.php");
+    $Admin = new Admin('local', 'sok', '2', '0', 'local', '');
+    $mysqli = $Admin->adminConnect();
+     
     if($mysqli->connect_error)
     {
         echo $mysqli->connect_error;

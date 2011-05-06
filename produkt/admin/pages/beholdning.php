@@ -1,8 +1,6 @@
 <?php
 echo '
     <h1><img src="images/barcode.jpg" alt="Brukere" width="30" height="30" />Varebeholdning</h1>
-    - Endre antall varer<br/>
-    - Visning bassert p� kategori<br/>
     <p>Det er totalt '.$Admin->visAntVarer().' varer registrert.</p>
     <table width="100%">
             <tr>

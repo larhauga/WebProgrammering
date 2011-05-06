@@ -4,8 +4,7 @@ $Admin = unserialize($_SESSION['admin']);
 /* Produktoppdateringsside */
 if(isset($_POST['slett']) && isset($_POST['produkt']))
     {
-        $array = $_POST['produkt'];
-        foreach($array as $teller=>$idSlett)
+        foreach ($_POST['produkt'] as $idSlett)
         {
             $Admin->slettProd($idSlett);
         }

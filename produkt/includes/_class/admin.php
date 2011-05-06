@@ -26,6 +26,10 @@ class Admin extends dbase
 	{
             return $this->fornavn;
 	}
+        public function adminConnect()
+        {
+            return parent::connect();
+        }
 
 	
 	//Brukere
@@ -462,9 +466,9 @@ class Admin extends dbase
                     {
 			echo '
                         <tr>
-                            <td><input type="checkbox" name="produkt[]" id="bruker" value="'.$rad->idvare.'" /></td>
-                            <td>'.$rad->kategori.'</td>
+                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idvare.'" /></td>
                             <td>'.$rad->tittel.'</td>
+                            <td>'.$rad->kategori.'</td>
                             <td>'.$rad->bildeurl.'</td>
                             <td>'.$rad->pris.'</td>
                         </tr>
@@ -504,22 +508,48 @@ class Admin extends dbase
         
         public function slettProd($idSlett)
         {
-            $mysqli = parent::connect();
-            if($mysqli->connect_error)
+            $db = parent::connect();
+            if($db->connect_error)
             {
-                die("Kunne ikke koble til databasen: " . $mysqli->connect_error);
+                die("Kunne ikke koble til databasen: " . $db->connect_error);
             }
-            $sql = "DELETE FROM produkt WHERE idprodukt = '".$idSlett."'";
-            $resultat = $mysqli->query($sql);
+            $db->autocommit(false);
+            $ok = true;
+            
+            $sql = "DELETE FROM vare WHERE idvare = '".$idSlett."'";
+            $resultat = $db->query($sql);
             if(!$resultat)
             {
-                $feilSlett = "Error ".$mysqli->error;
+                //$feilSlett = "Error ".$db->error;
+                $ok = false;
             }
             else 
             {
-                $antallRader = $mysqli->affected_rows;
-                if($antallRader == 0)
-                    $feilSlett = "Kunne ikke slette produktet";
+                if($db->affected_rows == 0)
+                        $ok = false;
+                    //$feilSlett = "Kunne ikke slette produktet";
+            }
+            $sql = "DELETE FROM vareregister WHERE idvare = $idSlett";
+            $resultat = $db->query($sql);
+            if(!$resultat)
+            {
+                $ok = false;
+            }
+            else
+            {
+                if($db->affected_rows == 0)
+                        $ok = false;
+            }
+            
+            if($ok)
+            {
+                $db->commit();
+                $feilSlett = "Varen ble slettet";
+            }
+            else
+            {
+                $db->rollback();
+                $feilSlett = "<p style='color:red'>Det skjedde en feil ved slettingen. Prøv igjen senere.</p>";
             }
         }
         
