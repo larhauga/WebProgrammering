@@ -1,4 +1,4 @@
- <?php
+<?php
 
 
 /*
@@ -7,7 +7,7 @@ if(!session_started())
 session_start();
 }*/
 
-include_once("includes/_class/handlekurv.php");
+include_once("class_handlekurv.php");
 $db = mysql_connect("193.107.29.49", "xzindor_db1", "lol123") or die(mysql_error());
 $handlekurv = $_SESSION['handlekurv'];
 //$action = $_GET['action'];
@@ -70,5 +70,7 @@ switch ($action) {
 }
 }
 $_SESSION['handlekurv'] = $handlekurv;
+$fin= 2;
+$kurv = new handlekurv($fin);
 echo $kurv->visHandlekurv();
 ?>

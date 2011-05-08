@@ -207,27 +207,10 @@ else
     }
     else
     {
-        echo '<object width="550" height="400">
-                <param name="movie" value="somefilename.swf">
-                <embed src="../dagobah_404_dance.swf" width="550" height="400">
-                </embed>
-                </object>';
     }
 
-?>
-<?php //start av handlekurv
-if(isset($_GET['handlevogn']))
-{
-	if(is_numeric($_GET['handlevogn']))
-	{
-		if($_GET['handlevogn'] == 1)
-		{
-			include "class_handlekurv.php";
-			echo betale();
-		}
-	}
-}
-
+$kurv->handlevognsjekk();
+$kurv->betalingsjekk();
 ?>
 		</div><!--end of main-->
 		<div id="rightbar">
