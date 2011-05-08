@@ -24,36 +24,24 @@ function showCart()
 				echo "failed  sql";
 				die();
 			}
-                        /*
-			while($rad = $resultat->fetch_array(MYSQLI_ASSOC))
-			{
-				$rader[] = $rad;
-			}
-			*/
                         $num=$resultat->num_rows;
 			 for($i=0;$i<$num;$i++)
 			{
 				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
 				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">Slett</a></td>';
-				$utskrift[] = '<td>'.$rad[3].' '.$rad[7].'</td>';
-
-				//$utskrift[] = '<td>'.$rad['$pris'].'</td>';
+				$utskrift[] = '<td>'.$rad[2].''.$rad[7].'</td>';
+				$utskrift[] = '<td>'.$rad[6].' x'.'</td>';
 				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
-				$utskrift[] = '<td>'.($rad[6] * $antall).'</td>';
+				$utskrift[] = '<td>'.($rad[6] * $antall).',-'.'</td>';
 				$total += $rad[6] * $antall;
-/*
-				$utskrift[] = '<td>'.$rad[7].'</td>';
-				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
-				$utskrift[] = '<td>'.($rad[7] * $antall).'</td>';
-				$total += $rad[7] * $antall;*/
-                                $utskrift[] = '</tr>';
+               	$utskrift[] = '</tr>';
 				
 			}
 		}	
 		$utskrift[] = '</table>';
 		$utskrift[] = "<p>Sum å betale <strong>".$total.',- kr'." "."</strong></p>";
-		$utskrift[] = '<div><button type="submit">Opptater</button></div>';
+		//$utskrift[] = '<div><button type="submit">Opptater</button></div>';
 		$utskrift[] = '</form>';
 	} else {
 		$utskrift[] = '<p>Handlekurven er tom</p>';

@@ -65,4 +65,4 @@ switch ($action) {
 $_SESSION['handlekurv'] = $handlekurv;
 
 echo showCart();
-?> </div>
+?>
