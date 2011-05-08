@@ -134,7 +134,7 @@ if(isset($_GET['login']))
 		
 		<div id="main">';
 			
-                      
+                    /*  
 echo 'Dette er hovedsiden <br/>';
 echo 'Halla';
 
@@ -145,7 +145,7 @@ $extension	= "php";		// filendingen på filene dine.
 $page = $_GET['page'];
 
 if (preg_match('/(http:\/\/|^\/|\.+?\/)/', $page)) echo "feil";
-
+*/
 if(isset($_GET['kat']))
 {
     if(is_numeric($_GET['kat']))
