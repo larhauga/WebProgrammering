@@ -64,7 +64,7 @@ class Vare extends dbase
         $tekst;
         $teller = 0;
         
-        echo '<table width="100%">';
+        echo '<table>';
         for($r = 0; $r < $rader; $r++)
         {
 
@@ -90,7 +90,7 @@ class Vare extends dbase
                  }
            echo '</tr>';
         }
-        echo '</table>';
+        echo '</table></div>';
         
     }
     function parseTekst($tekst)
