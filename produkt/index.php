@@ -195,6 +195,11 @@ else
         $soktekst = $_POST['soktekst'];
         $Vare->varesok($soktekst);
     }
+    if(isset($_GET['idvare']))
+    {
+        
+        $Vare->visvare($_GET['idvare']);
+    }
 
 ?>
 <?php //start av handlekurv

@@ -64,7 +64,7 @@ class Vare extends dbase
                      {
 						$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td> Tittel: '.$valg[1].'</td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td>
+                         echo('<tr><td>Tittel: <a href="index.php?idvare='.$valg[0].'">'.$valg[1].'</a></td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td>
                              <td><a href="?kat='.$kat.'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
                      }
         echo '</table>';
@@ -92,7 +92,8 @@ class Vare extends dbase
                             vare.pris as pris, 
                             DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
                             DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
-                            vareregister.antall as antall
+                            vareregister.antall as antall,
+                            bildeurl
                             
                     FROM vare, kategori, bruker, vareregister
                     WHERE vare.idkategori = kategori.idkategori
@@ -115,9 +116,43 @@ class Vare extends dbase
                      {
 						//$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td> Tittel: '.$valg[3].'</td><td> Dato oppdatert: '.$valg[6].'</td><td> Antall: '.$valg[7].'</td><td> Pris: '.$valg[4].'</td>
+                         echo('<tr><td>Tittel: <a href="index.php?idvare='.$valg[0].'">'.$valg[3].'</a></td><td> Dato oppdatert: '.$valg[6].'</td><td> Antall: '.$valg[7].'</td><td> Pris: '.$valg[4].'</td></td>
                              <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
                      }
+        echo '</table>';
+    
+    }
+    function visvare($idvare)
+    {
+        $mysqli = parent::connect();
+
+        $varer = "SELECT vare.idvare,
+                  vare.tittel as tittel, 
+                  vare.pris as pris,
+		  tekst,
+		  bildeurl,
+                  DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                  DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
+                  vareregister.antall as antall
+                  FROM vare, kategori, vareregister
+                  WHERE vare.idkategori = kategori.idkategori
+                  AND vare.idvare = vareregister.idvare AND vare.idvare = 30;" ;
+        $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
+        $num=$resultat->num_rows;
+
+        echo '<table id = varer>';
+        if($num < 1)
+        {
+            echo '<tr><td>Varen finnes ikke</td></tr>';
+        }
+/*
+                     for($i=0;$i<$num;$i++)
+                     {
+		*/				//$kat = $_GET['kat'];
+                         $valg=mysqli_fetch_row($resultat);
+                         echo('<tr><td> VareID: '.$valg[0].'</td><td> Tittel: '.$valg[1].'</td><td> Dato lagt til: '.$valg[5].'</td><td> Dato oppdatert: '.$valg[6].'</td><td> Antall på lager: '.$valg[7].'</td><td> Beksrivelse: '.$valg[3].'</td><td> Pris: '.$valg[2].'</td><td> Bilde: <img src="includes/images/'.$valg[4].'"/></td>
+                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
+          //           }
         echo '</table>';
     
     }
