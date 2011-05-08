@@ -41,7 +41,7 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
          $filnavnet = $_FILES['filstreng']['name'];
          $filsize = $_FILES['filstreng']['size'];
      }
-     echo "<img src='$helt_filnavn' height = '200' align = 'left'>";
+     echo "<img src='$path' height = '200' align = 'left'>";
      
      $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall ,$idbruker);
      
