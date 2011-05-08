@@ -17,7 +17,7 @@ function showCart()
 		$utskrift[] = '<form action="?action=update" method="post">';
 		$utskrift[] = '<table>';
 		foreach ($liste as $id=>$antall) {
-			$sql = "SELECT * FROM vare WHERE idvare =".$id;
+			$sql = "SELECT * FROM vare WHERE idvare = $id;";
 			$resultat = $mysqli->query($sql);
 			if(!$resultat)
 			{
@@ -37,11 +37,17 @@ function showCart()
 				$utskrift[] = '<tr>';
 				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">Slett</a></td>';
 				$utskrift[] = '<td>'.$rad[3].' '.$rad[7].'</td>';
+
 				//$utskrift[] = '<td>'.$rad['$pris'].'</td>';
 				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
 				$utskrift[] = '<td>'.($rad[6] * $antall).'</td>';
 				$total += $rad[6] * $antall;
-				$utskrift[] = '</tr>';
+/*
+				$utskrift[] = '<td>'.$rad[7].'</td>';
+				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
+				$utskrift[] = '<td>'.($rad[7] * $antall).'</td>';
+				$total += $rad[7] * $antall;*/
+                                $utskrift[] = '</tr>';
 				
 			}
 		}	
