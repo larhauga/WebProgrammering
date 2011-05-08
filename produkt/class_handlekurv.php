@@ -29,11 +29,11 @@ function showCart()
 			{
 				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
-				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">Slett</a></td>';
 				$utskrift[] = '<td>'.$rad[2].''.$rad[7].'</td>';
 				$utskrift[] = '<td>'.$rad[6].' x'.'</td>';
 				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
 				$utskrift[] = '<td>'.($rad[6] * $antall).',-'.'</td>';
+				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">x</a></td>';
 				$total += $rad[6] * $antall;
                	$utskrift[] = '</tr>';
 				
