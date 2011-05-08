@@ -43,7 +43,7 @@ class Vare extends dbase
         $varer = "SELECT vare.idvare,
                   vare.tittel as tittel, 
                   vare.pris as pris,
-                  DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
+                  vare.tekst as tekst,
                   DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
                   vareregister.antall as antall,
                   vare.bildeurl
@@ -54,30 +54,74 @@ class Vare extends dbase
         $num=$resultat->num_rows;
 
         echo '<div id="kategori">';
-        if($num < 1)
-        {
-            echo '<p>Ingen varer i denne kategorien</p>';
-        }
-        $teller = $num % 3;
-            for($i = 0; $i < $teller; $i++)
+            if($num < 1)
             {
-                     for($i=0; $i < $num; $i++)
-                     {
-			$kat = $_GET['kat'];
-                         $valg=mysqli_fetch_row($resultat);
-                         echo '<div class="katKol">';
-                             echo '<h1><a href="index.php?idvare='.$valg[0].'">'.$valg[1].
-                                     '</a></h1> Dato oppdatert: '.$valg[4].' Antall: '.$valg[5].
-                                     ' Pris: '.$valg[2].'
-                                        <a href="?kat='.$kat.'&action=add&id='.$valg[0].
-                                     '">Kj&oslash;p</a>';
-                         echo '</div>';
-                             echo "\n\t\t\t\t";
-                     }
+                echo '<p>Ingen varer i denne kategorien</p>';
             }
+            
+        $rader = $num % 3;
+        $kat = $_GET['kat'];
+        $tekst;
+        $teller = 0;
+        
+        for($r = 0; $r < $rader; $r++)
+        {
+
+            echo '<div class="katRad">';
+                 for($i=0; $i < 3; $i++)
+                 {
+                     if($teller < $num)
+                     {
+                         $teller++;
+                         $valg = mysqli_fetch_row($resultat);
+
+                         echo '<div class="katKol">';
+                             echo '
+                                    <img src="includes/images/'.$valg[6].'" width = "230" />
+                                    <h1><a href="index.php?idvare='.$valg[0].'">'.$valg[1].'</a></h1> 
+                                    <p>'.$this->parseTekst($valg[3]).'</p>
+                                    <p>'.$this->paLager($valg[5]).'</p> 
+                                    <p><h2>'.$valg[2].',-<a href="?kat='.$kat.'&action=add&id='.$valg[0].'">
+                                        <img src="includes/images/kjop.jpg"/ style="float:right" ></a></h2></p>';
+                         echo '</div>';
+                         echo "\n\t\t\t\t";
+                     }
+                 }
+           echo '</div>';
+        }
         echo '</div>';
     }
+    function parseTekst($tekst)
+    {
+        $array = explode(" ", $tekst);
+        $lengde = count($array);
+        
+        if($lengde <= 30)
+        {
+            return $tekst;
+        }
+        else
+        {
+            $string = "";
+            for($i = 0; $i < 30; $i++)
+            {
+                $string .= $array[$i] . " ";
+            }
+  
+                $string .= "...";
+            return $string;
+        }
+    }
 
+    function paLager($antall)
+    {
+        if($antall == 0)
+            return '<img src="includes/images/ikkepalager.gif" /> Ikke på lager.';
+        else {
+            return '<img src="includes/images/palager.gif" alt="'.$antall.' på lager." title="'.$antall.' på lager." /> På lager';
+        }
+        
+    }
     function getkat($katid)
     {
         $mysqli = parent::connect();

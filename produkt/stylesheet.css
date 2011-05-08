@@ -259,7 +259,8 @@ input, textarea {
     width: 250px;
     padding-left: 5px;
     max-width: 250px;
-    float: left;
+    float: none;
+    margin-top: 20px;
 }
 #kategori h1{
     color: black;
@@ -270,4 +271,9 @@ input, textarea {
 }
 #kategori a:visited {
     color:black;
+}
+
+.katRad {
+    height:auto;
+    width: 100%;
 }
