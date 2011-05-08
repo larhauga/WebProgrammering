@@ -60,6 +60,5 @@ switch ($action) {
 }
 $_SESSION['handlekurv'] = $handlekurv;
 
-//echo writeShoppingCart();
 echo showCart();
-?> </div><!-- end of shoppingcart -->
+?> </div>
