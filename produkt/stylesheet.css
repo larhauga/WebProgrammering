@@ -250,5 +250,24 @@ input, textarea {
     border: blue;
     border-style: solid;
     border-width: 1px;
+}
 
+#kategori {
+    
+}
+.katKol {
+    width: 250px;
+    padding-left: 5px;
+    max-width: 250px;
+    float: left;
+}
+#kategori h1{
+    color: black;
+    font-size: 1.4em;
+}
+#kategori a{
+    color:black;
+}
+#kategori a:visited {
+    color:black;
 }

@@ -19,15 +19,13 @@ class Vare extends dbase
         $kategori = "select * from kategori where aktiv ='1' limit 7;";
         $resultat = mysqli_query($mysqli,$kategori ) or die(mysqli_error($mysqli));
         $num=$resultat->num_rows;
-        echo '<table id = varer>';
-
-        echo '</table>';
 
         echo '<ul>';
                     for($i=0;$i<$num;$i++)
                      {
                          $valg=mysqli_fetch_row($resultat);
                          echo('<li><a href="index.php?kat='.$valg[0].'">'.$valg[1].'</a></li>');
+                         echo "\n\t\t";
                      }
        echo '</ul>';
 
@@ -47,27 +45,37 @@ class Vare extends dbase
                   vare.pris as pris,
                   DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
                   DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
-                  vareregister.antall as antall
+                  vareregister.antall as antall,
+                  vare.bildeurl
                   FROM vare, kategori, vareregister
                   WHERE vare.idkategori = kategori.idkategori
                   AND vare.idvare = vareregister.idvare AND kategori.idkategori = $katid " ;
         $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
         $num=$resultat->num_rows;
 
-        echo '<table id = varer>';
+        echo '<div id="kategori">';
         if($num < 1)
         {
-            echo '<tr><td>Ingen varer i denne kategorien</td></tr>';
+            echo '<p>Ingen varer i denne kategorien</p>';
         }
-
-                     for($i=0;$i<$num;$i++)
+        $teller = $num % 3;
+            for($i = 0; $i < $teller; $i++)
+            {
+                     for($i=0; $i < $num; $i++)
                      {
-						$kat = $_GET['kat'];
+			$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td>Tittel: <a href="index.php?idvare='.$valg[0].'">'.$valg[1].'</a></td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td>
-                             <td><a href="?kat='.$kat.'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
+                         echo '<div class="katKol">';
+                             echo '<h1><a href="index.php?idvare='.$valg[0].'">'.$valg[1].
+                                     '</a></h1> Dato oppdatert: '.$valg[4].' Antall: '.$valg[5].
+                                     ' Pris: '.$valg[2].'
+                                        <a href="?kat='.$kat.'&action=add&id='.$valg[0].
+                                     '">Kj&oslash;p</a>';
+                         echo '</div>';
+                             echo "\n\t\t\t\t";
                      }
-        echo '</table>';
+            }
+        echo '</div>';
     }
 
     function getkat($katid)
@@ -151,7 +159,7 @@ class Vare extends dbase
                      {
 		*/				//$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td> VareID: '.$valg[0].'</td><td> Tittel: '.$valg[2].'</td><td> Dato lagt til: '.$valg[6].'</td><td> Dato oppdatert: '.$valg[7].'</td><td> Antall på lager: '.$valg[8].'</td><td> Beksrivelse: '.$valg[4].'</td><td> Pris: '.$valg[3].'</td><td> Bilde: <img src="includes/images/'.$valg[5].'"/></td>
+                         echo('<tr><td> VareID: '.$valg[0].'</td><td> Tittel: '.$valg[2].'</td><td> Dato lagt til: '.$valg[6].'</td><td> Dato oppdatert: '.$valg[7].'</td><td> Antall pï¿½ lager: '.$valg[8].'</td><td> Beksrivelse: '.$valg[4].'</td><td> Pris: '.$valg[3].'</td><td> Bilde: <img src="includes/images/'.$valg[5].'"/></td>
                              <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
           //           }
         echo '</table>';
