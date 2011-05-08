@@ -78,12 +78,13 @@ class Vare extends dbase
 
                          echo '<td class="katKol">';
                              echo '
-                                    <img src="includes/images/'.$valg[6].'" width = "230" />
+                                    <a href="index.php?idvare='.$valg[0].'"><img src="bilder/opplastet/'.$valg[6].'" width = "230" /></a>
                                     <h1><a href="index.php?idvare='.$valg[0].'">'.$valg[1].'</a></h1> 
-                                    <p>'.$this->parseTekst($valg[3]).'</p>
+                                    <p>'.$this->parseTekst($valg[3]).'<br/><br/>
+                                        <a href="index.php?idvare='.$valg[0].'">Les mer</a></p>
                                     <p>'.$this->paLager($valg[5]).'</p> 
                                     <h2>'.$valg[2].',-<a href="?kat='.$kat.'&action=add&id='.$valg[0].'">
-                                        <img src="includes/images/kjop.jpg"/ style="float:right" ></a></h2>';
+                                        <img src="includes/images/kjop.jpg" style="float:right" /></a></h2>';
                          echo '</td>';
                          echo "\n\t\t\t\t";
                      }
@@ -116,11 +117,15 @@ class Vare extends dbase
     }
 
     function paLager($antall)
-    {
+    {   
         if($antall == 0)
             return '<img src="includes/images/ikkepalager.gif" /> Ikke på lager.';
-        else {
-            return '<img src="includes/images/palager.gif" alt="'.$antall.' på lager." title="'.$antall.' på lager." /> På lager';
+        else if (isset($_GET['idvare']))    
+        {
+            return '<img src="includes/images/palager.gif" alt="'.$antall.' på lager." title="'.$antall.' på lager." /> Lagerstatus: '.$antall.' på lager';
+        }
+         else {
+             return '<img src="includes/images/palager.gif" alt="'.$antall.' på lager." title="'.$antall.' på lager." /> På lager';
         }
         
     }
@@ -184,8 +189,8 @@ class Vare extends dbase
                   kategori.idkategori as katid,
                   vare.tittel as tittel, 
                   vare.pris as pris,
-		  tekst,
-		  bildeurl,
+		  vare.tekst as tekst,
+		  vare.bildeurl as bildeurl,
                   DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
                   DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
                   vareregister.antall as antall
@@ -195,20 +200,24 @@ class Vare extends dbase
         $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
         $num=$resultat->num_rows;
 
-        echo '<table id = varer>';
+        echo '<div id="vare">';
         if($num < 1)
         {
-            echo '<tr><td>Varen finnes ikke</td></tr>';
+            echo '<h3>Varen finnes ikke</h3>';
         }
-/*
-                     for($i=0;$i<$num;$i++)
-                     {
-		*/				//$kat = $_GET['kat'];
-                         $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td> VareID: '.$valg[0].'</td><td> Tittel: '.$valg[2].'</td><td> Dato lagt til: '.$valg[6].'</td><td> Dato oppdatert: '.$valg[7].'</td><td> Antall p� lager: '.$valg[8].'</td><td> Beksrivelse: '.$valg[4].'</td><td> Pris: '.$valg[3].'</td><td> Bilde: <img src="includes/images/'.$valg[5].'"/></td>
-                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
-          //           }
-        echo '</table>';
+        else
+        {
+             $valg = $resultat->fetch_object();
+             echo '<h1>'.$valg->tittel.'</h1>';
+             echo '<img id="prodVareImg" src="bilder/opplastet/'.$valg->bildeurl.'" alt="'.$valg->tittel.'"  />';
+             echo '<h1 style="padding-left:10px;">'.$valg->pris.',-
+                    <a href="?kat='.$valg->katid.'&action=add&id='.$valg->idvare.'">
+                         <img src="includes/images/kjop.jpg" style="float:right; padding: 0 40px;" />
+                    </a></h1>';
+                   echo $this->paLager($valg->antall);
+             echo '<p>'.$valg->tekst.'</p>';
+        }
+        echo '</div>';
     
     }
     
@@ -241,8 +250,8 @@ class Vare extends dbase
                      {
 			//$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td>Tittel: <a href="index.php?idvare='.$valg[0].'">'.$valg[2].'</a></td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td><td> Pris: '.$valg[3].'</td><td> Bilde: <img src="includes/images/'.$valg[5].'"/></td>
-                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
+                         echo '<tr><td>Tittel: <a href="index.php?idvare='.$valg[0].'">'.$valg[2].'</a></td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td><td> Pris: '.$valg[3].'</td><td> Bilde: <img src="bilder/opplastet/'.$valg[5].'"/></td>
+                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>';
                      }
         echo '</table>';
     }
