@@ -64,5 +64,5 @@ switch ($action) {
 }
 $_SESSION['handlekurv'] = $handlekurv;
 
-echo showCart();
+echo visHandlekurv();
 ?>
