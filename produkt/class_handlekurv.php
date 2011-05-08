@@ -18,7 +18,8 @@ function visHandlekurv()
         $total = 0;
 	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 	$handlekurv = $_SESSION['handlekurv'];
-	if ($handlekurv) {
+	if ($handlekurv) 
+		{
 		$varer = explode(',',$handlekurv);
 		$liste = array();
 		foreach ($varer as $vare) {
@@ -55,10 +56,16 @@ function visHandlekurv()
 		$utskrift[] = "<p><br>Sum å betale <strong>".$total.',- kr'." "."</strong></p>";
 		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
 		$utskrift[] = '</form>';
-	} else {
+		} 
+	else 
+	{
 		$utskrift[] =	'<h2>Handlekurv</h2>';
 		$utskrift[] = '<p>Handlekurven er tom</p>';
 	}
 	return join('',$utskrift);
+}
+function betale()
+{
+	echo "lol";
 }
 ?>
