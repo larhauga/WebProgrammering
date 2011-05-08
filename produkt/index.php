@@ -3,10 +3,7 @@
     require_once("includes/head.php");
 
     
-    if(!isset($_GET['kat']))
-    {             
-                           $kat=0;
-    }
+    
 
     $Vare = new Vare();
 
@@ -84,21 +81,29 @@ if(isset($_GET['login']))
 		</div>
 		  <div id="headerkolonne">
                       <?php 
+                      if(isset($_GET['kat']))
+                      {             
+                           $kat =$_GET['kat'];
+                      }
+                      else
+                      {
+                           $kat = 0;
+                      }
                       if(isset($_SESSION['loggetinn']))
                       {
                           
                         $bruker = unserialize($_SESSION['bruker']);
                         $epost=$bruker->epost;
                         echo 'Velkommen, '.$epost;
-                         $kat = $_GET['kat'];
+                        /* $kat = $_GET['kat'];
                        if($kat)
-                       {
-                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a>';
+                       {*/
+                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a>';/*
                        }
                        else
                        {
                         echo ' <a href="?kat=0&loggut">Logg ut</a>';
-                       }
+                       }*/
                       }
                       else 
                       {
@@ -106,7 +111,7 @@ if(isset($_GET['login']))
                        {
                            echo '<div id=loginerror>'.$feilmelding.'</div>';
                        }
-                       $kat = $_GET['kat'];
+                       /*$kat = $_GET['kat'];
                        if($kat)
                        {
 		  	echo '<div id="logginn">
@@ -118,8 +123,11 @@ if(isset($_GET['login']))
                             '<div id="logginn">
                             
 			    <form name="login" method="post" action="?kat=0&login">';
-                        }
-			echo '			<table>
+                        }*/
+			echo '<div id="logginn">
+                            
+			    <form name="login" method="post" action="?kat='.$kat.'&login">
+                                <table>
 						  <tr>
 							<td>Epost: </td>
 							<td><input type="text" name="epost" id="epost" /></td>
