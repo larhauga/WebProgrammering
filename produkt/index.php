@@ -205,7 +205,8 @@ else
     }
     else if(isset($_GET['hjem']))
     {
-        echo 'hei';
+        echo '<h1>Nyheter</h1></br>';
+        $Vare->nyheter();
     }
     else
     {

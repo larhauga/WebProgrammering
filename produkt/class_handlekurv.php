@@ -42,7 +42,7 @@ function visHandlekurv()
 				//$kat = $_GET['kat'];
 				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
-				$utskrift[] = '<td><a href="index.php?idvare='.$rad[0].'">'.$rad[3].'</a></td><td>'.$rad[6].',-</td>';
+				$utskrift[] = '<td><a href="index.php?idvare='.$rad[0].'">'.$rad[2].'</a></td><td>'.$rad[6].',-</td>';
 				$utskrift[] = '<td>x<input type="text" name="antall'.$id.'" value="'.$antall.'" size="1" maxlength="2" />stk</td>';
 				$utskrift[] = '<td>'.($rad[6] * $antall).',-'.'</td>';
 				$utskrift[] = '<td><a href="?kat='.$kat.'&action=delete&id='.$id.'">x</a></td>';
