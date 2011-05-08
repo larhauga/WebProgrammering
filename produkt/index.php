@@ -135,7 +135,6 @@ if(isset($_GET['login']))
 		<div id="main">';
 			
                       
-<?php
 echo 'Dette er hovedsiden <br/>';
 echo 'Halla';
 
