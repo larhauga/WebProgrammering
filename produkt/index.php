@@ -1,5 +1,10 @@
 <?php
     require_once("includes/head.php");
+    
+    if(!isset($_POST['kat']))
+    {             
+                           $kat=0;
+    }
     $Vare = new Vare();
 
 if(isset($_GET['loggut']))
@@ -82,7 +87,15 @@ if(isset($_GET['login']))
                         $bruker = unserialize($_SESSION['bruker']);
                         $epost=$bruker->epost;
                         echo 'Velkommen, '.$epost;
-                        echo ' <a href="?loggut">Logg ut</a>';
+                         $kat = $_GET['kat'];
+                       if($kat)
+                       {
+                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a>';
+                       }
+                       else
+                       {
+                        echo ' <a href="?kat=0&?loggut">Logg ut</a>';
+                       }
                       }
                       else 
                       {
@@ -90,7 +103,8 @@ if(isset($_GET['login']))
                        {
                            echo '<div id=loginerror>'.$feilmelding.'</div>';
                        }
-                       if($kat = $_GET['kat'])
+                       $kat = $_GET['kat'];
+                       if($kat)
                        {
 		  	echo '<div id="logginn">
                             
@@ -100,7 +114,7 @@ if(isset($_GET['login']))
                         {
                             '<div id="logginn">
                             
-			    <form name="login" method="post" action="?login">';
+			    <form name="login" method="post" action="?kat=0&login">';
                         }
 			echo '			<table>
 						  <tr>
