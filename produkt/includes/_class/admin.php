@@ -127,7 +127,7 @@ class Admin extends dbase
                     {
                         echo '
                                 <tr>
-                                    <td><input type="checkbox" name="bruker[ ]" value="'.$rad->idbruker.'" /></td>
+                                    <td><input type="checkbox" name="bruker[]" id="bruker" value="'.$rad->idbruker.'" /></td>
                                     <td>'.$rad->epost.'</td>
                                     <td>'.$rad->fornavn.'</td>
                                     <td>'.$rad->etternavn.'</td>
@@ -725,6 +725,31 @@ class Admin extends dbase
                         </tr>';
                     } //while
 		} //else
+        }
+        public function settAntVarer($idvare, $antall)
+        {
+            $db = parent::connect();
+            $antall = mysqli_escape_string($db,$antall);
+            
+            $sql = "UPDATE vareregister
+                        SET antall = '$antall'
+                    WHERE
+                        idvare = '$idvare';";
+            $resultat = $db->query($sql); 
+            if($db->connect_error)
+            {
+                echo "<p>Det skjedde en feil med spørringen.</p>";
+                return false;
+            }
+            else
+            {
+                if($db->affected_rows == 1)
+                {
+                        echo "<p>Antallet ble oppdatert.</p>";
+                        return true;
+                }
+            }
+              
         }
 	function sikkerhet()
 	{

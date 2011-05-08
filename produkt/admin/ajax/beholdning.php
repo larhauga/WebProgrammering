@@ -35,4 +35,14 @@
             </tr>';
         $Admin->visBeholdningPrKategori($_GET['kategori']);
     }
+    if(isset($_POST['varer']) && isset($_POST['antall']))
+    {
+        $antall = $_POST['antall'];
+        foreach($_POST['varer'] as $idvare)
+        {
+            if(!$Admin->settAntVarer($idvare, $antall))
+                    echo '<p>Varen nr. '.$idvare.' ble ikke oppdatert.</p>';
+            
+        }
+    }
 ?>

@@ -1,19 +1,18 @@
 <?php
-//include "includes/kategori.php";
-require_once("includes/head.php");
-include "includes/vare.php";
+    require_once("includes/head.php");
+    $Vare = new Vare();
+
 if(isset($_GET['loggut']))
 {
     unset($_SESSION['bruker']);
     unset($_SESSION['loggetinn']);
-   // unset($_SESSION['epost']);
 }
 if(isset($_GET['login']))
 {
 	$epost = ($_POST['epost']);
 	$passord = ($_POST['passord']);
-       // $passord = encrypt($pass);
-	//Sette opp sessions
+
+        
 	if($epost != "" && $passord != "")
         {
             function login($passord,$epost)
@@ -21,8 +20,9 @@ if(isset($_GET['login']))
 
              //    $passord;
              //    $epost;
-                    $passord = encrypt($passord, $epost);
-                 $mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1') or die(mysqli_error());
+                 $passord = encrypt($passord, $epost);
+                 $Vare = new Vare();
+                 $mysqli = $Vare->vareConnect();
                  $sql = $mysqli->query("SELECT * FROM bruker WHERE epost = '".$epost."' AND passord = '".$passord."'") or die(mysqli_error());
                  
                  if(!$sql)
@@ -50,6 +50,11 @@ if(isset($_GET['login']))
 				$_SESSION['loggetinn'] = true;
                        
 			}
+                        else
+                       {
+                        $feilmelding = 'Epost eller brukernavn var ikke skre vet inn';
+                        return $feilmelding;
+                       }
                }
             }
             login($passord,$epost);
@@ -58,16 +63,16 @@ if(isset($_GET['login']))
        {
            $feilmelding = 'Epost eller brukernavn var ikke skrevet inn';
        }
-
 }
 ?>
+
 
 
 <body>
 	<div id="container">
 		<div id="header">
 		<div id="headervenstre">
-			<h1>Nettbutikken</h1>
+			<h1><a href="index.php">Nettbutikken</a></h1>
 		</div>
 		  <div id="headerkolonne">
                       <?php 
@@ -121,21 +126,17 @@ if(isset($_GET['login']))
 		 </div>
 
 		</div>
-		
+	<?php	
 
-		<div id="meny">
-		<?php
-		meny();
-                ?>
-		</div>
+		echo '<div id="meny">';
+                    $Vare->meny();
+		echo '</div>
 		
-		<div id="main">
-			<div id="path">
-				<a href="#">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="#">Datautstyr</a>
-			</div><!--end of path-->
+		<div id="main">';
+			
                       
 <?php
-/*echo 'Dette er hovedsiden <br/>';
+echo 'Dette er hovedsiden <br/>';
 echo 'Halla';
 
 $default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
@@ -146,17 +147,27 @@ $page = $_GET['page'];
 
 if (preg_match('/(http:\/\/|^\/|\.+?\/)/', $page)) echo "feil";
 
-
-elseif (!empty($page))											// sjekke at variabelen ikke er tom.
+if(isset($_GET['kat']))
 {
-	if (file_exists("$directory/$page.$extension"))				// sjekke om fila eksisterer.
-	include("$directory/$page.$extension");					// inkluder fila.
-	else														// hvis ikke,
-	echo "<h1>Error 404</h1>\n<p>Finner ikke siden!</p>\n";	// skriv en feilmelding.
+    if(is_numeric($_GET['kat']))
+    {
+        $side = $Vare->getkat($_GET['kat']);
+        echo '<div id="path">
+                <a href="index.php">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="?id='.$_GET['kat'].'">'.$side.'</a>
+                    </div><!--end of path-->';
+    }
+}  
+else
+{
+    echo '<div id="path">
+          </div>
+          <!--end of path-->';
 }
-else															// eller,
-	include("$directory/$default.$extension");					// inkluder fila som definert som $default.
-*/
+
+    if(isset($_GET['kat']))
+    if(is_numeric($_GET['kat']))
+    $Vare->varer($_GET['kat']);
+
 ?>
 		</div><!--end of main-->
 		<div id="rightbar">

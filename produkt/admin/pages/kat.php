@@ -106,7 +106,7 @@ echo '        <form action="" method="post">
                         $.post("ajax/updKat.php", { "sok": katID},
                          function(data){
                            $("#updtittel").val(data.tittel); // Tittel
-                           $("#updaktiv").value(data.aktiv); //  Aktiv eller ikke aktiv
+                           $("#updaktiv").val(data.aktiv); //  Aktiv eller ikke aktiv
                          }, "json");
                 });
                 
@@ -115,7 +115,15 @@ echo '        <form action="" method="post">
                     $.post("ajax/updKat.php", { "sok": katID},
                      function(data){
                        $("#updtittel").val(data.tittel); // Tittel
-                       $("#updaktiv").value(data.aktiv); //  Aktiv eller ikke aktiv
+                       $("#updaktiv").val(data.aktiv); //  Aktiv eller ikke aktiv
+                     }, "json");
+                });
+                $("#kategoriID").keyup(function() {
+                var katID = $("#kategoriID").val();
+                    $.post("ajax/updKat.php", { "sok": katID},
+                     function(data){
+                       $("#updtittel").val(data.tittel); // Tittel
+                       $("#updaktiv").val(data.aktiv); //  Aktiv eller ikke aktiv
                      }, "json");
                 });
             </script>
