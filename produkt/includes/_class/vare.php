@@ -62,10 +62,10 @@ class Vare extends dbase
 
                      for($i=0;$i<$num;$i++)
                      {
-
+						$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
                          echo('<tr><td> Tittel: '.$valg[1].'</td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td>
-                             <td><a href="?action=add&id='.$valg[0].'">Kjop</a></td></tr>');
+                             <td><a href="?kat='.$kat.'&action=add&id='.$valg[0].'">Kjop</a></td></tr>');
                      }
         echo '</table>';
     }
