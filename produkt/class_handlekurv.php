@@ -43,7 +43,7 @@ function visHandlekurv()
 		}	
 		$utskrift[] = '</table>';
 		$utskrift[] = "<p><br>Sum å betale <strong>".$total.',- kr'." "."</strong></p>";
-		$utskrift[] = '<div><button type="submit">Opptater</button></div>';
+		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
 		$utskrift[] = '</form>';
 	} else {
 		$utskrift[] = '<p>Handlekurven er tom</p>';
