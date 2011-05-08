@@ -187,18 +187,26 @@ else
 
     if(isset($_GET['kat']))
     {
-    if(is_numeric($_GET['kat']))
-    $Vare->varer($_GET['kat']);
+        if(is_numeric($_GET['kat']))
+        $Vare->varer($_GET['kat']);
     }
-    if(isset($_GET['sok']))
+    else if(isset($_GET['sok']))
     {
         $soktekst = $_POST['soktekst'];
         $Vare->varesok($soktekst);
     }
-    if(isset($_GET['idvare']))
+    else if(isset($_GET['idvare']))
     {
         
         $Vare->visvare($_GET['idvare']);
+    }
+    else
+    {
+        echo '<object width="550" height="400">
+                <param name="movie" value="somefilename.swf">
+                <embed src="../dagobah_404_dance.swf" width="550" height="400">
+                </embed>
+                </object>';
     }
 
 ?>
