@@ -1,4 +1,5 @@
 <?php
+
 /*
 if(!session_started())
 {
@@ -6,6 +7,14 @@ session_start();
 }*/
 function visHandlekurv()
 {
+    if(isset($_GET['kat']))
+                      {             
+                           $kat =$_GET['kat'];
+                      }
+                      else
+                      {
+                           $kat = 0;
+                      }
         $total = 0;
 	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
 	$handlekurv = $_SESSION['handlekurv'];
@@ -15,7 +24,7 @@ function visHandlekurv()
 		foreach ($varer as $vare) {
 			$liste[$vare] = (isset($liste[$vare])) ? $liste[$vare] + 1 : 1;
 		}
-		$kat = $_GET['kat'];
+		//$kat = $_GET['kat'];
 		$utskrift[] = '<form action="?kat='.$kat.'&action=update" method="post">';
 		$utskrift[] = '<table>';
 		foreach ($liste as $id=>$antall) {
@@ -29,7 +38,7 @@ function visHandlekurv()
                         $num=$resultat->num_rows;
 			 for($i=0;$i<$num;$i++)
 			{
-				$kat = $_GET['kat'];
+				//$kat = $_GET['kat'];
 				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
 				$utskrift[] = '<td>'.$rad[2].''.$rad[7].'</td>';

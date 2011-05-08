@@ -1,7 +1,10 @@
 <?php 
 if(isset($_GET['registrer']))
 {
-include "head.php";
+    include "config1.php";
+    require "klasser.php";
+    require "_class/vare.php";
+   // require "_class/vare.php";
 $innepost = $_POST['epost'];
 $innepost2 = $_POST['epost2'];
 $innpassord = $_POST['passord'];
