@@ -1,11 +1,13 @@
 <?php
 
     require_once("includes/head.php");
+
     
     if(!isset($_GET['kat']))
     {             
                            $kat=0;
     }
+
     $Vare = new Vare();
 
 if(isset($_GET['loggut']))
