@@ -223,7 +223,7 @@ if(isset($_GET['handlevogn']))
 		if($_GET['handlevogn'] == 1)
 		{
 			include "class_handlekurv.php";
-			echo visHandlekurv();
+			echo betale();
 		}
 	}
 }
