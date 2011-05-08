@@ -1,5 +1,4 @@
 <?php
-
     require_once("includes/head.php");
 
     
@@ -77,7 +76,7 @@ if(isset($_GET['login']))
 	<div id="container">
 		<div id="header">
 		<div id="headervenstre">
-			<h1><a href="index.php">Nettbutikken</a></h1>
+			<h1><a href="index.php?hjem">Nettbutikken</a></h1>
 		</div>
 		  <div id="headerkolonne">
                       <?php 
@@ -174,7 +173,7 @@ if(isset($_GET['kat']))
     {
         $side = $Vare->getkat($_GET['kat']);
         echo '<div id="path">
-                <a href="index.php">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="?kat='.$_GET['kat'].'">'.$side.'</a>
+                <a href="index.php?hjem">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="?kat='.$_GET['kat'].'">'.$side.'</a>
                     </div><!--end of path-->';
     }
 }  
@@ -187,13 +186,35 @@ else
 
     if(isset($_GET['kat']))
     {
-    if(is_numeric($_GET['kat']))
-    $Vare->varer($_GET['kat']);
+        if(is_numeric($_GET['kat']))
+        $Vare->varer($_GET['kat']);
     }
-    if(isset($_GET['sok']))
+    else if(isset($_GET['sok']))
     {
         $soktekst = $_POST['soktekst'];
         $Vare->varesok($soktekst);
+    }
+    else if(isset($_GET['idvare']))
+    {
+        
+        $Vare->visvare($_GET['idvare']);
+    }
+    else if(isset($_GET['handlevogn']))
+    {
+        
+    }
+    else if(isset($_GET['hjem']))
+    {
+        echo '<h1>Nyheter</h1></br>';
+        $Vare->nyheter();
+    }
+    else
+    {
+        echo '<object width="550" height="400">
+                <param name="movie" value="somefilename.swf">
+                <embed src="../dagobah_404_dance.swf" width="550" height="400">
+                </embed>
+                </object>';
     }
 
 ?>
