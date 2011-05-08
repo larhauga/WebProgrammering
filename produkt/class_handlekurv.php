@@ -1,11 +1,14 @@
 <?php
 
-/*
-if(!session_started())
+class handlekurv2
 {
-session_start();
-}*/
-function visHandlekurv()
+	public $fin;
+	
+	function __construct($innfin)
+	{
+		$this->fin = $innfin;
+	}
+public function visHandlekurv()
 {
     if(isset($_GET['kat']))
                       {             
@@ -16,9 +19,9 @@ function visHandlekurv()
                            $kat = 0;
                       }
         $total = 0;
-	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-	$handlekurv = $_SESSION['handlekurv'];
-	if ($handlekurv) 
+		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		$handlekurv = $_SESSION['handlekurv'];
+		if ($handlekurv) 
 		{
 		$varer = explode(',',$handlekurv);
 		$liste = array();
@@ -64,8 +67,10 @@ function visHandlekurv()
 	}
 	return join('',$utskrift);
 }
-function betale()
+
+public function lol()
 {
 	echo "lol";
 }
+}// end of class
 ?>
