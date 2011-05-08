@@ -26,6 +26,7 @@ function visHandlekurv()
 		}
 		//$kat = $_GET['kat'];
 		$utskrift[] = '<form action="?kat='.$kat.'&action=update" method="post">';
+		$utskrift[] = '<h2>Handlekurv</h2>';
 		$utskrift[] = '<table>';
 		foreach ($liste as $id=>$antall) {
 			$sql = "SELECT * FROM vare WHERE idvare = $id;";
@@ -55,6 +56,7 @@ function visHandlekurv()
 		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
 		$utskrift[] = '</form>';
 	} else {
+		$utskrift[] =	'<h2>Handlekurv</h2>';
 		$utskrift[] = '<p>Handlekurven er tom</p>';
 	}
 	return join('',$utskrift);

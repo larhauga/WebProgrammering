@@ -168,25 +168,13 @@ if(isset($_GET['login']))
 		
 		<div id="main">';
 			
-                    /*  
-echo 'Dette er hovedsiden <br/>';
-echo 'Halla';
-
-$default	= "hjem";	// fila som skal inkluderes hvis variabelen er tom.
-$directory	= "includes";		// mappa filene dine ligger i.
-$extension	= "php";		// filendingen på filene dine.
-
-$page = $_GET['page'];
-
-if (preg_match('/(http:\/\/|^\/|\.+?\/)/', $page)) echo "feil";
-*/
 if(isset($_GET['kat']))
 {
     if(is_numeric($_GET['kat']))
     {
         $side = $Vare->getkat($_GET['kat']);
         echo '<div id="path">
-                <a href="index.php">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="?id='.$_GET['kat'].'">'.$side.'</a>
+                <a href="index.php">Hjem</a> <strong id="hjerte">&hearts;</strong> <a href="?kat='.$_GET['kat'].'">'.$side.'</a>
                     </div><!--end of path-->';
     }
 }  
@@ -200,6 +188,20 @@ else
     if(isset($_GET['kat']))
     if(is_numeric($_GET['kat']))
     $Vare->varer($_GET['kat']);
+
+?>
+<?php //start av handlekurv
+if(isset($_GET['handlevogn']))
+{
+	if(is_numeric($_GET['handlevogn']))
+	{
+		if($_GET['handlevogn'] == 1)
+		{
+			include "class_handlekurv.php";
+			echo visHandlekurv();
+		}
+	}
+}
 
 ?>
 		</div><!--end of main-->
