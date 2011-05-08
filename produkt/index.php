@@ -148,7 +148,7 @@ if(isset($_GET['login']))
                       }
 				?>
 			<div id="sok">
-				<form name="sok" method="post" action="sok.php">
+				<form name="sok" method="post" action="?sok">
 						<table>
 							<tr>
 								<td><input type="text" name="soktekst" id="soktekst" /></td>
@@ -186,8 +186,15 @@ else
 }
 
     if(isset($_GET['kat']))
+    {
     if(is_numeric($_GET['kat']))
     $Vare->varer($_GET['kat']);
+    }
+    if(isset($_GET['sok']))
+    {
+        $soktekst = $_POST['soktekst'];
+        $Vare->varesok($soktekst);
+    }
 
 ?>
 <?php //start av handlekurv
