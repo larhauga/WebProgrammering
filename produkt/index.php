@@ -1,10 +1,5 @@
 <?php
     require_once("includes/head.php");
-    
-    if(!isset($_POST['kat']))
-    {             
-                           $kat=0;
-    }
     $Vare = new Vare();
 
 if(isset($_GET['loggut']))
