@@ -90,10 +90,19 @@ if(isset($_GET['login']))
                        {
                            echo '<div id=loginerror>'.$feilmelding.'</div>';
                        }
+                       if($kat = $_GET['kat'])
+                       {
 		  	echo '<div id="logginn">
                             
-			    <form name="login" method="post" action="?login">
-						<table>
+			    <form name="login" method="post" action="?kat='.$kat.'&login">';
+                        }
+                        else
+                        {
+                            '<div id="logginn">
+                            
+			    <form name="login" method="post" action="?login">';
+                        }
+			echo '			<table>
 						  <tr>
 							<td>Epost: </td>
 							<td><input type="text" name="epost" id="epost" /></td>
