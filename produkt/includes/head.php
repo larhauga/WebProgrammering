@@ -13,5 +13,4 @@
     include "config1.php";
     require "klasser.php";
     require "includes/_class/vare.php";
-   // require "_class/vare.php";
 ?>
