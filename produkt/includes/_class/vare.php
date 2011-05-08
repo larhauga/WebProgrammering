@@ -65,7 +65,7 @@ class Vare extends dbase
 						$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
                          echo('<tr><td> Tittel: '.$valg[1].'</td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td>
-                             <td><a href="?kat='.$kat.'&action=add&id='.$valg[0].'">Kjop</a></td></tr>');
+                             <td><a href="?kat='.$kat.'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
                      }
         echo '</table>';
     }
@@ -116,7 +116,7 @@ class Vare extends dbase
 						//$kat = $_GET['kat'];
                          $valg=mysqli_fetch_row($resultat);
                          echo('<tr><td> Tittel: '.$valg[3].'</td><td> Dato oppdatert: '.$valg[6].'</td><td> Antall: '.$valg[7].'</td><td> Pris: '.$valg[4].'</td>
-                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kjop</a></td></tr>');
+                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>');
                      }
         echo '</table>';
     
