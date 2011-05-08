@@ -57,14 +57,15 @@ class Vare extends dbase
         echo '<table id = varer>';
         if($num < 1)
         {
-            echo '><tr><td>Ingen varer i denne kategorien</td></tr>';
+            echo '<tr><td>Ingen varer i denne kategorien</td></tr>';
         }
 
                      for($i=0;$i<$num;$i++)
                      {
 
                          $valg=mysqli_fetch_row($resultat);
-                         echo('<tr><td> Tittel: '.$valg[1].'</td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td></tr>');
+                         echo('<tr><td> Tittel: '.$valg[1].'</td><td> Dato oppdatert: '.$valg[4].'</td><td> Antall: '.$valg[5].'</td><td> Pris: '.$valg[2].'</td>
+                             <td><a href="?action=add&id='.$valg[0].'">Kjop</a></td></tr>');
                      }
         echo '</table>';
     }
