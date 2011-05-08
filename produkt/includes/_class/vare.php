@@ -57,7 +57,7 @@ class Vare extends dbase
         echo '<table id = varer>';
         if($num < 1)
         {
-            echo '<tr><td>Ingen varer i denne kategorien</td></tr>';
+            echo '><tr><td>Ingen varer i denne kategorien</td></tr>';
         }
 
                      for($i=0;$i<$num;$i++)

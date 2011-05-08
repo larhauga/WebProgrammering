@@ -1,5 +1,9 @@
 <?php
+/*
+if(!session_started())
+{
 session_start();
+}*/
 function showCart()
 {
 	$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
@@ -20,21 +24,23 @@ function showCart()
 				echo "failed  sql";
 				die();
 			}
+                        /*
 			while($rad = $resultat->fetch_array(MYSQLI_ASSOC))
 			{
 				$rader[] = $rad;
 			}
-			
-			foreach($rader as $rad)
+			*/
+                        $num=$resultat->num_rows;
+			 for($i=0;$i<$num;$i++)
 			{
-				
+				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
 				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">Slett</a></td>';
 				$utskrift[] = '<td>'.$rad[3].' '.$rad[7].'</td>';
-				$utskrift[] = '<td>'.$rad['$pris'].'</td>';
+				//$utskrift[] = '<td>'.$rad['$pris'].'</td>';
 				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
-				$utskrift[] = '<td>'.($rad['$pris'] * $antall).'</td>';
-				$total += $rad['$pris'] * $antall;
+				$utskrift[] = '<td>'.($rad[6] * $antall).'</td>';
+				$total += $rad[6] * $antall;
 				$utskrift[] = '</tr>';
 				
 			}

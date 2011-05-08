@@ -241,3 +241,14 @@ input, textarea {
 {
     color: red;
 }
+
+#varer td
+{
+    color: green;
+    padding: 5px;
+    margin: 30px;
+    border: blue;
+    border-style: solid;
+    border-width: 1px;
+
+}
