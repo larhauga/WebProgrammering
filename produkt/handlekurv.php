@@ -70,7 +70,5 @@ switch ($action) {
 }
 }
 $_SESSION['handlekurv'] = $handlekurv;
-$fin= 2;
-$kurv = new handlekurv($fin);
 echo $kurv->visHandlekurv();
 ?>
