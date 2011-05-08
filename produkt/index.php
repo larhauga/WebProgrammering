@@ -208,9 +208,11 @@ else
     else
     {
     }
-
 $kurv->handlevognsjekk();
+if($_GET['step'] == 3)
+{
 $kurv->betalingsjekk();
+}
 ?>
 		</div><!--end of main-->
 		<div id="rightbar">

@@ -30,7 +30,10 @@ public function visHandlekurv()
 		//$kat = $_GET['kat'];
 		if(isset($_GET['handlevogn']))
 		{
-			$utskrift[] = '<form action="?&action=update&handlevogn=1" method="post">';
+	
+			$step = $_GET['step'];
+			$utskrift[] = '<form action="?&action=update&handlevogn=1&step='.$step.' method="post">';
+
 		}
 		else
 		{
@@ -49,7 +52,7 @@ public function visHandlekurv()
                         $num=$resultat->num_rows;
 			 for($i=0;$i<$num;$i++)
 			{
-				//$kat = $_GET['kat'];
+				//$kat = if(isset($_GET['handlevogn']));
 				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
 				$utskrift[] = '<td><a href="index.php?idvare='.$rad[0].'">'.$rad[2].'</a></td><td>'.$rad[6].',-</td>';
@@ -64,8 +67,15 @@ public function visHandlekurv()
 		$utskrift[] = '</table>';
 		$utskrift[] = "<p><br>Sum å betale <strong>".$this->total.',- kr'." "."</strong></p>";
 		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
-		$utskrift[] = '</form>'.'<form action="?handlevogn=1" method="post"><button type="submit">Kjøp</button></form>';
-		} 
+		$utskrift[] = '</form>';
+		if($_GET['step'] != 2 && $_GET['step'] != 3)
+		{
+		$utskrift[] = '<form action="?handlevogn=1&step=2" method="post"><button type="submit">Kjøp</button></form>';
+		}
+		else
+		{
+			" ";
+		} }
 	else 
 	{
 		$utskrift[] =	'<h2>Handlekurv</h2>';
@@ -100,16 +110,16 @@ function visHandleSide()
 	}
 	else
 	{
-		echo '<a href="?betale=1">Klikk her for å gå videre i betalingsprossesen</a>';
+		echo '<form action="?step=3" method="post"><button type="submit">Bekreft</button></form>';
 	}
 }// end of visHandleSide
 function betalingsjekk() //error handler må til her :)
 {
-	if(isset($_GET['betale']))
+	if(isset($_GET['step']))
 {
-	if(is_numeric($_GET['betale']))
+	if(is_numeric($_GET['step']))
 	{
-		if($_GET['betale'] == 1)
+		if($_GET['step'] == 3)
 		{
 			echo "nå skal vi betale ting her"."<br>";
 			echo $this->total;
