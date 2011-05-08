@@ -64,10 +64,11 @@ class Vare extends dbase
         $tekst;
         $teller = 0;
         
+        echo '<table width="100%">';
         for($r = 0; $r < $rader; $r++)
         {
 
-            echo '<div class="katRad">';
+            echo '<tr class="katRad">';
                  for($i=0; $i < 3; $i++)
                  {
                      if($teller < $num)
@@ -75,21 +76,22 @@ class Vare extends dbase
                          $teller++;
                          $valg = mysqli_fetch_row($resultat);
 
-                         echo '<div class="katKol">';
+                         echo '<td class="katKol">';
                              echo '
                                     <img src="includes/images/'.$valg[6].'" width = "230" />
                                     <h1><a href="index.php?idvare='.$valg[0].'">'.$valg[1].'</a></h1> 
                                     <p>'.$this->parseTekst($valg[3]).'</p>
                                     <p>'.$this->paLager($valg[5]).'</p> 
-                                    <p><h2>'.$valg[2].',-<a href="?kat='.$kat.'&action=add&id='.$valg[0].'">
-                                        <img src="includes/images/kjop.jpg"/ style="float:right" ></a></h2></p>';
-                         echo '</div>';
+                                    <h2>'.$valg[2].',-<a href="?kat='.$kat.'&action=add&id='.$valg[0].'">
+                                        <img src="includes/images/kjop.jpg"/ style="float:right" ></a></h2>';
+                         echo '</td>';
                          echo "\n\t\t\t\t";
                      }
                  }
-           echo '</div>';
+           echo '</tr>';
         }
-        echo '</div>';
+        echo '</table>';
+        
     }
     function parseTekst($tekst)
     {
