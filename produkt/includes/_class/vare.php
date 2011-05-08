@@ -136,7 +136,7 @@ class Vare extends dbase
                   vareregister.antall as antall
                   FROM vare, kategori, vareregister
                   WHERE vare.idkategori = kategori.idkategori
-                  AND vare.idvare = vareregister.idvare AND vare.idvare = 30;" ;
+                  AND vare.idvare = vareregister.idvare AND vare.idvare = $idvare;" ;
         $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
         $num=$resultat->num_rows;
 
