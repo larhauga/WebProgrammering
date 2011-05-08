@@ -1,7 +1,8 @@
 <?php
+
     require_once("includes/head.php");
     
-    if(!isset($_POST['kat']))
+    if(!isset($_GET['kat']))
     {             
                            $kat=0;
     }
@@ -94,7 +95,7 @@ if(isset($_GET['login']))
                        }
                        else
                        {
-                        echo ' <a href="?kat=0&?loggut">Logg ut</a>';
+                        echo ' <a href="?kat=0&loggut">Logg ut</a>';
                        }
                       }
                       else 
