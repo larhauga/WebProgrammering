@@ -31,8 +31,7 @@ function showCart()
 				$rad=mysqli_fetch_row($resultat);
 				$utskrift[] = '<tr>';
 				$utskrift[] = '<td>'.$rad[2].''.$rad[7].'</td>';
-				$utskrift[] = '<td>'.$rad[6].' x'.'</td>';
-				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
+				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" />stk</td>';
 				$utskrift[] = '<td>'.($rad[6] * $antall).',-'.'</td>';
 				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">x</a></td>';
 				$total += $rad[6] * $antall;
@@ -42,7 +41,7 @@ function showCart()
 		}	
 		$utskrift[] = '</table>';
 		$utskrift[] = "<p><br>Sum å betale <strong>".$total.',- kr'." "."</strong></p>";
-		//$utskrift[] = '<div><button type="submit">Opptater</button></div>';
+		$utskrift[] = '<div><button type="submit">Opptater</button></div>';
 		$utskrift[] = '</form>';
 	} else {
 		$utskrift[] = '<p>Handlekurven er tom</p>';
