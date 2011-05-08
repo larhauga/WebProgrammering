@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 session_start();
-=======
- 
->>>>>>> 99a7220af7492fc709beb1ad326669abb4b81219
 class handlekurv
 {
 	public $varer;
