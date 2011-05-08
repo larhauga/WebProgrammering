@@ -40,7 +40,7 @@ function showCart()
 			}
 		}	
 		$utskrift[] = '</table>';
-		$utskrift[] = "<p>Sum å betale <strong>".$total.',- kr'." "."</strong></p>";
+		$utskrift[] = "<p><br>Sum å betale <strong>".$total.',- kr'." "."</strong></p>";
 		//$utskrift[] = '<div><button type="submit">Opptater</button></div>';
 		$utskrift[] = '</form>';
 	} else {
