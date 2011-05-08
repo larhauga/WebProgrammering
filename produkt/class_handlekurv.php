@@ -10,7 +10,7 @@ function showCart()
 		foreach ($varer as $vare) {
 			$liste[$vare] = (isset($liste[$vare])) ? $liste[$vare] + 1 : 1;
 		}
-		$utskrift[] = '<form action="handlekurv.php?action=update" method="post">';
+		$utskrift[] = '<form action="?action=update" method="post">';
 		$utskrift[] = '<table>';
 		foreach ($liste as $id=>$antall) {
 			$sql = "SELECT * FROM vare WHERE idvare =".$id;
@@ -29,7 +29,7 @@ function showCart()
 			{
 				
 				$utskrift[] = '<tr>';
-				$utskrift[] = '<td><a href="handlekurv.php?action=delete&id='.$id.'">Slett</a></td>';
+				$utskrift[] = '<td><a href="?action=delete&id='.$id.'">Slett</a></td>';
 				$utskrift[] = '<td>'.$rad[3].' '.$rad[7].'</td>';
 				$utskrift[] = '<td>'.$rad['$pris'].'</td>';
 				$utskrift[] = '<td><input type="text" name="qty'.$id.'" value="'.$antall.'" size="3" maxlength="3" /></td>';
