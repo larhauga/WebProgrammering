@@ -268,12 +268,21 @@ input, textarea {
 }
 #kategori a{
     color:black;
+    text-decoration: none;
 }
 #kategori a:visited {
     color:black;
 }
+#kategori a:hover {
+    color:#005f9b;
+}
 
-.katRad {
+#vare {
+    padding-left:10px;
+}
+#prodVareImg {
+    margin-right:10px;
+    float:right;
+    width: 400px;
     height:auto;
-    width: 100%;
 }
