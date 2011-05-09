@@ -200,18 +200,15 @@ else
     {
         
     }
-    else if(isset($_GET['hjem']))
-    {
-        echo '<h1>Nyheter</h1></br>';
-        $Vare->nyheter();
-    }
+
     else
     {
+        $Vare->nyheter();
     }
 $kurv->handlevognsjekk();
-if($_GET['step'] == 3)
+if(isset($_GET['step']) && $_GET['step'] == 3)
 {
-$kurv->betalingsjekk();
+    $kurv->betalingsjekk();
 }
 ?>
 		</div><!--end of main-->

@@ -8,6 +8,17 @@ body
     font-size:12px;
 }
 
+a {
+    text-decoration: none;
+    color:black;
+}
+a:hover {
+    color: #005f9b;
+}
+a:visited {
+    color: black;
+}
+
 #container{
 	width: 1000px;
     margin-left:auto;
@@ -285,4 +296,42 @@ input, textarea {
     float:right;
     width: 400px;
     height:auto;
+}
+
+#nyhet {
+    
+}
+#nyhetbilde {
+    width: 600px;
+    height:auto;
+    margin-left:45px;
+    margin-right:auto;
+}
+.forsideNyhet {
+    padding-left:20px;
+}
+.forsideNyhetLiten {
+    padding-left:30px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    
+	background: -webkit-gradient(linear, left bottom, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+	background: -moz-linear-gradient(bottom, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+	background: -o-linear-gradient(bottom, #FFFFFF, #EEEEEE);
+	box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+ 
+}
+.bildeNyhetLiten {
+    float:right;
+    width: 200px;
+    height:auto;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+#sokResultat {
+    
+}
+#sokResultat a:visited {
+    color:black;
 }
