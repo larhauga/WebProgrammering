@@ -77,7 +77,8 @@ public function visHandlekurv()
 		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
 		$utskrift[] = '</form>';
 		$this->total = $total;
-
+                if(!isset($_GET['step']))
+                  //  if(!$_GET['step']==2)
 		$utskrift[] = '<form action="?handlevogn=1&step=2" method="post"><button type="submit">Kjøp</button></form>';
 		
 		}
