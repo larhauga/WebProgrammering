@@ -147,8 +147,8 @@ else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_
 				<li><a href="?id=3">Kategorier</a></li>
 				<li><a href="?id=4">Produkter</a></li>
 				<li><a href="?id=5">Varebeholdning</a></li>
-				<li><a href="?id=6">Sikkerhet</a></li>
-				<li><a href="?id=7">Konfigurering</a></li>
+				<li><a href="?id=6">Ordre</a></li>
+				<li><a href="?id=7">Sikkerhet</a></li>
 			</ul>
 		</div>
 		<div id="content">';
@@ -167,10 +167,10 @@ else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > '1' && $_
 				include('pages/beholdning.php');
 			}
 			if($id == 6){
-				include('pages/sec.php');
+				include('pages/ordre.php');
 			}
 			if($id == 7){
-				include('pages/conf.php');
+				include('pages/sec.php');
 			}
 		echo '
 		</div>
@@ -208,8 +208,8 @@ else if(isset($_SESSION['login']))
 				<li><a href="?id=3">Kategorier</a></li>
 				<li><a href="?id=4">Produkter</a></li>
 				<li><a href="?id=5">Varebeholdning</a></li>
-				<li><a href="?id=6">Sikkerhet</a></li>
-				<li><a href="?id=7">Konfigurering</a></li>
+				<li><a href="?id=6">Ordre</a></li>
+				<li><a href="?id=7">Sikkerhet</a></li>
 			</ul>
 		</div>
 		<div id="content">

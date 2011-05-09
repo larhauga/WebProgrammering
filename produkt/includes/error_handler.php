@@ -11,7 +11,7 @@ $epost = "lars@larshaugan.net"; // Sender epost hvis filen ikke eksisterer eller
 
 
 error_reporting($visFeil);
-set_error_handler(errorlogger, $loglevel);
+set_error_handler(errorlogger(), $loglevel);
 register_shutdown_function(fatalFeil); 
 
 
