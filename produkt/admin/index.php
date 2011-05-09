@@ -227,13 +227,13 @@ else if(isset($_SESSION['login']))
 				</tr>
 				<tr>
 					<td align="center"><a href="?id=5"><img src="images/barcode.jpg" alt="Varebeholdning" width="150" height="150"/></a></td>
-					<td align="center"><a href="?id=6"><img src="images/windows-7-security-icon.png" alt="Sikkerhet" width="150" height="150"/></a></td>
 					<td align="center"><a href="?id=7"><img src="images/Config-Tools.png" alt="Konfigurering" width="150" height="150"/></a></td>
+                                        <td align="center"><a href="?id=6"><img src="images/windows-7-security-icon.png" alt="Sikkerhet" width="150" height="150"/></a></td>
 				</tr>
 				<tr>
 					<td align="center"><a href="?id=5">Varebeholdning</a></td>
-					<td align="center"><a href="?id=6">Sikkerhet</a></td>
-					<td align="center"><a href="?id=7">Konfigurering</a></td>
+                                        <td align="center"><a href="?id=6">Ordre</a></td>
+					<td align="center"><a href="?id=7">Sikkerhet</a></td>
 				</tr>
 			</table>
 			</div>
