@@ -74,18 +74,14 @@ public function visHandlekurv()
 		}	
 		$utskrift[] = '</table>';
 		$utskrift[] = "<p><br>Sum å betale <strong>".$this->total.',- kr'." "."</strong></p>";
-		if($_GET['step'] != 3)
 		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
 		$utskrift[] = '</form>';
 		$this->total = $total;
-		if($_GET['step'] != 2 && $_GET['step'] != 3)
-		{
+
 		$utskrift[] = '<form action="?handlevogn=1&step=2" method="post"><button type="submit">Kjøp</button></form>';
+		
 		}
-		else
-		{
-			" ";
-		} }
+                
 	else 
 	{
 		$utskrift[] =	'<h2>Handlekurv</h2>';
