@@ -226,34 +226,61 @@ class Vare extends dbase
 
         $mysqli = parent::connect();
 
-        $varer = "SELECT vare.idvare,
+        $varer = "SELECT vare.idvare as idvare,
                   kategori.idkategori as katid,
                   vare.tittel as tittel, 
                   vare.pris as pris,
+                  vare.tekst as tekst,
                   DATE_FORMAT(`date`, '%d.%m.%y %H:%i') as dato,
                   DATE_FORMAT(`sistoppdatert`, '%d.%m.%y %H:%i') as sisteDato,
                   vareregister.antall as antall,
-                  bildeurl
+                  vare.bildeurl as bildeurl
                   FROM vare, kategori, vareregister
                   WHERE vare.idkategori = kategori.idkategori
                   AND vare.idvare = vareregister.idvare order by dato desc limit 3;";
         $resultat = mysqli_query($mysqli,$varer ) or die(mysqli_error($mysqli));
         $num=$resultat->num_rows;
 
-        echo '<table id = varer>';
+        echo '<div id="nyhet">';
         if($num < 1)
         {
-            echo '<tr><td>Ingen varer i denne kategorien</td></tr>';
+            echo '<h1>Det er ingen varer til salgs akkurat nå.</h1>';
         }
-
-                     for($i=0;$i<$num;$i++)
+        else
+        {
+            echo '<h1>Nyheter</h1>';
+             $valg = $resultat->fetch_object();
+             
+            echo '<div class="forsideNyhet">';
+            echo '<a href="index.php?idvare='.$valg->idvare.'">
+                        <img id="nyhetbilde" src="bilder/opplastet/'.$valg->bildeurl.'" /></a>
+                  <a href="index.php?idvare='.$valg->idvare.'">         
+                        <h1>'.$valg->tittel.'</h1>
+                  </a>
+                  <p>'.$valg->tekst.'</p>
+                                <h2>Nå '.$valg->pris.',- <a href="?kat='.$valg->katid.'&action=add&id='.$valg->idvare.'">
+                                 <img src="includes/images/kjop.jpg" style="padding-left:20px;"/></a></h2>
+                  ';
+            echo '</div>';
+                     for($i=1; $i<$num; $i++)
                      {
-			//$kat = $_GET['kat'];
-                         $valg=mysqli_fetch_row($resultat);
-                         echo '<tr><td>Tittel: <a href="index.php?idvare='.$valg[0].'">'.$valg[2].'</a></td><td> Dato oppdatert: '.$valg[5].'</td><td> Antall: '.$valg[6].'</td><td> Pris: '.$valg[3].'</td><td> Bilde: <img src="bilder/opplastet/'.$valg[5].'"/></td>
-                             <td><a href="?kat='.$valg[1].'&action=add&id='.$valg[0].'">Kj&oslash;p</a></td></tr>';
+                        $valg = $resultat->fetch_object();
+                        echo '<div class="forsideNyhetLiten">';
+                        
+                         echo '
+                             <img class="bildeNyhetLiten" src="bilder/opplastet/'. $valg->bildeurl.'" />
+                            <a href="index.php?idvare='.$valg->idvare.'">
+                                <h1>'.$valg->tittel.'</h1>
+                               </a>
+                               <p>'.$valg->tekst.'</p>
+                                <h2>Nå '.$valg->pris.',- <a href="?kat='.$valg->katid.'&action=add&id='.$valg->idvare.'">
+                                 <img src="includes/images/kjop.jpg" style="padding-left:20px;"/></a></h2>
+                                 
+';
+                         echo '</div>';
                      }
-        echo '</table>';
+        }
+        echo '</div>';
     }
 }
 ?>
