@@ -203,7 +203,10 @@ else
 
     else
     {
-        $Vare->nyheter();
+		if(!isset($_GET['step']))
+        {
+			$Vare->nyheter();
+		}
     }
 $kurv->handlevognsjekk();
 if(isset($_GET['step']) && $_GET['step'] == 3)
