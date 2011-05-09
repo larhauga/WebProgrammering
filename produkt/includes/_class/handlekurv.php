@@ -1,5 +1,4 @@
 <?php
-
 class handlekurv
 {
 	public $total;
@@ -45,7 +44,6 @@ public function visHandlekurv()
 		}
 		$utskrift[] = '<h2>Handlekurv</h2>';
 		$utskrift[] = '<table>';
-		$ordre = new ordre();
 		foreach ($liste as $id=>$antall) {
 			$sql = "SELECT * FROM vare WHERE idvare = $id;";
 			$resultat = $mysqli->query($sql);
@@ -71,7 +69,7 @@ public function visHandlekurv()
 				//lagrer ting i klassen
 				$this->vareid = $id;
 				$this->antall = $antall;
-				$ordre->addOrdrelinje($id,$antall);
+				//$ordre->addOrdrelinje($id,$antall);
 			}
 		}	
 		$utskrift[] = '</table>';
@@ -134,7 +132,7 @@ function betalingsjekk() //error handler må til her :)
 		if($_GET['step'] == 3)
 		{
 			echo "Betalingen har nå gått igjenomm<br>";
-			$ordre->sendOrdre($this->total);
+			//$ordre->sendOrdre($this->total);
 		}
 		else
 		{
