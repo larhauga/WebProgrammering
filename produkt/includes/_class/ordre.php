@@ -39,15 +39,19 @@ class ordre
            $epost=$bruker->epost;
 		  }
 		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
-		$sql2 = "select idbruker from bruker where epost= $epost;";
-		$resultat = $mysqli->query($sql2); 
+		$sql2 = "select idbruker from bruker where epost= '$epost';";
+		$resultat = $mysqli->query($sql2);
+               
+                $valg = mysqli_fetch_row($resultat);
 		//mysql sjekk her
-		$idbruker = $resultat;
+		$idbruker = $valg[0];
+               
 		$resultat = "";
-		$sql = "Insert into ordre(ordredato,idbruker) 
+		$sql = "Insert into ordre(ordredato,idbruker,betaltdato) 
 		Values(
 		'$ordredato',
-		'$idbruker')";
+		'$idbruker',
+                '$ordredato')";
 		$resultat = $mysqli->query($sql);
 			if(!$resultat);
 			//mysql sjekk
