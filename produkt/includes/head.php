@@ -14,5 +14,6 @@
     require "klasser.php";
     require "includes/_class/vare.php";
 	require "includes/_class/handlekurv.php";
+	require "includes/_class/ordre.php";
 	$kurv = new handlekurv();
 ?>

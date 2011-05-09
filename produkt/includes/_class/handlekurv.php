@@ -133,11 +133,8 @@ function betalingsjekk() //error handler må til her :)
 	{
 		if($_GET['step'] == 3)
 		{
-			echo "nå skal vi betale ting her"."<br>";
-			echo '<table>';
-			echo '<tr><td>Test</td>';
-			echo '</table>';
-			echo $this->total;
+			echo "Betalingen har nå gått igjenomm<br>";
+			$ordre->sendOrdre($this->total);
 		}
 		else
 		{

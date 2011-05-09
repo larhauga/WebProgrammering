@@ -3,19 +3,20 @@
 class ordre
 {
 	public $kundeid;
-	public $ordreid;
-	public $varer;
 	public $dato;
-	public $betalt; 
+	public $betalt;
+	public $total;
 	
 	function __construct()
 	{
 	}
-	function addOrdreLinje()
+	function addOrdreLinje($innAntall,$innID)
 	{
+		//komando for å skrive dette til sqlen
 	}
-	function sendOrdre()
+	function sendOrdre($total)
 	{
-		
+		//komando for å lagre ordreren
+		$this->total = $total;
 	}
 }
