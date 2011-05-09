@@ -3,9 +3,13 @@
 class handlekurv
 {
 	public $total;
+	public $utskrift;
+	public $vareid;
+	public $antall;
 	
 	function __construct()
 	{
+		$this->total = 0;
 	}
 public function visHandlekurv()
 {
@@ -41,6 +45,7 @@ public function visHandlekurv()
 		}
 		$utskrift[] = '<h2>Handlekurv</h2>';
 		$utskrift[] = '<table>';
+		$ordre = new ordre();
 		foreach ($liste as $id=>$antall) {
 			$sql = "SELECT * FROM vare WHERE idvare = $id;";
 			$resultat = $mysqli->query($sql);
@@ -59,15 +64,22 @@ public function visHandlekurv()
 				$utskrift[] = '<td>x<input type="text" name="antall'.$id.'" value="'.$antall.'" size="1" maxlength="2" />stk</td>';
 				$utskrift[] = '<td>'.($rad[6] * $antall).',-'.'</td>';
 				$utskrift[] = '<td><a href="?kat='.$kat.'&action=delete&id='.$id.'">x</a></td>';
-				$this->total += $rad[6] * $antall;
+				$total += $rad[6] * $antall;
+				$this->total = $total;
                	$utskrift[] = '</tr>';
 				
+				//lagrer ting i klassen
+				$this->vareid = $id;
+				$this->antall = $antall;
+				$ordre->addOrdrelinje($id,$antall);
 			}
 		}	
 		$utskrift[] = '</table>';
 		$utskrift[] = "<p><br>Sum å betale <strong>".$this->total.',- kr'." "."</strong></p>";
+		if($_GET['step'] != 3)
 		$utskrift[] = '<div><button type="submit">Oppdater</button></div>';
 		$utskrift[] = '</form>';
+		$this->total = $total;
 		if($_GET['step'] != 2 && $_GET['step'] != 3)
 		{
 		$utskrift[] = '<form action="?handlevogn=1&step=2" method="post"><button type="submit">Kjøp</button></form>';
@@ -122,7 +134,8 @@ function betalingsjekk() //error handler må til her :)
 		if($_GET['step'] == 3)
 		{
 			echo "nå skal vi betale ting her"."<br>";
-			echo '<table>'; // her skal det komme en kvitering
+			echo '<table>';
+			echo '<tr><td>Test</td>';
 			echo '</table>';
 			echo $this->total;
 		}

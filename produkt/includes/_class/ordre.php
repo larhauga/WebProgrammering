@@ -14,4 +14,8 @@ class ordre
 	function addOrdreLinje()
 	{
 	}
+	function sendOrdre()
+	{
+		
+	}
 }
