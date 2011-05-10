@@ -4,7 +4,7 @@
  * Liste ordre fra kunder og eventuelt ha muligheten til å endre / slette disse.
  */
 echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30" />Ordre</h1>
-
+    <p>Søk etter ordrenummer, bruker eller ordredato.</p>
     <div id="sokefunksjon">
         <table>
             <tr>
@@ -13,20 +13,22 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
             </tr>
         </table>
     </div>
-    <div id="ordre">
+    <div id="resultat">
         <table width="100%">
             <tr>
-                <td>Se på</td>
-                <td>Bruker</td>
-                <td>Ordredato</td>
-                <td>Sendt</td>
-                <td>Antall varer</td>
-                <td>Sum</td>
+                <td><b>Se på</b></td>
+                <td><b>Bruker</b></td>
+                <td><b>Ordredato</b></td>
+                <td><b>Sendt</b></td>
             </tr>
+';
+        $Admin->visOrdre("");
+    echo '
         </table>
     </div>
     <div id="forms">
     <div id="formVenstre">
+    <p id="loading"></p>
         <h2>Ordreinfo</h2>
             <table width="100%">
                 <tr>
@@ -64,6 +66,12 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
                     <td>Nei <label id="sendt" >Sendt</label></td>
                 </tr>
             </table>
+            <table>
+                <tr class="submit">
+                    <td><input type="submit" name="sendt" id="sendt" value="Varen er sendt" /></td>
+                    <td><input type="submit" name="slett" id="slett" value="Slett ordre" /></td>
+                </tr>
+            </table>
     </div>
     <div id="formHoyre">
         <h2>Ordreinnhold</h2>
@@ -73,11 +81,20 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
                 <td>Vare</td>
                 <td>Pris</td>
                 <td>Antall</td>
+                <td>Slett</td>
             </tr>
         </table>
+        <table width="100%">
+            <tr class="submit">
+                <td width="65%"></td>
+                <td><input type="submit" id="slettVare" name="slettVare" value="Slett varer" /></td>
+            </tr>
+        </table>
+        
     </div>
     <div style="clear:both"></div>
     </div>
+    <script src="ajax/ordre.js"></script>
 ';
 /*
  * Ting som burde være med på siden:
@@ -90,7 +107,6 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
  * 
  * Sette ordre til sendt
  * Avlyse ordre
- *     
  */
 
 ?>

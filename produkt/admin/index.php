@@ -258,6 +258,12 @@ else if(isset($_SESSION['login']))
 					echo'</td>
 						<td>Brukere</td>
 					</tr>
+                                        <tr>
+                                            <td align="right" class="colorTall">';
+                                                        $Admin->statsOrdre();
+                                        echo'</td>
+                                            <td>Ordre</td>
+                                        </tr>
 				</table>
 				<h1>Info</h1>
 				<p>Muligheter for implementasjon av google analythics vil bli implementert ved en senere versjon</p>

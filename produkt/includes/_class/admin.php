@@ -13,7 +13,7 @@ class Admin extends dbase
 	
 	public function __construct($epost, $passord, $tilgangstype, $idbruker, $fornavn, $ip)
 	{
-            parent::__construct();
+            parent::__construct(); //Kjører konstruktøren til dbase (databaseklasse)
             
             $this->epost = $epost;
             $this->passord = $passord;
@@ -30,6 +30,9 @@ class Admin extends dbase
         {
             return $this->tilgangstype;
         }
+        /* Brukes av ytterfiler for å koble til database.
+         * Ingen tilkobling til databasen blir gjort uten denne funksjonen eller den overordnede dbase->connect();
+         */
         public function adminConnect()
         {
             return parent::connect();
@@ -215,6 +218,7 @@ class Admin extends dbase
                     $feilUpd = "<p style='color:red'>Kunne ikke oppdatere brukeren!</p>";
             }
         }
+        /* Slutt brukere */
 	/* Kategorier */
 	//Innsetting av nye kategorier
 	function nyKat($tittel, $aktiv)
@@ -346,7 +350,8 @@ class Admin extends dbase
                     $feilUpd = "<p style='color:red'>Kunne ikke oppdatere kategorien</p>";
             }
         }
-	
+	/* Slutt kategori */
+        /* Produktsiden */
 	function nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall, $idbruker)
 	{
             /*$db = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
@@ -564,7 +569,8 @@ class Admin extends dbase
                 $feilSlett = "<p style='color:red'>Det skjedde en feil ved slettingen. Prøv igjen senere.</p>";
             }
         }
-        
+        /* Slutt produktsiden */
+        /* Admin beholdningsside */
 	function visBeholdning($fra, $til, $sok)
 	{
             $db = parent::connect();
@@ -751,14 +757,206 @@ class Admin extends dbase
             }
               
         }
+        /* Slutt på varebeholdningssiden */
+        /* Ordrevisning */
+        public function visOrdre($sok)
+        {
+            /* Innhold:
+             *  Bruker, Ordredato, Sendt, Antall varer, Sum
+             *  bruker.epost, ordre.ordredato, ordre.sendtdato, count(*) from ordrelinje where idordre = idordre
+             */
+            
+            $db = parent::connect();
+            $fra = mysqli_escape_string($db, $sok);
+     
+            $sql = "SELECT  ordre.idordre as idordre,
+                            bruker.epost as brukernavn,
+                            ordre.ordredato as ordredato, 
+                            ordre.sendtdato as sendtdato
+                            
+                    FROM ordre, bruker
+                    WHERE bruker.idbruker = ordre.idbruker";
+            
+            if($sok != "")
+            {
+
+                $sql .= "
+                            AND (
+                                   ordre.idordre = '$sok' 
+                                OR bruker.epost LIKE '$sok%' 
+                                OR ordredato LIKE '$sok%' )";
+            }
+
+		$resultat = mysqli_query($db, $sql);
+                if($db->connect_error)
+                {
+                    die("Kunne ikke koble til databasen: ".$db->connect_error);
+                }
+                
+		$antrader = $db->affected_rows;
+		if($antrader == 0)
+                    echo "<p>Ingen ordre på dette søket</p>";
+                else if($antrader == -1){
+                        echo "<p>Det skjedde en feil.</p>";
+                }
+		else
+		{
+                    while($rad = $resultat->fetch_object())
+                    {
+                        echo '
+                        <tr>
+                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idordre.'" /></td>
+                            <td>'.$rad->brukernavn.'</td>
+                            <td>'.$rad->ordredato.'</td>
+                            <td>'.$this->ordreSendt($rad->sendtdato).'</td>
+                        </tr>';
+                    } //while
+		} //else
+             $db->close();
+
+        }
+        public function ordreSendt($input)
+        {
+            if($input == "0000-00-00 00:00:00")
+            {
+                return "Ikke sendt";
+            }
+            else if($input == null || $input == "")
+            {
+                return "Ikke sendt";
+            }
+            else
+            {
+                return "Sendt";
+            }
+        }
+        public function visOrdreInnhold($idordre)
+        {
+            $db = parent::connect();
+            $kategori = mysqli_escape_string($db, $idordre);
+
+            if(!is_numeric($idordre))
+            {
+                echo "Ordreid må være et tall";
+                return false;
+            }
+             else {
+
+            
+            $sql = "SELECT  ordrelinje.ordrelinje as ordrelinje,
+                            ordrelinje.idvare as idvare,
+                            vare.tittel as vare,
+                            ordrelinje.prisPrEnhet as pris,
+                            ordrelinje.antall as antall
+                    FROM ordrelinje, vare 
+                    WHERE ordrelinje.idvare = vare.idvare AND ordrelinje.idordre = '$idordre';";
+            
+                $resultat = $db->query($sql);
+                if($db->connect_error)
+                {
+                    die("Kunne ikke koble til databasen");
+                }
+                
+		$antrader = $db->affected_rows;
+		if($antrader == 0)
+                    echo "<h2>Ordreinnhold</h2><p>Ordren har ingen varer</p>";
+                else if($antrader == -1){
+                        echo "<p>Det skjedde en feil med innhentingen av varer</p>";
+                }
+		else
+		{
+                    echo '
+                        <h2>Ordreinnhold</h2>
+                        <table width="100%">';
+                    while($rad = $resultat->fetch_object())
+                    {
+                        echo '
+                        <tr>
+                            <td>'.$rad->idvare.'</td>
+                            <td>'.$rad->vare.'</td>
+                            <td>'.$rad->pris.'</td>
+                            <td>'.$rad->antall.'</td>
+                            <td><input type="checkbox" name="slett[]" id="slett" value="'.$rad->ordrelinje.'" /></td>
+                        </tr>';
+                    } //while
+                    echo '</table>';
+		} //else
+             }
+        }
+        public function slettOrdre($idordre)
+        {
+            $db = parent::connect();
+            $antall = mysqli_escape_string($db,$idordre);
+            
+            $sql = "DELETE FROM ordre";
+            $resultat = $db->query($sql); 
+            if($db->connect_error)
+            {
+                echo "<p>Det skjedde en feil med spørringen.</p>";
+                return false;
+            }
+            else
+            {
+                if($db->affected_rows == 1)
+                {
+                        echo "<p>Ordren ble sendt.</p>";
+                        return true;
+                }
+            }
+        }
+        public function settOrdreTilSendt($idordre)
+        {
+            $db = parent::connect();
+            $antall = mysqli_escape_string($db,$idordre);
+            $sendtdato = date('Y-m-d H:i:s');
+            
+            $sql = "UPDATE ordre
+                        SET sendtdato = '$sendtdato'
+                    WHERE
+                        idordre = '$idordre';";
+            $resultat = $db->query($sql); 
+            if($db->connect_error)
+            {
+                echo "<p>Det skjedde en feil med spørringen.</p>";
+                return false;
+            }
+            else
+            {
+                if($db->affected_rows == 1)
+                {
+                        echo "<p>Ordren ble sendt.</p>";
+                        return true;
+                }
+            }
+        }
+        public function slettVare($ordrelinje)
+        {
+            $db = parent::connect();
+            $antall = mysqli_escape_string($db,$ordrelinje);
+            
+            $sql = "DELETE FROM ordrelinje
+                        WHERE ordrelinje = '$ordrelinje'";
+            $resultat = $db->query($sql); 
+            if($db->connect_error)
+            {
+                echo "<p>Det skjedde en feil med spørringen.</p>";
+                return false;
+            }
+            else
+            {
+                if($db->affected_rows == 1)
+                {
+                        echo "<p>Varen ble slettet.</p>";
+                        return true;
+                }
+            }
+        }
+        /* Slutt ordre */
 	function sikkerhet()
 	{
 		
 	}
-	function konfig()
-	{
-		
-	}
+
 	
 	/* Henter stats til admin siden */
 	function statsVarer()
@@ -807,7 +1005,31 @@ class Admin extends dbase
                     $rad = $resultat->fetch_object();
                     echo $rad->count;
                 }
-	}
+	}        
+        function statsOrdre()
+        {
+            $db = parent::connect();
+
+            if($db->connect_error)
+            {
+                die("Kunne ikke koble til databasen: ".$db->connect_error);
+            }
+            else
+            {
+                $sql = "SELECT count(*) as antall FROM ordre";
+                $resultat = $db->query($sql);
+                
+                if(!$resultat)
+                {
+                    echo 0;
+                }
+                else
+                {
+                    $rad = $resultat->fetch_object();
+                    echo $rad->antall;
+                }
+            }
+        }
         function visAntVarer()
         {
             $db = parent::connect();
@@ -832,6 +1054,7 @@ class Admin extends dbase
                 }
             }
         }
+
         
 	//Login 
 	function hash($br, $pass)
