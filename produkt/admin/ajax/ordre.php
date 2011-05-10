@@ -90,7 +90,10 @@
     }
     if(isset($_POST['sendt']))
     {
-        $Admin->ordreSendt($_POST['sendt']);
+        $Admin->settOrdreTilSendt($_POST['sendt']);
     }
-    
+    if(isset($_POST['slettVare']))
+    {
+        $Admin->slettVare($_POST['slettVare']);
+    }
 ?>

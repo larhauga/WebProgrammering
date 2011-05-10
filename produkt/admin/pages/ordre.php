@@ -63,7 +63,7 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
                 </tr>
                 <tr>
                     <td>Sendt: </td>
-                    <td>Nei <label id="sendt" ></label></td>
+                    <td><label id="sendt" ></label></td>
                 </tr>
             </table>
             <table>
@@ -97,6 +97,5 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
     <div style="clear:both"></div>
     </div>
     <script src="ajax/ordre.js"></script>
-    <p id="test"></p>
 ';
 ?>

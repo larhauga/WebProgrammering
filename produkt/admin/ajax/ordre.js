@@ -32,12 +32,15 @@
                       
             });
    $("#sendt").click(function() {
-       $("#forms").fadeOut("slow");
-       var ordreid = document.getElementById("ordreid").val();
+       var ordreid = document.getElementById("ordreid").html();
+       alert(ordreid);
+       $("#forms").fadeOut("fast");
+       
        $.post("ajax/produkt.php", { "sendt": ordreid}, function() {});
+       $("#forms").fadeIn("fast");
    });
    $("#slett").click(function() {
-       var ordreid = document.getElementById("ordreid").val();
+       var ordreid = document.getElementById("ordreid").html();
        $.post("ajax/produkt.php", { "slett": ordreid}, function() {});
    });
 
