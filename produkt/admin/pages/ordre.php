@@ -26,28 +26,28 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
     echo '
         </table>
     </div>
-    <div id="forms">
+    <div id="forms" style="display:none">
     <div id="formVenstre">
-    <p id="loading"></p>
         <h2>Ordreinfo</h2>
+        <div id="loading"></div>
             <table width="100%">
                 <tr>
                     <td>
-                        <label id="fornavn" >Fornavn</label>
-                        <label id="etternavn" >Etternavn</label>
+                        <label id="fornavn" ></label>
+                        <label id="etternavn" ></label>
                     </td>
                 </tr>
                 <tr>
-                    <td><label id="adresse" >Adresse</label></td>
+                    <td><label id="adresse" ></label></td>
                 </tr>
                 <tr>
                     <td>
-                        <label id="postnr" >Postnr</label>
-                        <label id="poststed" >Poststed</label>
+                        <label id="postnr" ></label>
+                        <label id="poststed" ></label>
                    </td>
                 </tr>
                 <tr>
-                    <td><label id="tlf" >Telefon</label></td>
+                    <td><label id="tlf" ></label></td>
                 </tr>
                 
             </table>
@@ -55,15 +55,15 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
             <table>
                 <tr>
                     <td>Ordre id: </td>
-                    <td><label id="ordreid" >Ordreid</label></td>
+                    <td><label id="ordreid" ></label></td>
                 </tr>
                 <tr>
                     <td>Ordredato:</td>
-                    <td><label id="ordredato" >Ordredato</label></td>
+                    <td><label id="ordredato" ></label></td>
                 </tr>
                 <tr>
                     <td>Sendt: </td>
-                    <td>Nei <label id="sendt" >Sendt</label></td>
+                    <td>Nei <label id="sendt" ></label></td>
                 </tr>
             </table>
             <table>
@@ -75,6 +75,7 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
     </div>
     <div id="formHoyre">
         <h2>Ordreinnhold</h2>
+        <div id="innhold">
         <table width="100%">
             <tr>
                 <td>idvare</td>
@@ -84,6 +85,7 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
                 <td>Slett</td>
             </tr>
         </table>
+        </div>
         <table width="100%">
             <tr class="submit">
                 <td width="65%"></td>

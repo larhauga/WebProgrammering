@@ -786,6 +786,7 @@ class Admin extends dbase
                                 OR bruker.epost LIKE '$sok%' 
                                 OR ordredato LIKE '$sok%' )";
             }
+            $sql .= " ORDER BY idordre DESC LIMIT 0, 20";
 
 		$resultat = mysqli_query($db, $sql);
                 if($db->connect_error)
@@ -859,15 +860,22 @@ class Admin extends dbase
                 
 		$antrader = $db->affected_rows;
 		if($antrader == 0)
-                    echo "<h2>Ordreinnhold</h2><p>Ordren har ingen varer</p>";
+                    echo "<p>Ordren har ingen varer</p>";
                 else if($antrader == -1){
                         echo "<p>Det skjedde en feil med innhentingen av varer</p>";
                 }
 		else
 		{
                     echo '
-                        <h2>Ordreinnhold</h2>
-                        <table width="100%">';
+                        <table width="100%">
+                        <tr>
+                            <td>idvare</td>
+                            <td>Vare</td>
+                            <td>Pris</td>
+                            <td>Antall</td>
+                            <td>Slett</td>
+                        </tr>';
+                    
                     while($rad = $resultat->fetch_object())
                     {
                         echo '

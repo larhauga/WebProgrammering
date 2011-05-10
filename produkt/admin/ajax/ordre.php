@@ -37,8 +37,9 @@
         }
         else
         {
-            if($_POST['hentData'] != "")
-            {
+
+                $verdi = mysqli_real_escape_string($mysqli, $_POST['hentData']);
+                
                 $sql = "SELECT  bruker.fornavn as fornavn,
                                 bruker.etternavn as etternavn,
                                 bruker.adresse as adresse,
@@ -51,7 +52,7 @@
                         FROM ordre, bruker, poststed
                         WHERE bruker.idbruker = ordre.idbruker AND
                                 bruker.postnr = poststed.postnr AND
-                                ordre.idordre = 7";
+                                ordre.idordre = '$verdi'";
                 $resultat = $mysqli->query($sql);
                 $ant = $mysqli->affected_rows;
                 if($ant == 1)
@@ -63,14 +64,13 @@
                                            "postnr"=>$rad->postnr, 
                                            "poststed"=>$rad->poststed,
                                            "tlf"=>$rad->tlf,
-                                           "idordre"=>$rad->idordre,
+                                           "ordreid"=>$rad->idordre,
                                            "ordredato"=>$rad->ordredato,
                                            "sendtdato"=>$rad->sendtdato));
                 }
                 else
-                    echo "";
+                    echo "fail";
             }
-        }
     }
     if(isset($_GET['idordre']))
     {

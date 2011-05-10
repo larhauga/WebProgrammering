@@ -10,29 +10,37 @@
 
         $('input:radio').click(function() {
             var ordreid = $(this).val();
+
                 $('#loading').html('<img src="../includes/images/ajax-loader.gif" />');
-                    $.post("ajax/produkt.php", { "hentData": ordreid},
+                    
+                    $.post("ajax/ordre.php", { "hentData": ordreid},
                      function(data){
-                       $("#fornavn").val("");
-                       $("#etternavn").val(data.etternavn);
-                       $("#adresse").val(data.adresse);
-                       $("#postnr").val(data.postnr);
-                       $("#poststed").val(data.poststed);
-                       $("#tlf").val(data.tlf);
-                       $("#ordreid").val(data.ordreid);
-                       $("#ordredato").val(data.ordredato);
-                       $("#sendt").val(data.sendt);
+                       $("#fornavn").html(data.fornavn);
+                       $("#etternavn").html(data.etternavn);
+                       $("#adresse").html(data.adresse);
+                       $("#postnr").html(data.postnr);
+                       $("#poststed").html(data.poststed);
+                       $("#tlf").html(data.tlf);
+                       $("#ordreid").html(data.ordreid);
+                       $("#ordredato").html(data.ordredato);
+                       $("#sendt").html(data.sendt);
                      }, "json");
+                  $("#forms").slideDown("slow");
                   $('#loading').html('');
-                  $('#formHoyre').html('<p><img src="../includes/images/ajax-loader.gif" /></p>');
-                  $('#formHoyre').load("ajax/ordre.php?idordre=" + ordreid);
+                  $('#innhold').html('<p><img src="../includes/images/ajax-loader.gif" /></p>');
+                  $('#innhold').load("ajax/ordre.php?idordre=" + ordreid);
                       
             });
    $("#sendt").click(function() {
+       $("#forms").fadeOut("slow");
        var ordreid = document.getElementById("ordreid").val();
        $.post("ajax/produkt.php", { "sendt": ordreid}, function() {});
    });
    $("#slett").click(function() {
        var ordreid = document.getElementById("ordreid").val();
        $.post("ajax/produkt.php", { "slett": ordreid}, function() {});
+   });
+
+   $("#slettVare").click(function() {
+       
    });
