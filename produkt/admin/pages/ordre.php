@@ -95,18 +95,6 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
     <div style="clear:both"></div>
     </div>
     <script src="ajax/ordre.js"></script>
+    <p id="test"></p>
 ';
-/*
- * Ting som burde være med på siden:
- * Visning: Ved trykk på en ordre:
- * Brukerforavn, etternavn, adresse, postnr og sted, tlf
- * Idordre, ordredato, stendt,
- * Vare -> Pris -> antall
- *      Looper gjennom varene som er i orderen.
- *      Slette vare, endre antall.
- * 
- * Sette ordre til sendt
- * Avlyse ordre
- */
-
 ?>

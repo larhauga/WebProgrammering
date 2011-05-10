@@ -805,7 +805,7 @@ class Admin extends dbase
                     {
                         echo '
                         <tr>
-                            <td><input type="checkbox" name="produkt[]" id="produkt" value="'.$rad->idordre.'" /></td>
+                            <td><input type="radio" name="produkt[]" id="produkt" value="'.$rad->idordre.'" /></td>
                             <td>'.$rad->brukernavn.'</td>
                             <td>'.$rad->ordredato.'</td>
                             <td>'.$this->ordreSendt($rad->sendtdato).'</td>
