@@ -69,7 +69,7 @@ echo '<h1><img src="images/Config-Tools.png" alt="Brukere" width="30" height="30
             <table>
                 <tr class="submit">
                     <td><input type="submit" name="sendtKnapp" id="sendtKnapp" value="Varen er sendt" /></td>
-                    <td><input type="submit" name="slett" id="slett" value="Slett ordre" /></td>
+                    <td><input type="submit" name="slettKnapp" id="slettKnapp" value="Slett ordre" /></td>
                 </tr>
             </table>
     </div>
