@@ -52,8 +52,9 @@ public function visHandlekurv()
 		$utskrift[] = '<h2>Handlekurv</h2>';
 		$utskrift[] = '<table>';
 		foreach ($liste as $id=>$antall) {
-			$sql = "SELECT * FROM vare WHERE idvare = $id;";
-			$resultat = $mysqli->query($sql);
+			$sql = "SELECT * FROM vare WHERE idvare = '$id';";
+                        
+			$resultat = mysqli_query($mysqli,$sql);
 			if(!$resultat)
 			{
 				echo "failed  sql";
