@@ -78,7 +78,7 @@ public function visHandlekurv()
 				$this->antall = $antall;
 				if(isset($_SESSION['loggetinn']))
           		{
-					$ordre->addOrdreLinje();
+					$ordre->addOrdreLinje($antall,$id);
 		  		}
 		  
 			}
