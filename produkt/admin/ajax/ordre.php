@@ -58,6 +58,7 @@
                 if($ant == 1)
                 {
                     $rad = $resultat->fetch_object();
+                    $sendt = $Admin->ordreSendt($rad->sendtdato);
                     echo json_encode(array("fornavn"=>$rad->fornavn, 
                                            "etternavn"=>$rad->etternavn,
                                            "adresse"=>$rad->adresse, 
@@ -66,7 +67,7 @@
                                            "tlf"=>$rad->tlf,
                                            "ordreid"=>$rad->idordre,
                                            "ordredato"=>$rad->ordredato,
-                                           "sendtdato"=>$rad->sendtdato));
+                                           "sendt"=>$sendt));
                 }
                 else
                     echo "fail";
@@ -94,6 +95,10 @@
     }
     if(isset($_POST['slettVare']))
     {
-        $Admin->slettVare($_POST['slettVare']);
+        foreach($_POST['slettVare'] as $idvare)
+        {
+            $Admin->slettVare($idvare);
+            
+        }
     }
 ?>

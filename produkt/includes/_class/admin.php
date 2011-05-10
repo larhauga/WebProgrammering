@@ -869,11 +869,11 @@ class Admin extends dbase
                     echo '
                         <table width="100%">
                         <tr>
-                            <td>idvare</td>
-                            <td>Vare</td>
-                            <td>Pris</td>
-                            <td>Antall</td>
-                            <td>Slett</td>
+                            <td><b>idvare</b></td>
+                            <td><b>Vare</b></td>
+                            <td><b>Pris</b></td>
+                            <td><b>Antall</b></td>
+                            <td><b>Slett</b></td>
                         </tr>';
                     
                     while($rad = $resultat->fetch_object())
