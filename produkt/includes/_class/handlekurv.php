@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 class handlekurv extends dbase 
 {
 	public $total;
@@ -25,6 +26,7 @@ public function visHandlekurv()
 		if(isset($_SESSION['loggetinn']))
           {
 		$ordre = new ordre();
+                if($_GET['step']==3)
 		$this->ordreid = $ordre->sendOrdre();
 		  }
 		$mysqli = parent::connect();
@@ -79,6 +81,7 @@ public function visHandlekurv()
 				$this->antall = $antall;
 				if(isset($_SESSION['loggetinn']))
           		{
+                                    if($_GET['step']==3)
 					$ordre->addOrdreLinje($antall,$id);
 		  		}
 		  

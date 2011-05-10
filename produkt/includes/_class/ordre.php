@@ -61,7 +61,7 @@ class ordre extends dbase
 				'$ordredato',
       	          '$idbruker')";
 			$resultat = mysqli_query($mysqli,$sql);
-			//$this->ordreid = $mysqli->insert_id;
+			$this->ordreid = $mysqli->insert_id;
 			if(!$resultat)
 					{
 						echo "Error222";//.$db->error;
