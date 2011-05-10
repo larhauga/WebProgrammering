@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 class handlekurv extends dbase 
 {
 	public $total;
@@ -25,6 +26,7 @@ public function visHandlekurv()
 		if(isset($_SESSION['loggetinn']))
           {
 		$ordre = new ordre();
+                if($_GET['step']==3)
 		$this->ordreid = $ordre->sendOrdre();
 		  }
 		$mysqli = parent::connect();
@@ -52,8 +54,9 @@ public function visHandlekurv()
 		$utskrift[] = '<h2>Handlekurv</h2>';
 		$utskrift[] = '<table>';
 		foreach ($liste as $id=>$antall) {
-			$sql = "SELECT * FROM vare WHERE idvare = $id;";
-			$resultat = $mysqli->query($sql);
+			$sql = "SELECT * FROM vare WHERE idvare = '$id';";
+                        
+			$resultat = mysqli_query($mysqli,$sql);
 			if(!$resultat)
 			{
 				echo "failed  sql";
@@ -78,7 +81,8 @@ public function visHandlekurv()
 				$this->antall = $antall;
 				if(isset($_SESSION['loggetinn']))
           		{
-					$ordre->addOrdreLinje();
+                                    if($_GET['step']==3)
+					$ordre->addOrdreLinje($antall,$id);
 		  		}
 		  
 			}

@@ -6,6 +6,7 @@ class ordre extends dbase
 	public $dato;
 	public $betalt;
 	public $total;
+	public $ordreid;
 	
 	    public function __construct()
     	{
@@ -13,19 +14,19 @@ class ordre extends dbase
     	}
 		
 		
-	function addOrdreLinje($innAntall,$innID,$ordreid)
+	function addOrdreLinje($innAntall,$innID)
 	{
 		//komando for å skrive dette til sqlen
 		$mysqli = parent::connect();
-		$sql2 = "SELECT pris FROM vare WHERE idvare = $id;";
-		$resultat = $mysqli->query($sql2); 
+		$sql2 = "select pris from vare where idvare= '$innID';";
+		$resultat = mysqli_query($mysqli,$sql2) or die(mysqli_error($mysqli));
 		// mysql sjekk her :)
 		$arraytt = mysqli_fetch_row($resultat);
-		$pris = $valg[6];
+		$pris = $arraytt[0];
 		$resultat = "";
 		$sql = "Insert into ordrelinje(idordre,idvare,prisPrEnhet,antall) 
 		Values(
-		'$ordreid',
+		'$this->ordreid',
 		'$innID',
 		'$pris',
 		'$innAntall')";
@@ -45,28 +46,28 @@ class ordre extends dbase
 		  
 			$mysqli = parent::connect();
 			$sql2 = "select idbruker from bruker where epost= '$epost';";
-			$resultat = $mysqli->query($sql2);
-        	  if(!$resultat);
+			$resultat = mysqli_query($mysqli, $sql2);
+        	  if(!$resultat)
 					{
-						echo "Error".$db->error;
+						echo "Error";//.$db->error;
 					}     
      	   $valg = mysqli_fetch_row($resultat);
 			$idbruker = $valg[0];
-            $mysqli->query($sql2);
-			$resultat = "";// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!
-			$sql = "Insert into ordre(idordre,ordredato,idbruker)  
+            //$resultat->query($sql2);
+		//	$resultat = "";// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!// feil her !!! !!!!!!!§!!
+			$sql = "Insert into ordre(ordredato,idbruker)  
 			Values(
-			'$ordreid',
+			
 				'$ordredato',
       	          '$idbruker')";
-			$resultat = $mysqli->query($sql);
-			$ordreid = $mysqli->insert_id;
-			if(!$resultat);
+			$resultat = mysqli_query($mysqli,$sql);
+			$this->ordreid = $mysqli->insert_id;
+			if(!$resultat)
 					{
-						echo "Error222".$db->error;
+						echo "Error222";//.$db->error;
 					}
-			return $ordreid;
-			$mysqli->query();
+			//return $ordreid;
+			//$mysqli->query();
 		  }
 		  else {
 			  return null;
