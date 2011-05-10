@@ -94,7 +94,7 @@ if(isset($_GET['login']))
                         /* $kat = $_GET['kat'];
                        if($kat)
                        {*/
-                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a>';/*
+                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a><br/><a href="?brukerpanel">Brukerpanel';/*
                        }
                        else
                        {
@@ -200,14 +200,21 @@ else
     {
         
     }
-
+    else if(isset($_GET['brukerpanel']))
+    {
+        echo 'hei';
+        include 'includes/_class/brukerpanel.php';
+        $b = new Brukerendring;
+        $b->endrebruker();
+    }
+/*
     else
     {
 		if(!isset($_GET['step']))
         {
 			$Vare->nyheter();
 		}
-    }
+    }*/
 $kurv->handlevognsjekk();
 if(isset($_GET['step']) && $_GET['step'] == 3)
 {
