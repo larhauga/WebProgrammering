@@ -1,17 +1,18 @@
 <?php
-class handlekurv
+class handlekurv extends dbase 
 {
 	public $total;
 	public $utskrift;
 	public $vareid;
 	public $antall;
+	public $ordreid;
 	
-	function __construct()
+	public function __construct()
 	{
-		$this->total = 0;
+		parent::__construct();
 	}
 public function visHandlekurv()
-{
+	{
     if(isset($_GET['kat']))
                       {             
                            $kat =$_GET['kat'];
@@ -21,7 +22,12 @@ public function visHandlekurv()
                            $kat = 0;
                       }
         $total = 0;
-		$mysqli = new mysqli('193.107.29.49','xzindor_db1','lol123','xzindor_db1');
+		if(isset($_SESSION['loggetinn']))
+          {
+		$ordre = new ordre();
+		$this->ordreid = $ordre->sendOrdre();
+		  }
+		$mysqli = parent::connect();
 		$handlekurv = $_SESSION['handlekurv'];
 		if ($handlekurv) 
 		{
@@ -70,7 +76,11 @@ public function visHandlekurv()
 				//lagrer ting i klassen
 				$this->vareid = $id;
 				$this->antall = $antall;
-				//$ordre->addOrdrelinje($id,$antall);
+				if(isset($_SESSION['loggetinn']))
+          		{
+					$ordre->addOrdreLinje($antall,$id);
+		  		}
+		  
 			}
 		}	
 		$utskrift[] = '</table>';
@@ -130,8 +140,6 @@ function betalingsjekk() //error handler må til her :)
 		if($_GET['step'] == 3)
 		{
 			echo "Betalingen har nå gått igjenomm<br>";
-                        $ordre = new ordre();
-			$ordre->sendOrdre($this->total);
 		}
 		else
 		{
