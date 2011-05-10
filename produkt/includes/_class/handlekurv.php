@@ -33,9 +33,10 @@ public function visHandlekurv()
 		//$kat = $_GET['kat'];
 		if(isset($_GET['handlevogn']))
 		{
+				
 	
 			$step = $_GET['step'];
-			$utskrift[] = '<form action="?&action=update&handlevogn=1&step='.$step.' method="post">';
+			$utskrift[] = '<form action="?action=update&handlevogn=1&step='.$step.'"'.'method="post">';
 
 		}
 		else
@@ -78,7 +79,7 @@ public function visHandlekurv()
 		$utskrift[] = '</form>';
 		$this->total = $total;
                 if(!isset($_GET['step']))
-                  //  if(!$_GET['step']==2)
+                    if(!$_GET['step']==2)
 		$utskrift[] = '<form action="?handlevogn=1&step=2" method="post"><button type="submit">Kjøp</button></form>';
 		
 		}
