@@ -1,6 +1,5 @@
 <?php
     require_once("includes/head.php");
-
     $Vare = new Vare();
 
 if(isset($_GET['loggut']))
