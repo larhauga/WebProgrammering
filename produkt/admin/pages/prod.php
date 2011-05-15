@@ -23,30 +23,15 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $idbruker = $Admin->idbruker;
      $antall = $_POST['antall'];
      
-     /* Opplastning av fil */
+     
+     $temp_fil = $_FILES['filstreng']['tmp_name'];
      $filnavn = $_FILES['filstreng']['name'];
-     $filnavn = str_replace("#", "No.", $filnavn); 
-     $filnavn = str_replace("$", "Dollar", $filnavn); 
-     $filnavn = str_replace("%", "Percent", $filnavn); 
-     $filnavn = str_replace("^", "", $filnavn); 
-     $filnavn = str_replace("&", "and", $filnavn); 
-     $filnavn = str_replace("*", "", $filnavn); 
-     $filnavn = str_replace("?", "", $filnavn); 
      
-     //$updir = $_SERVER['DOCUMENT_ROOT']."/Informatikk/2.%20semester/Webprogrammering/butikk/produkt/bilder/produkt/";
-	 $updir = $_SERVER['DOCUMENT_ROOT']."../";
-     $path = $updir.$filnavn;
-
-     if(copy($_FILES['filstreng']['tmp_name'], $path))
-     {
-         $filnavnet = $_FILES['filstreng']['name'];
-         $filsize = $_FILES['filstreng']['size'];
-     }
-     echo "<img src='$path' height = '200' align = 'left'>";
-     
+     $helt_filnavn = "/www/nettbutikk/produkt/bilder/opplastet/".$filnavn;
+     move_uploaded_file($temp_fil, $helt_filnavn);
+          
      $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall ,$idbruker);
-     
-        //header('Location:'.$_SERVER["PHP_SELF"].'?id=4');
+
  }
 	echo '
         <h1><img src="images/Cardboard-Box.png" alt="Brukere" width="30" height="30" />Produkter</h1>
