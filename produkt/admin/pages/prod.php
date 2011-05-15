@@ -23,6 +23,9 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $idbruker = $Admin->idbruker;
      $antall = $_POST['antall'];
      
+     /*
+      * Det er en feil med scriptet som fører til en 500 internal server error på serveren vi tester dette på.
+      * Dette er ikke fikset på dette tidspunktet.
      if(empty($_FILES['filstreng']['name']))
      {
          echo "Det ble ikke lastet opp et bilde";
@@ -30,7 +33,6 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      else
      {
          $temp_fil = "/www/nettbutikk/produkt/bilder/opplastet/".$_FILES['filstreng']['tmp_name'];
-
          $filnavn = $_FILES['filstreng']['name'];
 
          $helt_filnavn = "/www/nettbutikk/produkt/bilder/opplastet/".$filnavn;
@@ -43,6 +45,8 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
              echo "Bildet ble lastet opp";
         }
      }     
+      * 
+      */
      $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall ,$idbruker);
 
  }

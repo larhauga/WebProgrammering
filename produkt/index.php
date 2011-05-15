@@ -231,7 +231,11 @@ else
                     <p>På enkelte sider hvor jquery brukes har det oppstått et kjent problem ved ajax request.<br />
                         Problemet går ut på at knapper slutter å virke etter en ajax request. Dette ble oppdaget sent i testingen, og har derfor ikke blitt utrettet.
                         Link til jquery sin FAQ: <a href="http://docs.jquery.com/Frequently_Asked_Questions#Why_do_my_events_stop_working_after_an_AJAX_request.3F">http://docs.jquery.com/Frequently_Asked_Questions#Why_do_my_events_stop_working_after_an_AJAX_request.3F</a>
-                        Her er det en veiledning om hvordan dette skal fikses, og dette blir utbedret i en senere versjon.</p>';
+                        Her er det en veiledning om hvordan dette skal fikses, og dette blir utbedret i en senere versjon.</p>
+                    
+                    <p>Vi har også opplevd problematikk med opplastningsscriptet på admin/pages/prod.php siden.<br />
+                        På grunn av en feil som fører til en 500 internal server error har vi utkommentert dette skriptet.<br />
+                        Vi regner med at feilen ligger i absolutpathen.</p>';
         /*
          * Denne delen av siden er ikke ferdig og er derfor byttet ut med informasjon.
          * Det som er i denne else setningen er det som kommer frem på hovedsiden.
