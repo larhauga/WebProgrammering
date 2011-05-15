@@ -21,7 +21,7 @@ class dbase
         $db = new mysqli($this->hostname, $this->brukernavn, $this->passord, $this->dbnavn);
         if($db->connect_error)
         {
-            die("Feil ved henting av data. Kunne ikke koble til databasen." . $db->connect_error);
+            die("<h2>Feil ved henting av data. Kunne ikke koble til databasen. Venligst kom tilbake senere.</h2>" . $db->connect_error);
         }
         return $db;
     }

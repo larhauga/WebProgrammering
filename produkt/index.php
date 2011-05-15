@@ -43,7 +43,7 @@ if(isset($_GET['login']))
 				$rad = $sql->fetch_object();
 
 				//Oppretter bruker objektet
-				$bruker = new bruker($rad->epost, $rad->fornavn, $rad->etternavn, $rad->adresse, $rad->postnr, $rad->tlf);
+				$bruker = new bruker($rad->epost, $rad->fornavn, $rad->etternavn, $rad->adresse, $rad->postnr, $rad->tlf, $rad->rettigheter);
 				//Serialiserer og oppretter SESSIONs
 				$_SESSION['bruker'] = serialize($bruker);
                                 //$_SESSION['epost'] = $epost;
@@ -90,15 +90,12 @@ if(isset($_GET['login']))
                         $bruker = unserialize($_SESSION['bruker']);
                         $epost=$bruker->epost;
                         echo 'Velkommen, '.$epost;
-                        /* $kat = $_GET['kat'];
-                       if($kat)
-                       {*/
-                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a><br/><a href="?brukerpanel">Brukerpanel';/*
-                       }
-                       else
-                       {
-                        echo ' <a href="?kat=0&loggut">Logg ut</a>';
-                       }*/
+                        echo ' <a href="?kat='.$kat.'&loggut">Logg ut</a><br/><a href="?brukerpanel">Brukerpanel</a>';
+                        
+                        if($bruker->rettigheter == 0)
+                        {
+                            echo ' - <a href="admin/">Administrasjon</a>';
+                        }
                       }
                       else 
                       {
@@ -106,19 +103,6 @@ if(isset($_GET['login']))
                        {
                            echo '<div id=loginerror>'.$feilmelding.'</div>';
                        }
-                       /*$kat = $_GET['kat'];
-                       if($kat)
-                       {
-		  	echo '<div id="logginn">
-                            
-			    <form name="login" method="post" action="?kat='.$kat.'&login">';
-                        }
-                        else
-                        {
-                            '<div id="logginn">
-                            
-			    <form name="login" method="post" action="?kat=0&login">';
-                        }*/
 			echo '<div id="logginn">
                             
 			    <form name="login" method="post" action="?kat='.$kat.'&login">
@@ -134,7 +118,7 @@ if(isset($_GET['login']))
 				          <tr>
 					         <td></td>
 						 	 <td><input type="submit" name="login" id="login" value="Logg inn" />
-					           Registrer <a href="includes/registrer.php">her</a><br/></td>
+					           Registrer <a href="?reg">her</a><br/></td>
                                                          
 					      </tr>
 						</table>
@@ -201,19 +185,81 @@ else
     }
     else if(isset($_GET['brukerpanel']))
     {
-        echo 'hei';
         include 'includes/_class/brukerpanel.php';
         $b = new Brukerendring;
         $b->endrebruker();
     }
-/*
+    else if(isset($_GET['reg']))
+    {
+        include('includes/registrer.php');
+    }
+    else if(isset($_GET['registrer']))
+    {
+        include('includes/regBruker.php');
+    }
+    else if(isset($_GET['kontakt']))
+    {
+        $epost = $_POST['epost'];
+        $tekst = $_POST['tekst'];
+        
+        if($epost != "" && $tekst != "")
+        {
+            mail($epost,
+                    "Kontaktskjema Webprogrammering",
+                    $tekst,
+                    "From : Webprogrammering \r\n");
+                    echo "<h1>Eposten er sendt</h1>
+                            <p>Eposten er sendt. Du vil motta epost på ".$epost.".</p>";
+        }
+    }
+
     else
     {
-		if(!isset($_GET['step']))
+        echo '<h1>Prosjektoppgave HiO våren 2011</h1>
+                <p>Velkommen til prosjektoppgaven for:</p>
+                    <ul>
+                        <li><b>Lars Haugan</b> - s171201</li>
+                        <li><b>Ole Henrik Paulsen</b> - s171194</li>
+                        <li><b>Anders Struksn&aelig;s</b> - s171192</li>
+                    </ul>
+                <p>Denne siden har også <a href="admin/">administrasjonssider</a>.
+                    Link til denne siden kommer opp hvis du logger inn som administrator, <br/>eller går til adressen <a href="admin/">/admin</a>. </p>
+                <h2>Innlogging</h2>
+                <p>For å logge inn kan du benytten den ferdige brukeren test.<br />
+                    <b>Brukernavn:</b> test<br />
+                    <b>Passord:</b> test<br/>
+                    
+                    Dette er en administratorbruker som også kan brukes på administratorsiden.</p>
+                <h2>Kontakt oss</h2>
+                <form action="?kontakt" method="post" name="registrer">
+                    <table>
+                    <tr>
+                        <td>Epost:</td>
+                        <td><input type="text" id="epost" name="epost"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><textarea id="tekst" name="tekst" cols="40" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="sendEpost" id="sendEpost" /></td>
+                    </tr>
+                    </table>
+                </form>
+                <h2>Kreditering</h2>
+                <p>Vi har på enkelte sider brukt et javascript bibliotek kalt <a href="http://jquery.com/">jquery</a>.<br />
+                Dette er et mye brukt bibliotek med refferanser fra blant annet, Google, Wordpress og Drupal.</p>';
+        /*
+         * Denne delen av siden er ikke ferdig og er derfor byttet ut med informasjon.
+         * Det som er i denne else setningen er det som kommer frem på hovedsiden.
+	if(!isset($_GET['step']))
         {
 			$Vare->nyheter();
-		}
-    }*/
+	}
+        */
+    
+    }
 $kurv->handlevognsjekk();
 if(isset($_GET['step']) && $_GET['step'] == 3)
 {

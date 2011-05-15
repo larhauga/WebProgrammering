@@ -1,41 +1,6 @@
-<?php 
-if(isset($_GET['registrer']))
-{
-    include "config1.php";
-    require "klasser.php";
-    require "_class/vare.php";
-   // require "_class/vare.php";
-$innepost = $_POST['epost'];
-$innepost2 = $_POST['epost2'];
-$innpassord = $_POST['passord'];
-$innpassord2 = $_POST['passord2'];
-$innfornavn = $_POST['fornavn'];
-$innetternavn = $_POST['etternavn'];
 
-$innadresse = $_POST['adresse'];
-$innpostnr = $_POST['postnr'];
 
-$inntlf = $_POST['tlf'];
-if($innepost == $innepost2)
-	{
-	if($innpassord == $innpassord2)
-		{
-                        $passord = encrypt($innpassord, $innepost);
-			$bruker = new bruker($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$inntlf);
-			$bruker->passord = $passord;
-			$bruker->updateDB();
-		}
-		else 
-		{ echo "Du har ikke skrevet inn 2 like passord"; }
-	}
- else
- { echo "du har ikke skrevet inn 2 like eposter"; }
-}
-?>
-
-<body>
 <center>
-<br><br><hr>
 <form action="?registrer" method="post" name="registrer">
 <h2>Registering av ny kunde</h2>
 <table width="248" summary="Kunde info">
@@ -56,7 +21,4 @@ if($innepost == $innepost2)
 </table>
 <input name="submit" type="submit" value="Register">
 </form>
-</center>
-<hr><br><br>
-</body>
-</html>
+</center> 

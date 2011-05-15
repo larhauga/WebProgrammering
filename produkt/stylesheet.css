@@ -153,6 +153,9 @@ a:visited {
 	min-height: 400px;
 	float: left;
 }
+#main a {
+    text-decoration: underline;
+}
 #path
 {
 	color: grey;

@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(0);
 class handlekurv extends dbase 
 {
 	public $total;
@@ -12,6 +12,11 @@ class handlekurv extends dbase
 	{
 		parent::__construct();
 	}
+        public function connect()
+        {
+            return parent::connect();
+        }
+        
 public function visHandlekurv()
 	{
     if(isset($_GET['kat']))

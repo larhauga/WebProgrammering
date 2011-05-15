@@ -14,7 +14,7 @@ class bruker
 	public $rettigheter;
 	public $error;
 	
-	function __construct($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$inntlf)
+	function __construct($innepost,$innfornavn,$innetternavn,$innadresse,$innpostnr,$inntlf,$rettigheter)
 	{
 		$this->epost = $innepost;
 		$this->fornavn = $innfornavn;
@@ -23,7 +23,7 @@ class bruker
 		$this->postnr = $innpostnr;
 		$this->tlf = $inntlf;
 		$this->registert = 10;
-		$this->rettigheter = 1; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
+		$this->rettigheter = $rettigheter; // 0: Superbruker, 1: vanlig bruker, 2: moderator?
 	}
 
 	function updateDB()
