@@ -10,6 +10,7 @@
 <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
+    include "includes/error_handler.php";
     include "config1.php";
     require "klasser.php";
     require "includes/_class/vare.php";

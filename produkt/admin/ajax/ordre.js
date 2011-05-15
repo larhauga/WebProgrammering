@@ -1,5 +1,8 @@
 /* 
  * Javascriptfil som hjelper php ajax fil og utfører requestene
+ * Det er oppdaget en BUG i koden som gjør at etter en ajax request vil knappelytteren miste relasjonen til knappene.
+ * http://docs.jquery.com/Frequently_Asked_Questions#Why_do_my_events_stop_working_after_an_AJAX_request.3F
+ * Dette ble oppdaget for sent for innleveringen. Siden fungerer, men man har problemer med knappene ettersom det kjøres en ajax request.
  */
 
     $("#sok").keyup(function() {

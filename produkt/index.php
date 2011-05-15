@@ -215,10 +215,23 @@ else
                     <b>Passord:</b> test<br/>
                     
                     Dette er en administratorbruker som også kan brukes på administratorsiden.</p>
+                <h2>Ved implementering på andre tjenere</h2>
+                    <p>Hvis siden skulle vært implementert på en annen tjener, må noen endringer bli gjort i koden.</p>
+                    <h3>Database</h3>
+                    <p>Vedlagt ligger en kjørbar SQL fil som importerer alle tabellene som er brukt.<br />
+                        Adressen, brukernavnet og passordet blir endret i klassen dbase.php som ligger under includes/_class/. Denne blir inkludert og brukt i alle klasser.</p>
+                    <p>Error_handleren trenger en Absoluttpath til loggfilen.</p>
+
                 </form>
                 <h2>Kreditering</h2>
                 <p>Vi har på enkelte sider brukt et javascript bibliotek kalt <a href="http://jquery.com/">jquery</a>.<br />
-                Dette er et mye brukt bibliotek med refferanser fra blant annet, Google, Wordpress og Drupal.</p>';
+                Dette er et mye brukt bibliotek med refferanser fra blant annet, Google, Wordpress og Drupal.</p>
+                
+                <h2>Kjente feil og mangler</h2>
+                    <p>På enkelte sider hvor jquery brukes har det oppstått et kjent problem ved ajax request.<br />
+                        Problemet går ut på at knapper slutter å virke etter en ajax request. Dette ble oppdaget sent i testingen, og har derfor ikke blitt utrettet.
+                        Link til jquery sin FAQ: <a href="http://docs.jquery.com/Frequently_Asked_Questions#Why_do_my_events_stop_working_after_an_AJAX_request.3F">http://docs.jquery.com/Frequently_Asked_Questions#Why_do_my_events_stop_working_after_an_AJAX_request.3F</a>
+                        Her er det en veiledning om hvordan dette skal fikses, og dette blir utbedret i en senere versjon.</p>';
         /*
          * Denne delen av siden er ikke ferdig og er derfor byttet ut med informasjon.
          * Det som er i denne else setningen er det som kommer frem på hovedsiden.
