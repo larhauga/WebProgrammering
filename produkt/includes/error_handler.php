@@ -6,7 +6,7 @@
 $visFeil = 0;           //0: Viser ikke feil på side, E_ALL,E_WARNING
 $logfil = "/www/nettbutikk/produkt/includes/log.txt";           //Må være ABSOLUTTPATH!!!
 $loglevel = "E_ALL";    //E_ALL, E_ERROR, E_WARNING, E_USER_ERROR
-$evtRedir = "";         //Ved fatalfeil så redirect.
+$evtRedir = "index.php";         //Ved fatalfeil så redirect.
 $epost = "lars@larshaugan.net"; // Sender epost hvis filen ikke eksisterer eller det er en feil.
 
 
