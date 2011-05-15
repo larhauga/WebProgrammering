@@ -24,7 +24,7 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $antall = $_POST['antall'];
      
      
-     $temp_fil = $_FILES['filstreng']['tmp_name'];
+     $temp_fil = "/www/nettbutikk/produkt/bilder/opplastet/".$_FILES['filstreng']['tmp_name'];
      $filnavn = $_FILES['filstreng']['name'];
      
      $helt_filnavn = "/www/nettbutikk/produkt/bilder/opplastet/".$filnavn;
