@@ -33,7 +33,8 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $filnavn = str_replace("*", "", $filnavn); 
      $filnavn = str_replace("?", "", $filnavn); 
      
-     $updir = $_SERVER['DOCUMENT_ROOT']."/Informatikk/2.%20semester/Webprogrammering/butikk/produkt/bilder/produkt/";
+     //$updir = $_SERVER['DOCUMENT_ROOT']."/Informatikk/2.%20semester/Webprogrammering/butikk/produkt/bilder/produkt/";
+	 $updir = $_SERVER['DOCUMENT_ROOT']."../";
      $path = $updir.$filnavn;
 
      if(copy($_FILES['filstreng']['tmp_name'], $path))

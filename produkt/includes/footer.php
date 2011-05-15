@@ -1,1 +1,1 @@
-<div id="footer"><p>2011 &copy; Nettbutikken</p></div>
+<div id="footer"><p>2011 &copy; Nettbutikken</p> <a href="?kontakt=1&kat=">Kontakt oss</a></div>

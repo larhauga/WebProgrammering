@@ -197,21 +197,6 @@ else
     {
         include('includes/regBruker.php');
     }
-    else if(isset($_GET['kontakt']))
-    {
-        $epost = $_POST['epost'];
-        $tekst = $_POST['tekst'];
-        
-        if($epost != "" && $tekst != "")
-        {
-            mail($epost,
-                    "Kontaktskjema Webprogrammering",
-                    $tekst,
-                    "From : Webprogrammering \r\n");
-                    echo "<h1>Eposten er sendt</h1>
-                            <p>Eposten er sendt. Du vil motta epost på ".$epost.".</p>";
-        }
-    }
 
     else
     {
@@ -236,23 +221,7 @@ else
                     <p>Vedlagt ligger en kjørbar SQL fil som importerer alle tabellene som er brukt.<br />
                         Adressen, brukernavnet og passordet blir endret i klassen dbase.php som ligger under includes/_class/. Denne blir inkludert og brukt i alle klasser.</p>
                     <p>Error_handleren trenger en Absoluttpath til loggfilen.</p>
-                    
-                <h2>Kontakt oss</h2>
-                <form action="?kontakt" method="post" name="registrer">
-                    <table>
-                    <tr>
-                        <td>Epost:</td>
-                        <td><input type="text" id="epost" name="epost"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><textarea id="tekst" name="tekst" cols="40" rows="10"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="submit" name="sendEpost" id="sendEpost" /></td>
-                    </tr>
-                    </table>
+
                 </form>
                 <h2>Kreditering</h2>
                 <p>Vi har på enkelte sider brukt et javascript bibliotek kalt <a href="http://jquery.com/">jquery</a>.<br />
@@ -278,6 +247,45 @@ if(isset($_GET['step']) && $_GET['step'] == 3)
 {
     $kurv->betalingsjekk();
 }
+function epost()
+{
+	           echo     '<h2>Kontakt oss</h2>';
+               echo     '<form action="?kontakt=2" method="post" name="registrer">';
+               echo     '<table>';
+               echo     '<tr>';
+               echo         '<td>Epost:</td>';
+               echo         '<td><input type="text" id="epost" name="epost"></td>';
+               echo     '</tr>';
+               echo     '<tr>';
+               echo         '<td></td>';
+               echo         '<td><textarea id="tekst" name="tekst" cols="40" rows="10"></textarea></td>';
+               echo     '</tr>';
+               echo     '<tr>';
+               echo         '<td></td>';
+               echo          '<td><input type="submit" name="sendEpost" id="sendEpost" /></td>';
+               echo      '</tr>';
+               echo      '</table>';
+}
+if(isset($_GET['kontakt']))
+    {
+		if($_GET['kontakt'] == 1)
+		{
+		   epost();
+		}
+		if($_GET['kontakt'] == 2)
+        $epost = $_POST['epost'];
+        $tekst = $_POST['tekst'];
+        
+        if($epost != "" && $tekst != "")
+        {
+            mail($epost,
+                    "Kontaktskjema Webprogrammering",
+                    $tekst,
+                    "From : Webprogrammering \r\n");
+                    echo "<h1>Eposten er sendt</h1>
+                            <p>Eposten er sendt. Du vil motta epost på ".$epost.".</p>";
+        }
+    }
 ?>
 		</div><!--end of main-->
 		<div id="rightbar">
