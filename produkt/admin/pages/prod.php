@@ -23,13 +23,26 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
      $idbruker = $Admin->idbruker;
      $antall = $_POST['antall'];
      
-     
-     $temp_fil = "/www/nettbutikk/produkt/bilder/opplastet/".$_FILES['filstreng']['tmp_name'];
-     $filnavn = $_FILES['filstreng']['name'];
-     
-     $helt_filnavn = "/www/nettbutikk/produkt/bilder/opplastet/".$filnavn;
-     move_uploaded_file($temp_fil, $helt_filnavn);
-          
+     if(empty($_FILES['filstreng']['name']))
+     {
+         echo "Det ble ikke lastet opp et bilde";
+     }
+     else
+     {
+         $temp_fil = "/www/nettbutikk/produkt/bilder/opplastet/".$_FILES['filstreng']['tmp_name'];
+
+         $filnavn = $_FILES['filstreng']['name'];
+
+         $helt_filnavn = "/www/nettbutikk/produkt/bilder/opplastet/".$filnavn;
+         if(!move_uploaded_file($temp_fil, $helt_filnavn))
+         {
+             echo "Filen ble ikke lastet opp.";
+             print_r($_FILES['filstreng']);
+         }
+         else {
+             echo "Bildet ble lastet opp";
+        }
+     }     
      $Admin->nyttProdukt($idkategori, $dato, $aktiv, $tittel, $filnavn, $tekst, $pris, $antall ,$idbruker);
 
  }
@@ -67,7 +80,7 @@ if(isset($_POST['slett']) && isset($_POST['produkt']))
                         <tr>
                                 <td>Bilde: </td>
                                 <td>
-                                            <input id="file" type="file" size="10" name="filstreng" />';
+                                            <input id="filstreng" type="file" size="10" name="filstreng" />';
                                             //<input type="submit" name="knapp" value="Last opp"/>
                                                     echo'
                                 </td>
